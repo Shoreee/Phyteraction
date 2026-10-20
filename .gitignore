@@ -1,0 +1,53 @@
+# Unity
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+*.csproj
+*.sln
+*.slnx
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.apk
+*.aab
+*.unitypackage
+.vs/
+.vscode/
+.idea/
+.DS_Store
+
+# Local tooling / agent caches
+.workbuddy/
+.cursor/
+
+# Reverse-engineering intermediates (regenerate with ReverseEngineering/run_all.sh)
+/ReverseEngineering/output/
+/ReverseEngineering/backups/
+/ReverseEngineering/rea-*/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+**/.venv/
+
+# PhysFlow / PhysDreamer raw captures and prepared bins (multi-GB; keep tools + docs)
+/Research/GaussianWorld/data/
+/Research/GaussianWorld/.venv/
+
+# ORCA SpeedTree binary assets (re-download from NVIDIA ORCA); keep scripts + architecture docs
+/Research/SpeedTree/orca/
+/Research/SpeedTree/**/*.fbx
+/Research/SpeedTree/**/*.FBX
+/Research/SpeedTree/**/*.dds
+/Research/SpeedTree/**/*.DDS

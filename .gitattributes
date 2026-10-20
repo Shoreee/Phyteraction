@@ -1,0 +1,2 @@
+Assets/_Project/GaussianWorld/PhysFlow/*.asset filter=lfs diff=lfs merge=lfs -text
+Assets/_Project/GaussianWorld/Flower.asset filter=lfs diff=lfs merge=lfs -text

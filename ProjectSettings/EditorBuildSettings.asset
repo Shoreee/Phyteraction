@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Project/Scenes/Sandbox.unity
+    guid: dc8067a97918a4048a521fd7190d4e6a
+  m_configObjects:
+    UnityEditor.XR.VisionOS.VisionOSSettings: {fileID: 11400000, guid: 43b9cbf6841ac4951881ed1357fbb5da, type: 2}
+    com.unity.polyspatial.xr.xr_settings: {fileID: 11400000, guid: ecad71135b1de4c52bdedd77be47d587, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 1d399ed0bd0084ea0a81a9f47af9deda, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b6fe0404cb14a4160954dfa44c4ec8d9, type: 2}
