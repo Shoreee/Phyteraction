@@ -14,6 +14,9 @@ namespace PhysicsHands.GaussianData
             get;
         }
 
+        // Notify consumers after writing Deformed, including reset and GPU deformation.
+        void MarkDeformed();
+
         int Count
         {
             get;

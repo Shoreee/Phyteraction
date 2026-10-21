@@ -35,8 +35,6 @@ namespace PhysicsHands.Hands
         [SerializeField]
         private Collider _detachableTrigger;
         [SerializeField]
-        private LineRenderer _springLine;
-        [SerializeField]
         private bool _canBeAttached = true;
         [SerializeField]
         private bool _canBeDetached = true;
@@ -51,34 +49,17 @@ namespace PhysicsHands.Hands
         private float _autoDetachDistance;
         [SerializeField]
         private Transform _palm;
-        [SerializeField]
-        private Rigidbody _thumbRb;
-        [SerializeField]
-        private Rigidbody _indexRb;
-        [SerializeField]
-        private Rigidbody _middleRb;
-        [SerializeField]
-        private Rigidbody _ringRb;
-        [SerializeField]
-        private Rigidbody _pinkyRb;
-        private float _dragSpringMultiplier = 1f;
-        private float _dragDamperMultiplier = 1f;
         private float _detachMultiplier = 1f;
         private float _trackingSpringMultiplier = 1f;
         private float _trackingDamperMultiplier = 1f;
         private float _trackingSpringGoal = 1f;
         private float _trackingDamperGoal = 1f;
         private float _trackingRate = float.PositiveInfinity;
-        private float _grabSpringMultiplier = 1f;
-        private float _grabDamperMultiplier = 1f;
-        private float _grabAngularSpringMultiplier = 1f;
-        private float _grabAngularDamperMultiplier = 1f;
         private float _fingersPinMultiplier = 1f;
         private Vector3 _lastTargetPosition;
         private Vector3 _sampledTargetVelocity;
         private bool _hasTargetSample;
         private float _initialMass;
-        private float _initialDrag;
         private float _detachedTime;
         public PhysicsHand PhysicsHand => _hand;
         public PhysicsJointDriver Enforcer => _enforcer;
@@ -98,7 +79,6 @@ namespace PhysicsHands.Hands
             if (_hand == null)
                 _hand = GetComponentInParent<PhysicsHand>();
             _initialMass = _rb.mass;
-            _initialDrag = _rb.linearDamping;
         }
 
         private void Start()
@@ -109,11 +89,6 @@ namespace PhysicsHands.Hands
                 DetachHand(0f);
         }
 
-        public Rigidbody GetAttachPoint(HandAttachPoint point) => point switch
-        {
-        HandAttachPoint.Thumb when _thumbRb != null => _thumbRb, HandAttachPoint.Index when _indexRb != null => _indexRb, HandAttachPoint.Middle when _middleRb != null => _middleRb, HandAttachPoint.Ring when _ringRb != null => _ringRb, HandAttachPoint.Pinky when _pinkyRb != null => _pinkyRb, _ => _rb, }
-
-        ;
         private void Update()
         {
             if (!_attached)
@@ -121,7 +96,6 @@ namespace PhysicsHands.Hands
             else if (_canBeDetached && _autoDetachDistance > 0f && _enforcer.GetDistanceFromTarget() > _autoDetachDistance)
                 DetachHand(0.2f);
             SampleTargetVelocity();
-            HandleSpringLine();
         }
 
         private void SampleTargetVelocity()
@@ -151,7 +125,6 @@ namespace PhysicsHands.Hands
             _trackingDamperMultiplier = Mathf.MoveTowards(_trackingDamperMultiplier, _trackingDamperGoal, step);
             ComputeFingersPin();
             ComputeDynamicJointValues();
-            HandleAntiGravity();
         }
 
         private void ComputeFingersPin()
@@ -190,32 +163,9 @@ namespace PhysicsHands.Hands
             float wristAngularSpring = (humanoid ? humanoid.WristAngularSpringMultiplier : 1f) * (setup ? setup.humanoidWristSpringMultiplier : 1f);
             float wristDamper = (humanoid ? humanoid.WristDamperMultiplier : 1f) * (setup ? setup.humanoidWristDamperMultiplier : 1f);
             float wristAngularDamper = (humanoid ? humanoid.WristAngularDamperMultiplier : 1f) * (setup ? setup.humanoidWristDamperMultiplier : 1f);
-            float common = _detachMultiplier * _trackingSpringMultiplier * _dragSpringMultiplier;
-            float commonDamper = _detachMultiplier * _trackingDamperMultiplier * _dragDamperMultiplier;
-            _enforcer.SetDriveMultipliers(linearSpring * wristSpring * common * _grabSpringMultiplier * _fingersPinMultiplier, linearDamper * wristDamper * commonDamper * _grabDamperMultiplier, angularSpring * wristAngularSpring * common * _grabAngularSpringMultiplier * _fingersPinMultiplier, angularDamper * wristAngularDamper * commonDamper * _grabAngularDamperMultiplier);
-        }
-
-        private void HandleAntiGravity()
-        {
-            if (!_attached || _hand == null)
-                return;
-            Rigidbody held = _hand.HeldRigidbody;
-            if (held == null || held.isKinematic || !held.useGravity)
-                return;
-            _rb.AddForce(-Physics.gravity * (held.mass * _hand.GrabAntiGravityMultiplier), ForceMode.Force);
-        }
-
-        private void HandleSpringLine()
-        {
-            if (_springLine == null)
-                return;
-            bool show = !_attached || _enforcer.GetDistanceFromTarget() > 0.05f;
-            _springLine.enabled = show;
-            if (!show)
-                return;
-            _springLine.positionCount = 2;
-            _springLine.SetPosition(0, transform.position);
-            _springLine.SetPosition(1, _enforcer.GetTargetPosition());
+            float common = _detachMultiplier * _trackingSpringMultiplier;
+            float commonDamper = _detachMultiplier * _trackingDamperMultiplier;
+            _enforcer.SetDriveMultipliers(linearSpring * wristSpring * common * _fingersPinMultiplier, linearDamper * wristDamper * commonDamper, angularSpring * wristAngularSpring * common * _fingersPinMultiplier, angularDamper * wristAngularDamper * commonDamper);
         }
 
         public void InstantMapToTarget()
@@ -236,23 +186,6 @@ namespace PhysicsHands.Hands
             _trackingRate = duration > 0f ? distance / duration : float.PositiveInfinity;
         }
 
-        public void SetJointGrabDriveMultiplier(float springMultiplier, float damperMultiplier, float angularSpringMultiplier, float angularDamperMultiplier)
-        {
-            _grabSpringMultiplier = springMultiplier;
-            _grabDamperMultiplier = damperMultiplier;
-            _grabAngularSpringMultiplier = angularSpringMultiplier;
-            _grabAngularDamperMultiplier = angularDamperMultiplier;
-        }
-
-        public void SetJointGrabDriveSpringMultiplier(float springMultiplier, float angularSpringMultiplier)
-        {
-            _grabSpringMultiplier = springMultiplier;
-            _grabAngularSpringMultiplier = angularSpringMultiplier;
-        }
-
-        public void SetDragSpringMultiplier(float value) => _dragSpringMultiplier = value;
-        public void SetDragDamperMultiplier(float value) => _dragDamperMultiplier = value;
-        public void SetDrag(float multiplier) => _rb.linearDamping = _initialDrag * multiplier;
         public void SetMassMultiplier(float multiplier) => _rb.mass = _initialMass * multiplier;
         public void AdjustJoint() => _enforcer.AdjustJoint();
         public void DetachHand(float detachTime)

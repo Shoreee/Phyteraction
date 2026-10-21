@@ -23,15 +23,7 @@ namespace PhysicsHands
         public const int Desk = 21;
         public const int RightHandBlocker = 22;
         public const int LeftHandBlocker = 23;
+        public const int UIOverlay = 24;
         public const int PhysicalHologram = 26;
-        public static int HandLayer(HandSide side) => side == HandSide.Right ? RightHand : LeftHand;
-        public static bool IsHandLayer(int layer) => layer == RightHand || layer == LeftHand || layer == Flesh;
-        public static LayerMask Mask(params int[] layers)
-        {
-            int mask = 0;
-            foreach (int l in layers)
-                mask |= 1 << l;
-            return mask;
-        }
     }
 }

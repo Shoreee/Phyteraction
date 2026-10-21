@@ -34,7 +34,6 @@ namespace PhysicsHands.Interaction
                 Tip = transform;
         }
 
-        public float GetRadius() => Collider.radius * transform.lossyScale.x;
         private void OnTriggerEnter(Collider other)
         {
             var target = other.GetComponentInParent<IInteractorTarget>();
@@ -57,6 +56,5 @@ namespace PhysicsHands.Interaction
                 _current = null;
         }
 
-        public void TriggerAction() => _current?.OnInteractorAction(this);
     }
 }

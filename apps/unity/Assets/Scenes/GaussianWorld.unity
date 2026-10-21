@@ -362,6 +362,19 @@ Transform:
   - {fileID: 1810373905}
   m_Father: {fileID: 2026698534}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &48536647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180880370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539897f704614248b51d55a1fee39e10, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
+  title: JAM
 --- !u!1 &68051596
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,6 +437,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1538853258}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &79679257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 79679258}
+  - component: {fileID: 79679261}
+  - component: {fileID: 79679259}
+  m_Layer: 0
+  m_Name: Workbench surface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &79679258
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79679257}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.035, z: 0.06}
+  m_LocalScale: {x: 1, y: 1, z: 0.7291667}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 540917407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &79679259
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79679257}
+  m_Material: {fileID: 13400000, guid: 2aeba26bca034434db693a8bb0f89cfa, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: abec05cc3fb3b49be8355fd5b423285d, type: 2}
+--- !u!33 &79679261
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79679257}
+  m_Mesh: {fileID: 4300000, guid: abec05cc3fb3b49be8355fd5b423285d, type: 2}
 --- !u!1 &94630505
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: accd974331b794fe0845236d4cfa2bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianDemoControls
-  flower: {fileID: 0}
   tracking: {fileID: 1470180516}
   headCamera: {fileID: 996183905}
 --- !u!114 &110175403
@@ -534,8 +609,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff33883b1686447d3873191b78c15376, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianSceneSelector
-  scenes:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.WorkbenchContentSelector
+  models:
   - {fileID: 1083395353}
   - {fileID: 1846598568}
   - {fileID: 604871496}
@@ -546,17 +621,6 @@ MonoBehaviour:
   - {fileID: 480436796}
   - {fileID: 1838594861}
   - {fileID: 1179789605}
-  titles:
-  - "Carnation  \xB7  PhysFlow foam"
-  - "Alocasia  \xB7  foam"
-  - "Hat  \xB7  elastic"
-  - "Phone cord  \xB7  elastic"
-  - "Fox  \xB7  foam"
-  - "Jam  \xB7  non-Newtonian"
-  - "Bulldozer  \xB7  plasticine"
-  - "Propeller  \xB7  metal"
-  - "Sandcastle  \xB7  sand"
-  - "Carnation  \xB7  learned elastic hand interaction"
   buttons:
   - {fileID: 357339429}
   - {fileID: 1932897480}
@@ -569,10 +633,16 @@ MonoBehaviour:
   - {fileID: 1373652051}
   - {fileID: 2070525559}
   backdropButton: {fileID: 348191551}
+  paperButton: {fileID: 2066603160}
+  labButton: {fileID: 1181065431}
+  labLabel: {fileID: 1012430660}
   status: {fileID: 1835577760}
+  lab: {fileID: 7833845388998640272}
+  interaction: {fileID: 540917409}
   startScene: 9
-  idle: {r: 0.32, g: 0.35, b: 0.37, a: 1}
-  active: {r: 1, g: 0.58, b: 0.2, a: 1}
+  idle: {r: 0.12, g: 0.12, b: 0.12, a: 1}
+  active: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+  unavailable: {r: 0.035, g: 0.035, b: 0.035, a: 1}
 --- !u!4 &110175404
 Transform:
   m_ObjectHideFlags: 0
@@ -646,12 +716,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164696547}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.0795, y: 0.001, z: 0.0020000003}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 429010778}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &164696549
 TextMesh:
@@ -666,7 +736,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -674,7 +744,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &164696550
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -801,6 +871,7 @@ GameObject:
   - component: {fileID: 180880375}
   - component: {fileID: 180880374}
   - component: {fileID: 20000000000}
+  - component: {fileID: 48536647}
   m_Layer: 0
   m_Name: PhysFlow jam
   m_TagString: Untagged
@@ -837,6 +908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianMetrics
   display: {fileID: 0}
+  recordCsv: 0
 --- !u!114 &180880373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,7 +1197,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.007, z: 0}
-  m_LocalScale: {x: 0.56, y: 0.014, z: 0.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1262572747}
@@ -1155,7 +1227,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 44445efaf08864acf854e766eb26155b, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1198,7 +1270,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.56, y: 0.014, z: 0.15}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &202777515
 MeshFilter:
@@ -1207,7 +1279,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202777511}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c6e2908911f84e498c65d85cd826c4c, type: 2}
 --- !u!1 &218781902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1738,6 +1810,121 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1938352135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &282873278 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7684817132781367769, guid: d8f4b266fd1724ea396b9c46bad0afc0, type: 3}
+  m_PrefabInstance: {fileID: 1079202904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c44d1582b0d94acf9ae51b6ffb17c53, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.ForceFieldGenerator
+--- !u!114 &282873279 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5016625160583861245, guid: d8f4b266fd1724ea396b9c46bad0afc0, type: 3}
+  m_PrefabInstance: {fileID: 1079202904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0dfacd3846d40039c0a52918b7fabe, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.HandGrabber
+--- !u!114 &282873280 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7039795812570311023, guid: d8f4b266fd1724ea396b9c46bad0afc0, type: 3}
+  m_PrefabInstance: {fileID: 1079202904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c44d1582b0d94acf9ae51b6ffb17c53, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.ForceFieldGenerator
+--- !u!114 &282873281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9048171992992932987, guid: d8f4b266fd1724ea396b9c46bad0afc0, type: 3}
+  m_PrefabInstance: {fileID: 1079202904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0dfacd3846d40039c0a52918b7fabe, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.HandGrabber
+--- !u!1 &318768394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 318768395}
+  - component: {fileID: 318768397}
+  - component: {fileID: 318768396}
+  m_Layer: 0
+  m_Name: LAB touch sensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &318768395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318768394}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0795, y: 0.016, z: -0.038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1262572747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &318768396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318768394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fad046db8904180b780007c70dfbb3, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.SceneButton
+  selector: {fileID: 110175403}
+  workspace: {fileID: 540917408}
+  action: 4
+  scene: 0
+  cap: {fileID: 1181065429}
+--- !u!65 &318768397
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318768394}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.044, y: 0.02, z: 0.032}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &321598196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1797,9 +1984,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1325, y: 0.004, z: -0.038}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1486094851}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &348191550
@@ -1809,7 +1997,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 348191548}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!23 &348191551
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1835,7 +2023,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 609df55447c7142308a44050675bede1, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1887,9 +2075,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.2385, y: 0.004, z: 0.028}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1099535102}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &357339428
@@ -1899,7 +2088,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357339426}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!23 &357339429
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1925,7 +2114,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 609df55447c7142308a44050675bede1, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1949,6 +2138,37 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &380966182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 380966183}
+  m_Layer: 0
+  m_Name: Tracked palm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &380966183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380966182}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.060000002, y: 0.01999998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 906504511}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &381426733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,10 +2354,9 @@ MonoBehaviour:
   _handedness: 0
   _referenceHandPoser: {fileID: 1712073651}
   _palm: {fileID: 0}
-  _forearmWrist: {fileID: 0}
-  _forearmArm: {fileID: 0}
   _goodTrackingTime: 0.2
   _head: {fileID: 996183902}
+  _trackingPalm: {fileID: 380966183}
   _restOffset: {x: 0.18, y: -0.25, z: 0.4}
   _moveSpeed: 0.0015
   _depthSpeed: 0.0005
@@ -2195,9 +2414,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0795, y: 0.004, z: 0.028}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 164696548}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &429010779
@@ -2207,7 +2427,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 429010777}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!23 &429010780
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2233,7 +2453,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 609df55447c7142308a44050675bede1, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2271,6 +2491,7 @@ GameObject:
   - component: {fileID: 480436801}
   - component: {fileID: 480436800}
   - component: {fileID: 20000000001}
+  - component: {fileID: 1511171193}
   m_Layer: 0
   m_Name: PhysFlow plane_960
   m_TagString: Untagged
@@ -2307,6 +2528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianMetrics
   display: {fileID: 0}
+  recordCsv: 0
 --- !u!114 &480436799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2368,6 +2590,68 @@ MonoBehaviour:
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 34348
   dynamicCount: 25124
+--- !u!1 &489966887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 489966889}
+  - component: {fileID: 489966888}
+  m_Layer: 0
+  m_Name: Left palm feedback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &489966888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489966887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2f4b5d2d5c42d0bbed665cdedfd5fd, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.HandOffsetFeedback
+  hand: {fileID: 1079202907}
+  head: {fileID: 996183905}
+  material: {fileID: 2100000, guid: 48e6cbc818f2549a7b8776330e70f79b, type: 2}
+  label: {fileID: 588670851}
+--- !u!4 &489966889
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489966887}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 588670853}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &514464345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499931952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539897f704614248b51d55a1fee39e10, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
+  title: CORD
 --- !u!1 &535894125
 GameObject:
   m_ObjectHideFlags: 0
@@ -2557,6 +2841,8 @@ GameObject:
   m_Component:
   - component: {fileID: 540917407}
   - component: {fileID: 540917408}
+  - component: {fileID: 540917409}
+  - component: {fileID: 540917410}
   m_Layer: 0
   m_Name: Workspace
   m_TagString: Untagged
@@ -2588,6 +2874,8 @@ Transform:
   - {fileID: 1838594862}
   - {fileID: 1179789606}
   - {fileID: 1262572747}
+  - {fileID: 79679258}
+  - {fileID: 7833845388998640271}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &540917408
@@ -2613,6 +2901,44 @@ MonoBehaviour:
   distance: 0.62
   lookAngle: 6
   gazeTolerance: 3
+--- !u!114 &540917409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540917406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6539d09df6a543afb21610c91ca4876b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.WorkbenchInteraction
+  workspace: {fileID: 540917408}
+  labContent: {fileID: 7833845388998640272}
+  grabbers:
+  - {fileID: 282873279}
+  - {fileID: 282873281}
+  remoteAssists:
+  - {fileID: 1373762183}
+  - {fileID: 1373762184}
+  - {fileID: 282873280}
+  - {fileID: 282873278}
+--- !u!114 &540917410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540917406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9adbec15ce6114fa9b73fadedce387a2, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.PalmGripFeedback
+  head: {fileID: 996183905}
+  material: {fileID: 2100000, guid: 48e6cbc818f2549a7b8776330e70f79b, type: 2}
+  lab: {fileID: 7833845388998640272}
+  interaction: {fileID: 540917409}
 --- !u!1 &544715590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,6 +3069,110 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.022, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &588670850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 588670853}
+  - component: {fileID: 588670852}
+  - component: {fileID: 588670851}
+  m_Layer: 24
+  m_Name: Offset label
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!102 &588670851
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588670850}
+  m_Text:
+  m_OffsetZ: 0
+  m_CharacterSize: 0.0014
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 48
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &588670852
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588670850}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!4 &588670853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588670850}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 489966889}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &600265977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2823,6 +3253,7 @@ GameObject:
   - component: {fileID: 604871501}
   - component: {fileID: 604871500}
   - component: {fileID: 20000000002}
+  - component: {fileID: 1372869785}
   m_Layer: 0
   m_Name: PhysFlow hat
   m_TagString: Untagged
@@ -2859,6 +3290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianMetrics
   display: {fileID: 0}
+  recordCsv: 0
 --- !u!114 &604871499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3214,12 +3646,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704047384}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.1855, y: 0.001, z: -0.063999996}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 2066603159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &704047386
 TextMesh:
@@ -3234,7 +3666,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -3242,7 +3674,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &704047387
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3606,7 +4038,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4289573658
+    rgba: 4294967295
 --- !u!23 &844638194
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3656,6 +4088,55 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &854366825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854366827}
+  - component: {fileID: 854366826}
+  m_Layer: 0
+  m_Name: Right palm feedback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &854366826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854366825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2f4b5d2d5c42d0bbed665cdedfd5fd, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.HandOffsetFeedback
+  hand: {fileID: 1079202905}
+  head: {fileID: 996183905}
+  material: {fileID: 2100000, guid: 48e6cbc818f2549a7b8776330e70f79b, type: 2}
+  label: {fileID: 1092165369}
+--- !u!4 &854366827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854366825}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1092165371}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &865132482
 GameObject:
   m_ObjectHideFlags: 0
@@ -3682,12 +4163,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865132482}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.026500002, y: 0.001, z: 0.0020000003}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 1221106344}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &865132484
 TextMesh:
@@ -3702,7 +4183,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -3710,7 +4191,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &865132485
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3795,6 +4276,7 @@ Transform:
   - {fileID: 166713725}
   - {fileID: 600265979}
   - {fileID: 1814190104}
+  - {fileID: 380966183}
   m_Father: {fileID: 1712073652}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &926147725
@@ -3823,12 +4305,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926147725}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.1325, y: 0.001, z: 0.0020000003}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 1602072177}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &926147727
 TextMesh:
@@ -3843,7 +4325,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -3851,7 +4333,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &926147728
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4030,7 +4512,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 1723314536}
-  _visualTarget: {fileID: 0}
   _wrist: {fileID: 1395668569}
   _mapWrist: 1
   _destroyMesh: 0
@@ -4226,9 +4707,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.079500005, y: 0.004, z: 0.028}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1966939260}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &992103662
@@ -4238,7 +4720,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992103660}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!23 &992103663
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4264,7 +4746,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 609df55447c7142308a44050675bede1, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4601,9 +5083,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.026499998, y: 0.004, z: 0.028}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1139370273}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1005639428
@@ -4613,7 +5096,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005639426}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!23 &1005639429
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4639,7 +5122,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 609df55447c7142308a44050675bede1, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4663,6 +5146,110 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1012430657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012430658}
+  - component: {fileID: 1012430659}
+  - component: {fileID: 1012430660}
+  m_Layer: 0
+  m_Name: LAB label
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1012430658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012430657}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.005, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1181065429}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1012430659
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012430657}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!102 &1012430660
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012430657}
+  m_Text: LAB
+  m_OffsetZ: 0
+  m_CharacterSize: 0.001
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 56
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
 --- !u!1 &1015979196
 GameObject:
   m_ObjectHideFlags: 0
@@ -4696,6 +5283,96 @@ Transform:
   - {fileID: 1935263921}
   m_Father: {fileID: 24253552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1077103583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1077103584}
+  - component: {fileID: 1077103586}
+  - component: {fileID: 1077103585}
+  m_Layer: 0
+  m_Name: Workbench black surfaces
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1077103584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077103583}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1262572747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1077103585
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077103583}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8255bc6a7106443e8979fb3d26c636fd, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1077103586
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077103583}
+  m_Mesh: {fileID: 4300000, guid: 98680c852fc5647dea906a180f4e608d, type: 2}
 --- !u!1001 &1079202904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5276,6 +5953,7 @@ GameObject:
   - component: {fileID: 1083395358}
   - component: {fileID: 1083395357}
   - component: {fileID: 20000000003}
+  - component: {fileID: 2004151360}
   m_Layer: 0
   m_Name: PhysFlow carnation
   m_TagString: Untagged
@@ -5312,6 +5990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianMetrics
   display: {fileID: 0}
+  recordCsv: 0
 --- !u!114 &1083395356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5373,6 +6052,110 @@ MonoBehaviour:
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 123954
   dynamicCount: 99280
+--- !u!1 &1092165368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1092165371}
+  - component: {fileID: 1092165370}
+  - component: {fileID: 1092165369}
+  m_Layer: 24
+  m_Name: Offset label
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!102 &1092165369
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092165368}
+  m_Text:
+  m_OffsetZ: 0
+  m_CharacterSize: 0.0014
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 48
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &1092165370
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092165368}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!4 &1092165371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092165368}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 854366827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1099535101
 GameObject:
   m_ObjectHideFlags: 0
@@ -5399,12 +6182,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099535101}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.2385, y: 0.001, z: 0.0020000003}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 357339427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1099535103
 TextMesh:
@@ -5419,7 +6202,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -5427,7 +6210,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &1099535104
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5477,6 +6260,19 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1112924986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390382677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539897f704614248b51d55a1fee39e10, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
+  title: FOX
 --- !u!1 &1119237815
 GameObject:
   m_ObjectHideFlags: 0
@@ -5602,12 +6398,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139370272}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.026499998, y: 0.001, z: 0.0020000003}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 1005639427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1139370274
 TextMesh:
@@ -5622,7 +6418,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -5630,7 +6426,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &1139370275
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5694,6 +6490,7 @@ GameObject:
   - component: {fileID: 1179789610}
   - component: {fileID: 1179789609}
   - component: {fileID: 20000000004}
+  - component: {fileID: 1550850667}
   m_Layer: 0
   m_Name: Gaussian Flower
   m_TagString: Untagged
@@ -5730,6 +6527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianMetrics
   display: {fileID: 0}
+  recordCsv: 0
 --- !u!114 &1179789608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5786,6 +6584,97 @@ MonoBehaviour:
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: -1
   dynamicCount: -1
+--- !u!1 &1181065428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1181065429}
+  - component: {fileID: 1181065430}
+  - component: {fileID: 1181065431}
+  m_Layer: 0
+  m_Name: LAB button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1181065429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181065428}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0795, y: 0.004, z: -0.038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1012430658}
+  m_Father: {fileID: 1262572747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1181065430
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181065428}
+  m_Mesh: {fileID: 4300000, guid: 91d336949402c471aaef01361199c368, type: 2}
+--- !u!23 &1181065431
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181065428}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1210336144
 GameObject:
   m_ObjectHideFlags: 0
@@ -5845,9 +6734,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.026500002, y: 0.004, z: 0.028}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 865132483}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1221106345
@@ -5857,7 +6747,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221106343}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!23 &1221106346
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5883,7 +6773,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 609df55447c7142308a44050675bede1, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6051,47 +6941,37 @@ Transform:
   m_Children:
   - {fileID: 357339427}
   - {fileID: 956456360}
-  - {fileID: 1099535102}
   - {fileID: 1932897478}
   - {fileID: 1588480397}
-  - {fileID: 1989266528}
   - {fileID: 1602072177}
   - {fileID: 720431317}
-  - {fileID: 926147726}
   - {fileID: 992103661}
   - {fileID: 1080468434}
-  - {fileID: 1966939260}
   - {fileID: 1221106344}
   - {fileID: 993526010}
-  - {fileID: 865132483}
   - {fileID: 1005639427}
   - {fileID: 1119237816}
-  - {fileID: 1139370273}
   - {fileID: 429010778}
   - {fileID: 181304886}
-  - {fileID: 164696548}
   - {fileID: 1522539568}
   - {fileID: 557207339}
-  - {fileID: 1728877071}
   - {fileID: 1373652049}
   - {fileID: 186516074}
-  - {fileID: 2107080057}
   - {fileID: 2070525557}
   - {fileID: 930982714}
-  - {fileID: 1635975101}
   - {fileID: 1960727774}
   - {fileID: 1980189666}
-  - {fileID: 1747435989}
   - {fileID: 2066603159}
   - {fileID: 1359641143}
-  - {fileID: 704047385}
   - {fileID: 348191549}
   - {fileID: 729817505}
-  - {fileID: 1486094851}
   - {fileID: 1835577762}
   - {fileID: 202777512}
   - {fileID: 1903808733}
   - {fileID: 844638192}
+  - {fileID: 1181065429}
+  - {fileID: 318768395}
+  - {fileID: 1077103584}
   m_Father: {fileID: 540917407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1274337591
@@ -6331,6 +7211,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.022, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1372869785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604871496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539897f704614248b51d55a1fee39e10, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
+  title: HAT
 --- !u!1 &1373652048
 GameObject:
   m_ObjectHideFlags: 0
@@ -6359,9 +7252,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.1855, y: 0.004, z: 0.028}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2107080057}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1373652050
@@ -6371,7 +7265,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1373652048}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!23 &1373652051
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6397,7 +7291,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 609df55447c7142308a44050675bede1, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6479,6 +7373,7 @@ GameObject:
   - component: {fileID: 1390382682}
   - component: {fileID: 1390382681}
   - component: {fileID: 20000000005}
+  - component: {fileID: 1112924986}
   m_Layer: 0
   m_Name: PhysFlow fox
   m_TagString: Untagged
@@ -6515,6 +7410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianMetrics
   display: {fileID: 0}
+  recordCsv: 0
 --- !u!114 &1390382680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6611,6 +7507,7 @@ Transform:
   - {fileID: 2054576524}
   - {fileID: 94630507}
   - {fileID: 114923786}
+  - {fileID: 1693849020}
   m_Father: {fileID: 956046957}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1398856601
@@ -6910,12 +7807,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486094850}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.1325, y: 0.001, z: -0.063999996}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 348191549}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1486094852
 TextMesh:
@@ -6930,7 +7827,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -6938,7 +7835,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &1486094853
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7002,6 +7899,7 @@ GameObject:
   - component: {fileID: 1499931957}
   - component: {fileID: 1499931956}
   - component: {fileID: 20000000006}
+  - component: {fileID: 514464345}
   m_Layer: 0
   m_Name: PhysFlow telephone
   m_TagString: Untagged
@@ -7038,6 +7936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianMetrics
   display: {fileID: 0}
+  recordCsv: 0
 --- !u!114 &1499931955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7099,6 +7998,19 @@ MonoBehaviour:
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 55020
   dynamicCount: 49273
+--- !u!114 &1511171193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480436796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539897f704614248b51d55a1fee39e10, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
+  title: PROP
 --- !u!1 &1522539567
 GameObject:
   m_ObjectHideFlags: 0
@@ -7127,9 +8039,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.1325, y: 0.004, z: 0.028}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1728877071}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1522539569
@@ -7139,7 +8052,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522539567}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!23 &1522539570
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7165,7 +8078,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 609df55447c7142308a44050675bede1, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7221,6 +8134,19 @@ Transform:
   - {fileID: 78315003}
   m_Father: {fileID: 1855035034}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1550850667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179789605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539897f704614248b51d55a1fee39e10, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
+  title: FLOWER
 --- !u!1 &1568932454
 GameObject:
   m_ObjectHideFlags: 0
@@ -7235,6 +8161,7 @@ GameObject:
   - component: {fileID: 1568932459}
   - component: {fileID: 1568932458}
   - component: {fileID: 20000000007}
+  - component: {fileID: 20000000011}
   m_Layer: 0
   m_Name: PhysFlow kitchen
   m_TagString: Untagged
@@ -7271,6 +8198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianMetrics
   display: {fileID: 0}
+  recordCsv: 0
 --- !u!114 &1568932457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7572,9 +8500,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1325, y: 0.004, z: 0.028}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 926147726}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1602072178
@@ -7584,7 +8513,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1602072176}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!23 &1602072179
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7610,7 +8539,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 609df55447c7142308a44050675bede1, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7691,12 +8620,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635975100}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.2385, y: 0.001, z: 0.0020000003}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 2070525557}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1635975102
 TextMesh:
@@ -7711,7 +8640,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -7719,7 +8648,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &1635975103
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7769,6 +8698,37 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1693849019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1693849020}
+  m_Layer: 0
+  m_Name: Tracked palm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1693849020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693849019}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0.060000002, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1395668569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1712073650
 GameObject:
   m_ObjectHideFlags: 0
@@ -7799,7 +8759,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 2009892937}
-  _visualTarget: {fileID: 0}
   _wrist: {fileID: 906504511}
   _mapWrist: 1
   _destroyMesh: 0
@@ -7934,12 +8893,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728877070}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.1325, y: 0.001, z: 0.0020000003}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 1522539568}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1728877072
 TextMesh:
@@ -7954,7 +8913,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -7962,7 +8921,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &1728877073
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8038,12 +8997,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1747435988}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.2385, y: 0.001, z: -0.063999996}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 1960727774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1747435990
 TextMesh:
@@ -8058,7 +9017,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -8066,7 +9025,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &1747435991
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8440,16 +9399,16 @@ TextMesh:
   m_OffsetZ: 0
   m_CharacterSize: 0.001
   m_LineSpacing: 1
-  m_Anchor: 3
+  m_Anchor: 4
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 92
+  m_FontSize: 32
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &1835577761
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8508,7 +9467,7 @@ Transform:
   m_GameObject: {fileID: 1835577759}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.0995, y: 0.001, z: -0.03}
+  m_LocalPosition: {x: 0.105, y: 0.001, z: -0.035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8528,6 +9487,7 @@ GameObject:
   - component: {fileID: 1838594866}
   - component: {fileID: 1838594865}
   - component: {fileID: 20000000008}
+  - component: {fileID: 20000000010}
   m_Layer: 0
   m_Name: PhysFlow sandcastle
   m_TagString: Untagged
@@ -8564,6 +9524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianMetrics
   display: {fileID: 0}
+  recordCsv: 0
 --- !u!114 &1838594864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8639,6 +9600,7 @@ GameObject:
   - component: {fileID: 1846598573}
   - component: {fileID: 1846598572}
   - component: {fileID: 20000000009}
+  - component: {fileID: 20000000012}
   m_Layer: 0
   m_Name: PhysFlow alocasia
   m_TagString: Untagged
@@ -8675,6 +9637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianMetrics
   display: {fileID: 0}
+  recordCsv: 0
 --- !u!114 &1846598571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9098,7 +10061,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b137bbc1e29594e47a5a98e783a32abd, type: 2}
+  - {fileID: 2100000, guid: f52e51abefe324e3b91ff9092c96361d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9194,10 +10157,9 @@ MonoBehaviour:
   _handedness: 1
   _referenceHandPoser: {fileID: 956046956}
   _palm: {fileID: 0}
-  _forearmWrist: {fileID: 0}
-  _forearmArm: {fileID: 0}
   _goodTrackingTime: 0.2
   _head: {fileID: 996183902}
+  _trackingPalm: {fileID: 1693849020}
   _restOffset: {x: 0.18, y: -0.25, z: 0.4}
   _moveSpeed: 0.0015
   _depthSpeed: 0.0005
@@ -9255,9 +10217,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1855, y: 0.004, z: 0.028}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1989266528}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1932897479
@@ -9267,7 +10230,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932897477}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!23 &1932897480
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9293,7 +10256,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 609df55447c7142308a44050675bede1, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9408,9 +10371,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.2385, y: 0.004, z: -0.038}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1747435989}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1960727775
@@ -9438,7 +10402,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 69835309dffec4feb86eb173cb73e3b3, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9469,7 +10433,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960727773}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!1 &1966939259
 GameObject:
   m_ObjectHideFlags: 0
@@ -9496,12 +10460,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966939259}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.079500005, y: 0.001, z: 0.0020000003}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 992103661}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1966939261
 TextMesh:
@@ -9516,7 +10480,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -9524,7 +10488,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &1966939262
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9699,12 +10663,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989266527}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.1855, y: 0.001, z: 0.0020000003}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 1932897478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1989266529
 TextMesh:
@@ -9719,7 +10683,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -9727,7 +10691,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &1989266530
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9817,6 +10781,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993708721}
   m_Mesh: {fileID: 0}
+--- !u!114 &2004151360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083395353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539897f704614248b51d55a1fee39e10, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
+  title: FOAM
 --- !u!1 &2009892936
 GameObject:
   m_ObjectHideFlags: 0
@@ -10233,9 +11210,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1855, y: 0.004, z: -0.038}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 704047385}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2066603160
@@ -10263,7 +11241,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 93c2b46e9dcfb46e2bc75ccf660fb154, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10294,7 +11272,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2066603158}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!1 &2070525556
 GameObject:
   m_ObjectHideFlags: 0
@@ -10323,9 +11301,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.2385, y: 0.004, z: 0.028}
-  m_LocalScale: {x: 0.04, y: 0.004, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1635975101}
   m_Father: {fileID: 1262572747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2070525558
@@ -10335,7 +11314,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070525556}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1c8076a784c7f403ca8d653554c60131, type: 2}
 --- !u!23 &2070525559
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10361,7 +11340,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 609df55447c7142308a44050675bede1, type: 2}
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10443,12 +11422,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107080056}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.1855, y: 0.001, z: 0.0020000003}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0050000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1262572747}
+  m_Father: {fileID: 1373652049}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &2107080058
 TextMesh:
@@ -10463,7 +11442,7 @@ TextMesh:
   m_CharacterSize: 0.001
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 56
   m_FontStyle: 0
@@ -10471,7 +11450,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4291611847
+    rgba: 4294967295
 --- !u!23 &2107080059
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10561,19 +11540,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2110328678}
   m_Mesh: {fileID: 0}
---- !u!1660057539 &9223372036854775807
-SceneRoots:
-  m_ObjectHideFlags: 0
-  m_Roots:
-  - {fileID: 1857705728}
-  - {fileID: 1873194595}
-  - {fileID: 218781904}
-  - {fileID: 2043928025}
-  - {fileID: 632510669}
-  - {fileID: 274002903}
-  - {fileID: 540917407}
-  - {fileID: 110175404}
-  - {fileID: 811383028}
 --- !u!114 &20000000000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10714,3 +11680,130 @@ MonoBehaviour:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianModelRuntime
   rendering: {fileID: 1846598573}
   simulation: {fileID: 1846598571}
+--- !u!114 &20000000010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838594861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539897f704614248b51d55a1fee39e10, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
+  title: SAND
+--- !u!114 &20000000011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568932454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539897f704614248b51d55a1fee39e10, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
+  title: DOZER
+--- !u!114 &20000000012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846598568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539897f704614248b51d55a1fee39e10, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
+  title: PLANT
+--- !u!1001 &7833845388998640270
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 540917407}
+    m_Modifications:
+    - target: {fileID: 282764139351467868, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282764139351467868, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282764139351467868, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282764139351467868, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 282764139351467868, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282764139351467868, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282764139351467868, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282764139351467868, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282764139351467868, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282764139351467868, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533426782349582944, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+      propertyPath: m_Name
+      value: PhysicsLab
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+--- !u!4 &7833845388998640271 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 282764139351467868, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+  m_PrefabInstance: {fileID: 7833845388998640270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7833845388998640272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 84662688683293027, guid: 6550bfe101b3c41c0bd88a4a05b99c20, type: 3}
+  m_PrefabInstance: {fileID: 7833845388998640270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e6c2824b13497b9713ad8a724470cd, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.PhysicsLabContent
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 1857705728}
+  - {fileID: 1873194595}
+  - {fileID: 218781904}
+  - {fileID: 2043928025}
+  - {fileID: 632510669}
+  - {fileID: 274002903}
+  - {fileID: 540917407}
+  - {fileID: 110175404}
+  - {fileID: 811383028}
+  - {fileID: 489966889}
+  - {fileID: 854366827}

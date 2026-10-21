@@ -1,4 +1,3 @@
-using PhysicsHands.Simulation;
 using PhysicsHands.Tracking;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +9,6 @@ namespace PhysicsHands.App
     [UnityEngine.Scripting.APIUpdating.MovedFrom(true, "PhysicsHands.GaussianWorld", "PhysicsHands.Runtime", "GaussianDemoControls")]
     public sealed class GaussianDemoControls : MonoBehaviour
     {
-        public ModalSimulation flower;
         public HandInputManager tracking;
         public Camera headCamera;
         void Start()
@@ -28,10 +26,5 @@ namespace PhysicsHands.App
 #endif
         }
 
-        void Update()
-        {
-            if (Keyboard.current?.backspaceKey.wasPressedThisFrame == true && flower != null)
-                flower.ResetSimulation();
-        }
     }
 }

@@ -3421,51 +3421,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56868ad89ee904585916dbfa2144becc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoserManager
-  _snapType: 1
-  _handAttachPoint: 0
-  _handSnapRight:
+  _rightPose:
     HandPoser: {fileID: 1740233885502247747}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 7627443538992118411}
-    SnapBaseRotator: {fileID: 6522443032025189135}
-    SnapTranslocator: {fileID: 4858526959729906390}
-    TranslocationMin: {fileID: 6389507583783007253}
-    TranslocationMax: {fileID: 4208119332704185750}
-    SnapRotator: {fileID: 4391469103209369099}
-    JointAnchor: {fileID: 3933102677588456772}
-  _handSnapLeft:
+  _leftPose:
     HandPoser: {fileID: 8223186379679876654}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 1308683899992292542}
-    SnapBaseRotator: {fileID: 2479025780763454179}
-    SnapTranslocator: {fileID: 3258257594883270834}
-    TranslocationMin: {fileID: 1778918518221798017}
-    TranslocationMax: {fileID: 2606471769679843746}
-    SnapRotator: {fileID: 8059809347275926871}
-    JointAnchor: {fileID: 5537996687411633660}
-  _spring: 10000
-  _damper: 100
-  _angularSpring: 1000
-  _angularDamper: 10
-  _ignoreGravityOnGrab: 0
-  _handMassMultiplier: 1
-  _handSpringMultiplier: 1
-  _handDamperMultiplier: 1
-  _handAngularSpringMultiplier: 1
-  _handAngularDamperMultiplier: 1
-  _ignoreHandCollidersOnGrab: 1
-  _snapTweenTime: 0.5
-  _snapRotation: 1
-  _xFreeRotation: 0
-  _yFreeRotation: 0
-  _zFreeRotation: 0
-  _xAxisFlip: 0
-  _canOnlyGrabFromTop: 0
-  _snapThresholdDistance: 0.005
-  _snapThresholdAngle: 5
-  _grabAntiGravityMultiplier: 0
-  _grabDragMultiplier: 0
-  _fingerSpringMultiplier: 1
 --- !u!1 &1743827981603523686
 GameObject:
   m_ObjectHideFlags: 0
@@ -5430,7 +5389,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 6605054187292471715}
   _wrist: {fileID: 443951701245427516}
   _mapWrist: 1
   _destroyMesh: 1
@@ -5983,7 +5941,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 2066990940428068256}
   _wrist: {fileID: 3332502539335686584}
   _mapWrist: 1
   _destroyMesh: 1
@@ -7506,7 +7463,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 3758882692081266158}
   _wrist: {fileID: 8608937333092351171}
   _mapWrist: 1
   _destroyMesh: 1
@@ -8182,51 +8138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56868ad89ee904585916dbfa2144becc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoserManager
-  _snapType: 1
-  _handAttachPoint: 0
-  _handSnapRight:
+  _rightPose:
     HandPoser: {fileID: 271555544985162931}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 9143596891714235989}
-    SnapBaseRotator: {fileID: 1276439524798195288}
-    SnapTranslocator: {fileID: 2609314682054797464}
-    TranslocationMin: {fileID: 1247657085559472631}
-    TranslocationMax: {fileID: 4329039310908965891}
-    SnapRotator: {fileID: 5786451585106668342}
-    JointAnchor: {fileID: 3858928841693095946}
-  _handSnapLeft:
+  _leftPose:
     HandPoser: {fileID: 6510643493850917765}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 6890982164243398371}
-    SnapBaseRotator: {fileID: 7956987322967899494}
-    SnapTranslocator: {fileID: 8303290964901336751}
-    TranslocationMin: {fileID: 2054284334961870227}
-    TranslocationMax: {fileID: 6964207560826063068}
-    SnapRotator: {fileID: 3172927389511149926}
-    JointAnchor: {fileID: 7975730076866676949}
-  _spring: 10000
-  _damper: 100
-  _angularSpring: 1000
-  _angularDamper: 10
-  _ignoreGravityOnGrab: 0
-  _handMassMultiplier: 1
-  _handSpringMultiplier: 1
-  _handDamperMultiplier: 1
-  _handAngularSpringMultiplier: 1
-  _handAngularDamperMultiplier: 1
-  _ignoreHandCollidersOnGrab: 1
-  _snapTweenTime: 0.5
-  _snapRotation: 1
-  _xFreeRotation: 0
-  _yFreeRotation: 0
-  _zFreeRotation: 0
-  _xAxisFlip: 0
-  _canOnlyGrabFromTop: 0
-  _snapThresholdDistance: 0.005
-  _snapThresholdAngle: 5
-  _grabAntiGravityMultiplier: 0
-  _grabDragMultiplier: 0
-  _fingerSpringMultiplier: 1
 --- !u!1 &3996396284149472635
 GameObject:
   m_ObjectHideFlags: 0
@@ -10224,51 +10139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56868ad89ee904585916dbfa2144becc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoserManager
-  _snapType: 1
-  _handAttachPoint: 0
-  _handSnapRight:
+  _rightPose:
     HandPoser: {fileID: 1813326107288780729}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 231480441956339156}
-    SnapBaseRotator: {fileID: 3342729646963297567}
-    SnapTranslocator: {fileID: 870388294013270902}
-    TranslocationMin: {fileID: 578248382118807193}
-    TranslocationMax: {fileID: 179876871768470689}
-    SnapRotator: {fileID: 65507026477601338}
-    JointAnchor: {fileID: 967169174909064063}
-  _handSnapLeft:
+  _leftPose:
     HandPoser: {fileID: 86171643356433838}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 627172604693937046}
-    SnapBaseRotator: {fileID: 378985632830860714}
-    SnapTranslocator: {fileID: 986221169787805583}
-    TranslocationMin: {fileID: 8728586214588704563}
-    TranslocationMax: {fileID: 8314806893766903837}
-    SnapRotator: {fileID: 913792375859132811}
-    JointAnchor: {fileID: 8639557735214050865}
-  _spring: 10000
-  _damper: 100
-  _angularSpring: 1000
-  _angularDamper: 10
-  _ignoreGravityOnGrab: 0
-  _handMassMultiplier: 1
-  _handSpringMultiplier: 1
-  _handDamperMultiplier: 1
-  _handAngularSpringMultiplier: 1
-  _handAngularDamperMultiplier: 1
-  _ignoreHandCollidersOnGrab: 1
-  _snapTweenTime: 0.5
-  _snapRotation: 1
-  _xFreeRotation: 0
-  _yFreeRotation: 0
-  _zFreeRotation: 0
-  _xAxisFlip: 0
-  _canOnlyGrabFromTop: 0
-  _snapThresholdDistance: 0.005
-  _snapThresholdAngle: 5
-  _grabAntiGravityMultiplier: 0
-  _grabDragMultiplier: 0
-  _fingerSpringMultiplier: 1
 --- !u!1 &5002376682914512434
 GameObject:
   m_ObjectHideFlags: 0
@@ -11656,51 +11530,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56868ad89ee904585916dbfa2144becc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoserManager
-  _snapType: 1
-  _handAttachPoint: 0
-  _handSnapRight:
+  _rightPose:
     HandPoser: {fileID: 5223988445162605169}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 7654156058502818390}
-    SnapBaseRotator: {fileID: 2767418477168824539}
-    SnapTranslocator: {fileID: 6286262650560548455}
-    TranslocationMin: {fileID: 8147831483269004873}
-    TranslocationMax: {fileID: 2136478978919105934}
-    SnapRotator: {fileID: 1763281309567536860}
-    JointAnchor: {fileID: 7707681239389155820}
-  _handSnapLeft:
+  _leftPose:
     HandPoser: {fileID: 7792593270500736482}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 960477398904419005}
-    SnapBaseRotator: {fileID: 5972505566623322844}
-    SnapTranslocator: {fileID: 6339340893589357157}
-    TranslocationMin: {fileID: 7880303849134295229}
-    TranslocationMax: {fileID: 1143691258206146663}
-    SnapRotator: {fileID: 7067477592921426977}
-    JointAnchor: {fileID: 7098134392902490026}
-  _spring: 10000
-  _damper: 100
-  _angularSpring: 1000
-  _angularDamper: 10
-  _ignoreGravityOnGrab: 0
-  _handMassMultiplier: 1
-  _handSpringMultiplier: 1
-  _handDamperMultiplier: 1
-  _handAngularSpringMultiplier: 1
-  _handAngularDamperMultiplier: 1
-  _ignoreHandCollidersOnGrab: 1
-  _snapTweenTime: 0.5
-  _snapRotation: 1
-  _xFreeRotation: 0
-  _yFreeRotation: 0
-  _zFreeRotation: 0
-  _xAxisFlip: 0
-  _canOnlyGrabFromTop: 0
-  _snapThresholdDistance: 0.005
-  _snapThresholdAngle: 5
-  _grabAntiGravityMultiplier: 0
-  _grabDragMultiplier: 0
-  _fingerSpringMultiplier: 1
 --- !u!1 &5712596080998322487
 GameObject:
   m_ObjectHideFlags: 0
@@ -12611,7 +12444,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 4660299611878030290}
   _wrist: {fileID: 654169507678064534}
   _mapWrist: 1
   _destroyMesh: 1
@@ -12870,7 +12702,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 3991090819268790354}
   _wrist: {fileID: 5988009812062850338}
   _mapWrist: 1
   _destroyMesh: 1
@@ -13080,51 +12911,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56868ad89ee904585916dbfa2144becc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoserManager
-  _snapType: 1
-  _handAttachPoint: 0
-  _handSnapRight:
+  _rightPose:
     HandPoser: {fileID: 1611652917830791956}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 3399535597012355118}
-    SnapBaseRotator: {fileID: 6262905899029461352}
-    SnapTranslocator: {fileID: 8932175861989364400}
-    TranslocationMin: {fileID: 3509642683098265542}
-    TranslocationMax: {fileID: 5985725621435583600}
-    SnapRotator: {fileID: 4175841379155734592}
-    JointAnchor: {fileID: 8234973432644077773}
-  _handSnapLeft:
+  _leftPose:
     HandPoser: {fileID: 2800386741400200244}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 19709295979502430}
-    SnapBaseRotator: {fileID: 968253679264265289}
-    SnapTranslocator: {fileID: 5795095378894669427}
-    TranslocationMin: {fileID: 2735393144888110612}
-    TranslocationMax: {fileID: 708844985789686474}
-    SnapRotator: {fileID: 1555782860253313371}
-    JointAnchor: {fileID: 7354392455254126977}
-  _spring: 10000
-  _damper: 100
-  _angularSpring: 1000
-  _angularDamper: 10
-  _ignoreGravityOnGrab: 0
-  _handMassMultiplier: 1
-  _handSpringMultiplier: 1
-  _handDamperMultiplier: 1
-  _handAngularSpringMultiplier: 1
-  _handAngularDamperMultiplier: 1
-  _ignoreHandCollidersOnGrab: 1
-  _snapTweenTime: 0.5
-  _snapRotation: 1
-  _xFreeRotation: 0
-  _yFreeRotation: 0
-  _zFreeRotation: 0
-  _xAxisFlip: 0
-  _canOnlyGrabFromTop: 0
-  _snapThresholdDistance: 0.005
-  _snapThresholdAngle: 5
-  _grabAntiGravityMultiplier: 0
-  _grabDragMultiplier: 0
-  _fingerSpringMultiplier: 1
 --- !u!1 &6499102893018434362
 GameObject:
   m_ObjectHideFlags: 0
@@ -13849,7 +13639,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 4207501585045055549}
   _wrist: {fileID: 3498465413374632790}
   _mapWrist: 1
   _destroyMesh: 1
@@ -14078,7 +13867,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 4588971248031139483}
   _wrist: {fileID: 1463798785290666521}
   _mapWrist: 1
   _destroyMesh: 1
@@ -15961,51 +15749,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56868ad89ee904585916dbfa2144becc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoserManager
-  _snapType: 1
-  _handAttachPoint: 0
-  _handSnapRight:
+  _rightPose:
     HandPoser: {fileID: 7826229815091199832}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 1897194609932990883}
-    SnapBaseRotator: {fileID: 8831804421294630634}
-    SnapTranslocator: {fileID: 8960947089512373873}
-    TranslocationMin: {fileID: 4694601997963788312}
-    TranslocationMax: {fileID: 2448881506757248750}
-    SnapRotator: {fileID: 6771794544020202906}
-    JointAnchor: {fileID: 3854120854677195071}
-  _handSnapLeft:
+  _leftPose:
     HandPoser: {fileID: 4000630831176289910}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 7427933842052101465}
-    SnapBaseRotator: {fileID: 5117532113526845845}
-    SnapTranslocator: {fileID: 2791173089880020792}
-    TranslocationMin: {fileID: 6697630059974916149}
-    TranslocationMax: {fileID: 9092911919333511073}
-    SnapRotator: {fileID: 4565337146272207222}
-    JointAnchor: {fileID: 4252200250990909294}
-  _spring: 10000
-  _damper: 100
-  _angularSpring: 1000
-  _angularDamper: 10
-  _ignoreGravityOnGrab: 0
-  _handMassMultiplier: 1
-  _handSpringMultiplier: 1
-  _handDamperMultiplier: 1
-  _handAngularSpringMultiplier: 1
-  _handAngularDamperMultiplier: 1
-  _ignoreHandCollidersOnGrab: 1
-  _snapTweenTime: 0.5
-  _snapRotation: 1
-  _xFreeRotation: 0
-  _yFreeRotation: 0
-  _zFreeRotation: 0
-  _xAxisFlip: 0
-  _canOnlyGrabFromTop: 0
-  _snapThresholdDistance: 0.005
-  _snapThresholdAngle: 5
-  _grabAntiGravityMultiplier: 0
-  _grabDragMultiplier: 0
-  _fingerSpringMultiplier: 1
 --- !u!1 &7776757520697475820
 GameObject:
   m_ObjectHideFlags: 0
@@ -16206,7 +15953,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 301743474021869315}
   _wrist: {fileID: 3685142441737008938}
   _mapWrist: 1
   _destroyMesh: 1
@@ -16275,51 +16021,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56868ad89ee904585916dbfa2144becc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoserManager
-  _snapType: 1
-  _handAttachPoint: 0
-  _handSnapRight:
+  _rightPose:
     HandPoser: {fileID: 5958327936127878707}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 6714429867819522689}
-    SnapBaseRotator: {fileID: 4523448988284076697}
-    SnapTranslocator: {fileID: 5280601465596749236}
-    TranslocationMin: {fileID: 44761217653229429}
-    TranslocationMax: {fileID: 8691486283786867917}
-    SnapRotator: {fileID: 5864933198725681846}
-    JointAnchor: {fileID: 5491325290627056979}
-  _handSnapLeft:
+  _leftPose:
     HandPoser: {fileID: 403199229748461641}
-    HandPoserAlternative: {fileID: 0}
-    FacingRotator: {fileID: 29227440803837804}
-    SnapBaseRotator: {fileID: 6394697657895942495}
-    SnapTranslocator: {fileID: 6931975051625262541}
-    TranslocationMin: {fileID: 95214619820566708}
-    TranslocationMax: {fileID: 1904763884772744674}
-    SnapRotator: {fileID: 4127409623532241871}
-    JointAnchor: {fileID: 3702111458155876889}
-  _spring: 10000
-  _damper: 100
-  _angularSpring: 1000
-  _angularDamper: 10
-  _ignoreGravityOnGrab: 0
-  _handMassMultiplier: 1
-  _handSpringMultiplier: 1
-  _handDamperMultiplier: 1
-  _handAngularSpringMultiplier: 1
-  _handAngularDamperMultiplier: 1
-  _ignoreHandCollidersOnGrab: 1
-  _snapTweenTime: 0.5
-  _snapRotation: 1
-  _xFreeRotation: 0
-  _yFreeRotation: 0
-  _zFreeRotation: 0
-  _xAxisFlip: 0
-  _canOnlyGrabFromTop: 0
-  _snapThresholdDistance: 0.005
-  _snapThresholdAngle: 5
-  _grabAntiGravityMultiplier: 0
-  _grabDragMultiplier: 0
-  _fingerSpringMultiplier: 1
 --- !u!1 &7823768907017270835
 GameObject:
   m_ObjectHideFlags: 0
@@ -17101,7 +16806,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 6114286926730391068}
   _wrist: {fileID: 6166063325710664209}
   _mapWrist: 1
   _destroyMesh: 1
@@ -17202,7 +16906,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 3302093631018312568}
   _wrist: {fileID: 879287048900239775}
   _mapWrist: 1
   _destroyMesh: 1
@@ -17269,7 +16972,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 208683377386190204}
   _wrist: {fileID: 165136959897847479}
   _mapWrist: 1
   _destroyMesh: 1
@@ -17591,7 +17293,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 1838648458783473368}
   _wrist: {fileID: 6726938587000643925}
   _mapWrist: 1
   _destroyMesh: 1
@@ -17722,7 +17423,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 6230831649624136200}
   _wrist: {fileID: 935462912196129021}
   _mapWrist: 1
   _destroyMesh: 1
@@ -19235,7 +18935,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
-  _visualTarget: {fileID: 457314364733862775}
   _wrist: {fileID: 5410863074425304905}
   _mapWrist: 1
   _destroyMesh: 1

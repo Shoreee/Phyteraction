@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using PhysicsHands.Hands;
 using UnityEngine;
 
@@ -13,17 +14,20 @@ namespace PhysicsHands.App
             Scene,
             Reset,
             Replay,
-            Backdrop
+            Backdrop,
+            Lab
         }
 
-        public GaussianSceneSelector selector;
+        public WorkbenchContentSelector selector;
         public Workspace workspace;
         public Action action;
         public int scene;
         public Transform cap;
         const float Travel = .004f;
         Vector3 rest;
-        int touching;
+        Collider sensor;
+        void Awake() => sensor = GetComponent<Collider>();
+        readonly HashSet<Collider> touching = new();
         float next;
         void Start()
         {
@@ -31,42 +35,60 @@ namespace PhysicsHands.App
                 rest = cap.localPosition;
         }
 
-        static bool Fingertip(Collider c)
+        public bool Near(PhysicsHand hand)
         {
-            var hand = c.GetComponentInParent<PhysicsHand>();
-            var tip = hand != null ? hand.IndexTip : null;
-            return tip != null && (c.ClosestPoint(tip.position) - tip.position).sqrMagnitude < .015f * .015f;
+            foreach (var finger in hand.Fingers)
+            {
+                if (finger.FingerType != HandFinger.Index || finger.Bones.Length == 0) continue;
+                foreach (var collider in finger.Bones[finger.Bones.Length - 1].GetColliders())
+                {
+                    if (collider == null || !collider.enabled || collider.isTrigger) continue;
+                    var onButton = sensor.ClosestPoint(collider.bounds.center);
+                    if ((onButton - collider.ClosestPoint(onButton)).sqrMagnitude < .02f * .02f) return true;
+                }
+            }
+            return false;
         }
 
-        void OnTriggerEnter(Collider other)
+        static bool Fingertip(Collider collider)
         {
-            if (!Fingertip(other) || workspace != null && workspace.Dragging)
-                return;
-            if (touching++ > 0 || selector == null || Time.unscaledTime < next)
-                return;
+            if (collider.isTrigger) return false;
+            var hand = collider.GetComponentInParent<PhysicsHand>();
+            var bone = collider.GetComponentInParent<PhysicsFingerBone>();
+            if (hand == null || bone == null) return false;
+            foreach (var finger in hand.Fingers)
+                if (finger.FingerType == HandFinger.Index && finger.Bones.Length > 0)
+                    return bone == finger.Bones[finger.Bones.Length - 1];
+            return false;
+        }
+
+        void OnTriggerEnter(Collider other) => Touch(other);
+        void OnTriggerStay(Collider other) => Touch(other);
+        void Touch(Collider other)
+        {
+            if (!Fingertip(other)) return;
+            bool first = touching.Count == 0;
+            if (!touching.Add(other) || !first) return;
+            if (selector == null || workspace != null && workspace.Dragging || Time.unscaledTime < next ||
+                (action == Action.Scene && !selector.IsModelAvailable(scene)) ||
+                (action == Action.Replay && !selector.CanPaper) || (action == Action.Backdrop && !selector.CanRoom)) return;
             next = Time.unscaledTime + .6f;
-            if (action == Action.Scene)
-                selector.Select(scene);
-            else if (action == Action.Reset)
-                selector.ResetScene();
-            else if (action == Action.Replay)
-                selector.Replay();
-            else
-                selector.ToggleBackdrop();
+            if (action == Action.Scene) selector.Select(scene);
+            else if (action == Action.Reset) selector.ResetScene();
+            else if (action == Action.Replay) selector.Replay();
+            else if (action == Action.Backdrop) selector.ToggleBackdrop();
+            else selector.ToggleLab();
         }
 
-        void OnTriggerExit(Collider other)
-        {
-            if (Fingertip(other))
-                touching = Mathf.Max(0, touching - 1);
-        }
-
-        void OnDisable() => touching = 0;
+        // Exit must remove the collider accepted on entry, even if the hand pose changed.
+        void OnTriggerExit(Collider other) => touching.Remove(other);
+        void OnDisable() => touching.Clear();
         void Update()
         {
+            touching.RemoveWhere(c => c == null || !c.enabled || !c.gameObject.activeInHierarchy);
             if (cap == null)
                 return;
-            var target = rest + Vector3.down * (touching > 0 ? Travel / Mathf.Max(1e-4f, cap.lossyScale.y) * cap.localScale.y : 0);
+            var target = rest + Vector3.down * (touching.Count > 0 ? Travel / Mathf.Max(1e-4f, cap.lossyScale.y) * cap.localScale.y : 0);
             cap.localPosition = Vector3.Lerp(cap.localPosition, target, 1 - Mathf.Exp(-30 * Time.deltaTime));
         }
     }

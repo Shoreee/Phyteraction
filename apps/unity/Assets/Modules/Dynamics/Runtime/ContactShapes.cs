@@ -119,9 +119,10 @@ namespace PhysicsHands.Dynamics
             if (reaction.magnitude > limit)
                 reaction = reaction.normalized * limit;
             var body = snapshot[shape];
-            if (body != null && reaction.sqrMagnitude > 0)
+            if (body == null || body.isKinematic || Policy?.CanApplyReaction(body) == false) return 0;
+            if (reaction.sqrMagnitude > 0)
             {
-                Policy?.NotifyPhysicalContact(body);
+                Policy?.NotifyPhysicalContact(body, reaction.normalized);
                 body.AddForceAtPosition(reaction, worldPoint, ForceMode.Impulse);
             }
 

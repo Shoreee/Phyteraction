@@ -98,10 +98,6 @@ namespace PhysicsHands.Posing
                 }
 
                 bone.target.localRotation = Quaternion.Slerp(bone.target.localRotation, goal, t);
-                // The thumb's fourth transform is the tracked tip. Its position
-                // changes with the XR hand size and must survive both poser stages.
-                if (type == HandFinger.Thumb && i == FingerBones.Count - 1)
-                    bone.target.localPosition = Vector3.Lerp(bone.target.localPosition, real.target.localPosition, t);
             }
         }
 
@@ -115,8 +111,6 @@ namespace PhysicsHands.Posing
                 if (FingerBones[i].target != null && other?.target != null)
                 {
                     FingerBones[i].target.localRotation = other.target.localRotation;
-                    if (type == HandFinger.Thumb && i == FingerBones.Count - 1)
-                        FingerBones[i].target.localPosition = other.target.localPosition;
                 }
             }
         }

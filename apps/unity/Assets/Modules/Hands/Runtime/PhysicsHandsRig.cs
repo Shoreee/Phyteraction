@@ -19,19 +19,11 @@ namespace PhysicsHands.Hands
         public GameSettings GameSettings => _gameSettings;
         public PhysicsHand LeftHand => _leftHand;
         public PhysicsHand RightHand => _rightHand;
-        public PhysicsHand GetHand(HandSide side) => side == HandSide.Right ? _rightHand : _leftHand;
         private void Awake()
         {
             if (_physicsSetup != null)
                 _physicsSetup.ApplyGlobal();
         }
 
-        public void ResetHands()
-        {
-            if (_leftHand != null)
-                _leftHand.Reset();
-            if (_rightHand != null)
-                _rightHand.Reset();
-        }
     }
 }

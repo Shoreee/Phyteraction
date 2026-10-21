@@ -23,6 +23,7 @@ namespace PhysicsHands.App
             private set;
         }
 
+        public Func<PhysicsHand, bool> CanDragHand { private get; set; }
         public Collider panel;
         public Camera headCamera;
         public Renderer outline;
@@ -39,9 +40,15 @@ namespace PhysicsHands.App
         [Tooltip("Gaze rays within this angle (deg) of the console grab it; eye tracking is accurate to about a degree.")]
         public float gazeTolerance = 3;
         readonly SpatialWorkspaceDrag spatialInput = new();
+        SceneButton[] buttons;
+        int activityEpoch;
+        Func<Vector3, bool> canStartSpatial;
         void Start()
         {
             wasPinching = new bool[hands.Length];
+            buttons = GetComponentsInChildren<SceneButton>(true);
+            activityEpoch = ApplicationActivity.Epoch;
+            canStartSpatial = CanStartSpatial;
             Show(false, false);
 #if !UNITY_VISIONOS || UNITY_EDITOR
             placed = true;
@@ -51,6 +58,8 @@ namespace PhysicsHands.App
         void OnDisable()
         {
             Dragging = false;
+            dragHand = null;
+            spatialInput.Reset();
         }
 
         public void PlaceInFrontOfHead()
@@ -77,7 +86,27 @@ namespace PhysicsHands.App
             return Vector3.Angle(head.forward, near - head.position) < lookAngle;
         }
 
-        static Vector3 Pinch(PhysicsHand hand) => (hand.ThumbTip.position + hand.IndexTip.position) * .5f;
+        // Placement follows the source, never the collision-constrained skeleton.
+        static Vector3 Pinch(PhysicsHand hand) => hand.TrackedHand.Palm.position;
+        bool CanStart(PhysicsHand hand)
+        {
+            if (hand == null || !hand.GoodTracking || CanDragHand?.Invoke(hand) == false) return false;
+            foreach (var button in buttons)
+                if (button != null && button.isActiveAndEnabled && button.Near(hand)) return false;
+            return true;
+        }
+        bool CanStartSpatial(Vector3 point)
+        {
+            PhysicsHand nearest = null;
+            float distance = float.PositiveInfinity;
+            foreach (var hand in hands)
+            {
+                if (hand == null || hand.TrackedHand?.Palm == null || !hand.GoodTracking) continue;
+                float d = (hand.TrackedHand.Palm.position - point).sqrMagnitude;
+                if (d < distance) { distance = d; nearest = hand; }
+            }
+            return CanStart(nearest);
+        }
         void Show(bool on, bool moving)
         {
             if (outline != null)
@@ -97,9 +126,22 @@ namespace PhysicsHands.App
                 PlaceInFrontOfHead();
             }
 
-            bool looking = Looking();
-            if (spatialInput.Update(panel, headCamera != null ? headCamera.transform : null, transform, gazeTolerance))
+            if (!ApplicationActivity.CanSubmitGpuWork || activityEpoch != ApplicationActivity.Epoch)
             {
+                activityEpoch = ApplicationActivity.Epoch;
+                dragHand = null;
+                spatialInput.Reset();
+                for (int i = 0; i < hands.Length; i++) wasPinching[i] = true;
+                Dragging = false;
+                Show(false, false);
+                return;
+            }
+            bool looking = Looking();
+            if (spatialInput.Update(panel, headCamera != null ? headCamera.transform : null, transform, gazeTolerance, canStartSpatial))
+            {
+                dragHand = null;
+                for (int i = 0; i < hands.Length; i++)
+                    wasPinching[i] = hands[i]?.TrackedHand?.IsPinching(HandFinger.Index) == true;
                 Dragging = spatialInput.Dragging;
                 Show(looking || Dragging, Dragging);
                 Keys();
@@ -108,7 +150,7 @@ namespace PhysicsHands.App
 
             if (dragHand != null)
             {
-                if (!dragHand.GoodTracking || !dragHand.IsIndexPinching())
+                if (!dragHand.GoodTracking || dragHand.TrackedHand?.IsPinching(HandFinger.Index) != true)
                     dragHand = null;
                 else
                     transform.position = grabOrigin + (Pinch(dragHand) - grabPoint);
@@ -117,8 +159,8 @@ namespace PhysicsHands.App
             for (int i = 0; i < hands.Length; i++)
             {
                 var hand = hands[i];
-                bool pinching = hand != null && hand.isActiveAndEnabled && hand.GoodTracking && hand.IsIndexPinching() && hand.ThumbTip != null && hand.IndexTip != null;
-                if (pinching && !wasPinching[i] && looking && dragHand == null)
+                bool pinching = hand != null && hand.isActiveAndEnabled && hand.TrackedHand?.IsPinching(HandFinger.Index) == true;
+                if (pinching && !wasPinching[i] && looking && dragHand == null && CanStart(hand))
                 {
                     dragHand = hand;
                     grabPoint = Pinch(hand);

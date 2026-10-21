@@ -9,7 +9,7 @@ namespace PhysicsHands.Tracking
     /// <summary>
     /// Keyboard/mouse hand for editor testing without a headset.
     /// Tab: select hand · hold RMB + mouse: move in view plane · wheel: depth ·
-    /// Q/E roll · R/F pitch · Z/C yaw · LMB or G: grasp · T: index pinch · Y: middle pinch ·
+    /// Q/E roll · R/F pitch · Z/C yaw · LMB or G: grasp · H: index pinch · Y: middle pinch ·
     /// V: point (grasp without index) · X: reset.
     /// </summary>
     [UnityEngine.Scripting.APIUpdating.MovedFrom(true, "PhysicsHands.Tracking", "PhysicsHands.Runtime", "TrackedHandSimulated")]
@@ -87,7 +87,7 @@ namespace PhysicsHands.Tracking
                 _localRotation *= Quaternion.Euler(euler);
                 grasp = mouse.leftButton.isPressed || keyboard.gKey.isPressed;
                 point = keyboard.vKey.isPressed;
-                _pinchIndex = keyboard.tKey.isPressed;
+                _pinchIndex = keyboard.hKey.isPressed;
                 _pinchMiddle = keyboard.yKey.isPressed;
             }
 

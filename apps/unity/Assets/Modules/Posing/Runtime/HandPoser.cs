@@ -15,8 +15,6 @@ namespace PhysicsHands.Posing
         [SerializeField]
         private Transform _mesh;
         [SerializeField]
-        private Transform _visualTarget;
-        [SerializeField]
         private Transform _wrist;
         [SerializeField]
         private bool _mapWrist;
@@ -74,7 +72,6 @@ namespace PhysicsHands.Posing
             _wrist.localRotation = _wristInitialLocalRotation;
         }
 
-        public Transform GetWrist() => _wrist;
         public void MapWrist(HandPoser reference, float time)
         {
             if (_wrist == null || reference?._wrist == null)
@@ -112,12 +109,6 @@ namespace PhysicsHands.Posing
                 FingerPosers[i].ForceMapTo(reference.FingerPosers[i]);
         }
 
-        public void SetTargetPosition(Vector3 position)
-        {
-            if (_visualTarget != null)
-                _visualTarget.position = position;
-        }
-
         public void ShowTarget(bool show)
         {
             if (_mesh != null)
@@ -127,7 +118,6 @@ namespace PhysicsHands.Posing
         public float GetCurl(HandFinger finger) => GetFinger(finger)?.GetCurlAmount() ?? 0f;
         /// <summary>Average curl of index, middle, ring and pinky.</summary>
         public float GetGranularGraspAmount() => (GetCurl(HandFinger.Index) + GetCurl(HandFinger.Middle) + GetCurl(HandFinger.Ring) + GetCurl(HandFinger.Pinky)) * 0.25f;
-        public float GraspingAmount() => GetGranularGraspAmount();
         public GraspLevel GetGraspLevel()
         {
             float amount = GetGranularGraspAmount();

@@ -32,6 +32,7 @@ namespace PhysicsHands.Dynamics
         private IJointDriveContext _hand;
         public void Bind(IJointDriveContext context) => _hand = context;
         private Quaternion _targetRestRelative;
+        public Quaternion RestLocalRotation => _rest.LocalRotation;
         public Transform TrackingTarget => _bindings.TrackingTarget;
         private Transform _trackedBone;
         private readonly TrackedBoneMuscle _muscle = new();
@@ -225,7 +226,15 @@ namespace PhysicsHands.Dynamics
             _trackedBone ??= _bindings.TrackingTarget;
             Vector3 position = _trackedBone != null ? _trackedBone.position : GetTargetPosition();
             Quaternion rotation = _trackedBone != null ? _trackedBone.rotation : GetTargetRotation();
-            _muscle.Step(_rigidbody, position, rotation, _trackedBone != null ? Mathf.Max(0, _hand.FingerSpringMultiplier) : 1f, _muscleSettings.TrackingFrequency, _muscleSettings.TrackingAngularFrequency, _hand.PhysicalContactActive ? _muscleSettings.MaxTrackingAcceleration : _muscleSettings.MaxFreeTrackingAcceleration, _muscleSettings.MaxTrackingAngularAcceleration);
+            if (_hand.TryGetTargetPose(_rigidbody, out Pose effective))
+            {
+                position = effective.position;
+                rotation = effective.rotation;
+            }
+            else
+                position += _hand.GetSimulationContactOffset(_rigidbody);
+            _hand.TryGetSimulationContactNormal(_rigidbody, out Vector3 contactNormal);
+            _muscle.Step(_rigidbody, position, rotation, _trackedBone != null ? Mathf.Max(0, _hand.FingerSpringMultiplier) : 1f, _muscleSettings.TrackingFrequency, _muscleSettings.TrackingAngularFrequency, _hand.PhysicalContactActive ? _muscleSettings.MaxTrackingAcceleration : _muscleSettings.MaxFreeTrackingAcceleration, _muscleSettings.MaxTrackingAngularAcceleration, contactNormal);
         }
 
         public void InitializeJoint()
@@ -290,6 +299,14 @@ namespace PhysicsHands.Dynamics
         {
             if (_bindings.Joint == null || _bindings.TargetRotation == null)
                 return;
+            if (_hand != null && _hand.TryGetTargetPose(_rigidbody, out Pose effective))
+            {
+                Quaternion parentRotation = ConnectedSpace != null ? ConnectedSpace.rotation : Quaternion.identity;
+                if (_bindings.Joint.connectedBody != null && _hand.TryGetTargetPose(_bindings.Joint.connectedBody, out Pose parent))
+                    parentRotation = parent.rotation;
+                _bindings.Joint.SetTargetRotationLocal(Quaternion.Inverse(parentRotation) * effective.rotation, _rest.JointStartLocalRotation);
+                return;
+            }
             Transform space = ConnectedSpace;
             Quaternion targetLocal = space != null ? Quaternion.Inverse(space.rotation) * _bindings.TargetRotation.rotation : _bindings.TargetRotation.rotation;
             if (_targetConnectedSpace != null)
@@ -338,10 +355,15 @@ namespace PhysicsHands.Dynamics
 
         /// <summary>Restores the default gravity cancellation after a grab changed it.</summary>
         public void ResetCancelGravity() => _settings.CancelGravity = _rest.CancelGravity;
-        public Quaternion GetTargetRotation() => FollowsParent && _bindings.Joint == null ? AttachedPose(false).rotation : _bindings.TargetRotation != null ? _bindings.TargetRotation.rotation : transform.rotation;
+        public Quaternion GetTargetRotation()
+        {
+            if (_hand != null && _hand.TryGetTargetPose(_rigidbody, out Pose effective)) return effective.rotation;
+            return FollowsParent && _bindings.Joint == null ? AttachedPose(false).rotation : _bindings.TargetRotation != null ? _bindings.TargetRotation.rotation : transform.rotation;
+        }
         /// <summary>World position at which the joint anchors would coincide.</summary>
         public Vector3 GetTargetPosition()
         {
+            if (_hand != null && _hand.TryGetTargetPose(_rigidbody, out Pose effective)) return effective.position;
             if (_bindings.Joint == null)
                 return FollowsParent ? AttachedPose(false).position : _bindings.TargetRotation != null && !_settings.RotationOnly ? _bindings.TargetRotation.position : transform.position;
             Vector3 connectedAnchorWorld = _bindings.Joint.connectedBody != null ? _bindings.Joint.connectedBody.transform.TransformPoint(_bindings.Joint.connectedAnchor) : _bindings.Joint.connectedAnchor;
@@ -353,13 +375,6 @@ namespace PhysicsHands.Dynamics
         public Vector3 GetOffsetFromTarget() => GetTargetPosition() - transform.position;
         public float GetDistanceFromTarget() => GetOffsetFromTarget().magnitude;
         public float GetAngleFromTarget() => Quaternion.Angle(transform.rotation, GetTargetRotation());
-        public float GetAngleFromTargetOnYAxis()
-        {
-            Quaternion target = GetTargetRotation();
-            Vector3 up = target * Vector3.up;
-            return Vector3.SignedAngle(Vector3.ProjectOnPlane(target * Vector3.forward, up), Vector3.ProjectOnPlane(transform.forward, up), up);
-        }
-
         public void MapToTarget()
         {
             Vector3 position = GetTargetPosition();
@@ -390,7 +405,7 @@ namespace PhysicsHands.Dynamics
         {
             if (_hand == null || _hand.Owns(collision.collider))
                 return;
-            _hand.NotifyPhysicalContact(_rigidbody);
+            _hand.NotifyPhysicalContact(_rigidbody, collision.collider);
         }
 
         public void Reset()
@@ -440,6 +455,5 @@ namespace PhysicsHands.Dynamics
             _bindings.Joint.connectedAnchor = _bindings.Joint.connectedBody.transform.InverseTransformPoint(restAnchorWorld);
         }
 
-        public static Vector3 InverseScale(Vector3 a, Vector3 b) => ConfigurableJointExtensions.InverseScale(a, b);
     }
 }

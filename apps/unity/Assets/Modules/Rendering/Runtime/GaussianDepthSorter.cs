@@ -12,6 +12,7 @@ namespace PhysicsHands.Rendering
         readonly int[] kernels;
         const int Buckets = 1 << 16;
         bool disposed;
+        ComputeBuffer boundDeformed;
         internal GaussianDepthSorter(int count, ComputeShader shader)
         {
             try
@@ -50,12 +51,16 @@ namespace PhysicsHands.Rendering
                 far = Mathf.Max(far, d);
             }
 
-            foreach (int k in kernels)
+            if (boundDeformed != Deformed)
             {
+                boundDeformed = Deformed;
+                foreach (int k in kernels)
+                {
                 sort.SetBuffer(k, "_Deformed", Deformed);
                 sort.SetBuffer(k, "_Order", order);
                 sort.SetBuffer(k, "_Keys", keys);
                 sort.SetBuffer(k, "_Buckets", buckets);
+                }
             }
 
             sort.SetInt("_SplatCount", visible);

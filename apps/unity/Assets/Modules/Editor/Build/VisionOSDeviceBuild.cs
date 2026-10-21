@@ -32,7 +32,7 @@ namespace PhysicsHands.Editor.Build
                 VisionOSSettings settings = VisionOSSettings.GetOrCreateSettings();
                 settings.appMode = VisionOSSettings.AppMode.Metal;
                 settings.metalImmersionStyle = VisionOSSettings.ImmersionStyle.Mixed;
-                settings.handsTrackingUsageDescription = "Your hands interact with reconstructed Gaussian scenes.";
+                settings.handsTrackingUsageDescription = "Your hands interact with physical objects and reconstructed Gaussian scenes.";
                 EditorUtility.SetDirty(settings);
                 AssetDatabase.SaveAssets();
                 var options = new BuildPlayerOptions{scenes = new[]{ScenePath}, locationPathName = OutputPath, target = BuildTarget.VisionOS, targetGroup = BuildTargetGroup.VisionOS, options = BuildOptions.Development, };

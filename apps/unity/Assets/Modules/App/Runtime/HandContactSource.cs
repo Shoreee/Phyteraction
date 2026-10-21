@@ -23,7 +23,17 @@ namespace PhysicsHands.App
             }
         }
 
+        void OnDisable()
+        {
+            foreach (var hand in hands) if (hand != null) hand.ClearSimulationContacts();
+        }
+
+        public bool CanApplyReaction(Rigidbody body)
+        {
+            var hand = body.GetComponentInParent<PhysicsHand>();
+            return hand == null || hand.isActiveAndEnabled && hand.GoodTracking;
+        }
         public bool UseSampledVelocity(Rigidbody body) => body.GetComponentInParent<PhysicsHand>()?.DirectTracking == true;
-        public void NotifyPhysicalContact(Rigidbody body) => body.GetComponentInParent<PhysicsHand>()?.NotifyPhysicalContact(body);
+        public void NotifyPhysicalContact(Rigidbody body, Vector3 outwardNormal) => body.GetComponentInParent<PhysicsHand>()?.NotifySimulationContact(body, outwardNormal);
     }
 }

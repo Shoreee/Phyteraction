@@ -66,6 +66,8 @@ namespace PhysicsHands.Simulation
         public bool useReferenceConstitutive;
         MpmDiscretization layout;
         int generation;
+        int activityEpoch;
+        bool reportedReadbackFailure;
         public int IntegrationParticleCount => layout?.positions.Length ?? 0;
         public bool Ready
         {
@@ -92,6 +94,8 @@ namespace PhysicsHands.Simulation
             get;
             private set;
         }
+
+        public int ReactionReadbackFailures => reactions?.Failures ?? 0;
 
         public float ReactionForce
         {
@@ -169,7 +173,9 @@ namespace PhysicsHands.Simulation
 
                 layout = new MpmDiscretization(asset, FullSourceFor(replay), asset.integrationSubdivisions);
                 generation++;
-                reactions ??= new MpmReactionReadback(epoch => this != null && Ready && epoch == generation);
+                activityEpoch = ApplicationActivity.Epoch;
+                reportedReadbackFailure = false;
+                reactions ??= new MpmReactionReadback(epoch => this != null && Ready && epoch == generation && activityEpoch == ApplicationActivity.Epoch && ApplicationActivity.CanSubmitGpuWork);
                 gpu = new MpmGpuResources(asset, layout, splats, solver, friction, skinCells, maxPushSpeed, maxMaterialSpeed);
                 timeBudget.Initialize(layout.positions.Length, maxSubsteps);
                 simFromLocal = asset.localFromSim.inverse;
@@ -191,7 +197,7 @@ namespace PhysicsHands.Simulation
         public void Replay() => Restart(true);
         void Restart(bool script)
         {
-            if (!Ready)
+            if (!Ready || !ApplicationActivity.CanSubmitGpuWork)
                 return;
             if (layout.fullSource != FullSourceFor(script))
             {
@@ -205,6 +211,7 @@ namespace PhysicsHands.Simulation
             // Restore the displayed buffer immediately as well as the simulation state.
             // Otherwise reset can leave torn-looking splats on screen until the next update.
             splats.Deformed.SetData(asset.renderData.splats);
+            splats.MarkDeformed();
             timeBudget.ResetPending();
             replay = script;
             SimTime = 0;
@@ -223,8 +230,16 @@ namespace PhysicsHands.Simulation
 
         void FixedUpdate()
         {
-            if (!Ready)
+            if (!Ready || !ApplicationActivity.CanSubmitGpuWork)
                 return;
+            if (activityEpoch != ApplicationActivity.Epoch)
+            {
+                activityEpoch = ApplicationActivity.Epoch;
+                generation++;
+                reactions.Reset();
+                contacts.Reset();
+                timeBudget.ResetPending();
+            }
             float meters = asset.metersPerUnit;
             ApplyReactions(Time.fixedDeltaTime);
             if (!timeBudget.Accumulate(Time.fixedDeltaTime, Time.frameCount, out float dt))
@@ -258,7 +273,7 @@ namespace PhysicsHands.Simulation
             int epoch = generation;
             if (contacts.Count > 0)
             {
-                reactions.Queue(gpu.cmd, gpu.reaction, step, epoch, contacts);
+                reactions.Queue(gpu.cmd, gpu.reaction, step, epoch, contacts, h * Substeps, dt);
             }
 
             Graphics.ExecuteCommandBuffer(gpu.cmd);
@@ -278,8 +293,17 @@ namespace PhysicsHands.Simulation
         // Reactions arrive one or more frames late; each is applied to the bodies of its own step.
         void ApplyReactions(float dt)
         {
-            if (!reactions.HasArrivals)
+            if (reactions.Failures > 0 && !reportedReadbackFailure)
+            {
+                reportedReadbackFailure = true;
+                Debug.LogError($"{name}: GPU reaction readback failed; hand feedback is incomplete. Check Metal errors and foreground state.", this);
+            }
+            if (!reactions.HasFeedback)
+            {
+                PairCount = 0;
+                ReactionForce = 0;
                 return;
+            }
             reactions.Apply(asset, transform, contacts, maxReactionForce, dt, out int pairs, out float force);
             PairCount = pairs;
             ReactionForce = force;
@@ -287,25 +311,28 @@ namespace PhysicsHands.Simulation
 
         void Update()
         {
-            if (!Ready)
+            if (!Ready || !ApplicationActivity.CanSubmitGpuWork)
                 return;
             timeBudget.Adapt(Time.unscaledDeltaTime, targetFrameMs, Time.timeSinceLevelLoad, maxSubsteps);
             if (!dirty)
                 return;
             gpu.cs.SetInt("_RenderTotal", asset.UsesTotalDeformation ? 1 : 0);
             if (asset.dynamicCount > 0)
+            {
                 gpu.cs.Dispatch(gpu.kDeform, (asset.dynamicCount + 63) / 64, 1, 1);
+                splats.MarkDeformed();
+            }
             dirty = false;
         }
 
         public void RequestQuality()
         {
-            if (!Ready)
+            if (!Ready || !ApplicationActivity.CanSubmitGpuWork)
                 return;
-            int epoch = generation;
+            int epoch = generation, activity = ApplicationActivity.Epoch;
             AsyncGPUReadback.Request(gpu.particles, r =>
             {
-                if (r.hasError || this == null || !Ready || epoch != generation)
+                if (r.hasError || this == null || !Ready || epoch != generation || activity != ApplicationActivity.Epoch || !ApplicationActivity.CanSubmitGpuWork)
                     return;
                 MpmStatistics.Measure(r.GetData<Particle>(), layout.positions, asset.metersPerUnit, out float rms, out float strain);
                 RmsDisplacement = rms;

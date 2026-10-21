@@ -14,6 +14,8 @@ namespace PhysicsHands.App
     {
         // Optional in-world readout; the CSV remains the measurement of record.
         public TextMesh display;
+        [Tooltip("Explicit profiling only: writes per-frame CSV and requests full-particle quality readback.")]
+        public bool recordCsv;
         public string OutputPath
         {
             get;
@@ -43,29 +45,29 @@ namespace PhysicsHands.App
             writer = new StreamWriter(OutputPath, false, Encoding.UTF8);
             writer.WriteLine("# " + SystemInfo.deviceModel + "; " + SystemInfo.graphicsDeviceName + "; " + Application.unityVersion + "; " + simulation.Provenance);
             writer.WriteLine("# " + simulation.Summary);
-            writer.WriteLine("frame,step,realtime_s,frame_ms,cpu_frame_ms,gpu_frame_ms,solver_cpu_ms,contact_sample_age_ms,shapes,contact_pairs,reaction_n,rms_displacement_m,strain,substeps,time_scale");
+            writer.WriteLine("frame,step,realtime_s,frame_ms,cpu_frame_ms,gpu_frame_ms,solver_cpu_ms,contact_sample_age_ms,shapes,contact_pairs,reaction_n,rms_displacement_m,strain,substeps,time_scale,reaction_readback_failures");
             Debug.Log("Gaussian metrics: " + OutputPath);
         }
 
         void LateUpdate()
         {
-            if (simulation == null || !simulation.Ready)
+            if (simulation == null || !simulation.Ready || !ApplicationActivity.CanSubmitGpuWork || (!recordCsv && display == null))
                 return;
-            if (writer == null)
+            if (recordCsv && writer == null)
                 Open();
             FrameTimingManager.CaptureFrameTimings();
             uint count = FrameTimingManager.GetLatestTimings(1, timing);
             double now = Time.realtimeSinceStartupAsDouble;
             string cpu = count > 0 && timing[0].cpuFrameTime > 0 ? F(timing[0].cpuFrameTime) : "";
             string gpu = count > 0 && timing[0].gpuFrameTime > 0 ? F(timing[0].gpuFrameTime) : "";
-            if (Time.unscaledTime >= nextQuality)
+            if (recordCsv && Time.unscaledTime >= nextQuality)
             {
                 nextQuality = Time.unscaledTime + 1;
                 simulation.RequestQuality();
             }
 
-            rows.AppendLine($"{Time.frameCount},{simulation.StepId},{F(now)},{F(Time.unscaledDeltaTime * 1000)},{cpu},{gpu},{F(simulation.SolverMs)},{F((now - simulation.ContactSampleTime) * 1000)},{simulation.ShapeCount},{simulation.PairCount},{F(simulation.ReactionForce)},{F(simulation.RmsDisplacement)},{F(simulation.StrainMeasure)},{simulation.Substeps},{F(simulation.TimeScale)}");
-            if (Time.unscaledTime >= nextFlush)
+            if (recordCsv) rows.AppendLine($"{Time.frameCount},{simulation.StepId},{F(now)},{F(Time.unscaledDeltaTime * 1000)},{cpu},{gpu},{F(simulation.SolverMs)},{F((now - simulation.ContactSampleTime) * 1000)},{simulation.ShapeCount},{simulation.PairCount},{F(simulation.ReactionForce)},{F(simulation.RmsDisplacement)},{F(simulation.StrainMeasure)},{simulation.Substeps},{F(simulation.TimeScale)},{(simulation is MpmSimulation mpm ? mpm.ReactionReadbackFailures : 0)}");
+            if (recordCsv && Time.unscaledTime >= nextFlush)
             {
                 nextFlush = Time.unscaledTime + 2;
                 writer.Write(rows);

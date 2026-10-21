@@ -28,7 +28,6 @@ namespace PhysicsHands.Hands
         private PhysicsHand _hand;
         private float _springMultiplier = 1f;
         private float _damperMultiplier = 1f;
-        private float _unpinSpringMultiplier = 1f;
         private float _distanceSpringMultiplier = 1f;
         private float _lastSpring = -1f;
         private float _lastDamper = -1f;
@@ -71,7 +70,7 @@ namespace PhysicsHands.Hands
         {
             if (_jointEnforcer.Joint == null || _hand == null)
                 return;
-            float spring = _muscleSpringMultiplier * _springMultiplier * _unpinSpringMultiplier * _distanceSpringMultiplier * _hand.FingerSpringMultiplier;
+            float spring = _muscleSpringMultiplier * _springMultiplier * _distanceSpringMultiplier * _hand.FingerSpringMultiplier;
             float damper = _muscleDamperMultiplier * _damperMultiplier * _hand.FingerDamperMultiplier;
             if (Mathf.Approximately(spring, _lastSpring) && Mathf.Approximately(damper, _lastDamper))
                 return;
@@ -90,10 +89,8 @@ namespace PhysicsHands.Hands
         {
             _springMultiplier = 1f;
             _damperMultiplier = 1f;
-            _unpinSpringMultiplier = 1f;
         }
 
-        public void SetUnpinSpringMultiplier(float unpinSpringMultiplier) => _unpinSpringMultiplier = unpinSpringMultiplier;
         /// <summary>Floppy finger: keeps the joint limits but removes the muscle.</summary>
         public void FreeMovement() => SetSpringDamperMultiplier(0f, 0.2f);
         public void Reset()

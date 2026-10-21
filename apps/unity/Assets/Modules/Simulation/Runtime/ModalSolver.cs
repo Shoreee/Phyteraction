@@ -110,9 +110,16 @@ namespace PhysicsHands.Simulation
                 RenderPositions[i] = new float4(Rest[i], 1);
         }
 
+        public bool DeformationChanged { get; private set; }
+        float[] previousQ;
+
         public void Step(int shapeCount, float dt, int substeps, float damping, float friction, float sampleRadius)
         {
+            previousQ ??= new float[ModeCount];
+            Q.CopyTo(previousQ);
             new ModalStepJob{q = Q, qd = QDot, predicted = predicted, begin = begin, omega = omega, nodeModes = nodeModes, rest = Rest, x = Positions, render = RenderPositions, sampleModes = sampleModes, sampleRest = sampleRest, effectiveMass = sampleEffectiveMass, voxelNodes = voxelNodes, sampleVoxel = sampleVoxel, weights = sampleWeights, shapes = Shapes, shapeCount = math.min(shapeCount, MaxShapes), pairs = pairs, impulse = Impulse, moment = ImpulseMoment, magnitude = ImpulseMagnitude, dt = dt, substeps = math.max(1, substeps), damping = damping, friction = friction, radius = sampleRadius, }.Run();
+            DeformationChanged = false;
+            for (int i=0;i<ModeCount;i++) if (Q[i] != previousQ[i]) { DeformationChanged = true; break; }
         }
 
         public void Dispose()

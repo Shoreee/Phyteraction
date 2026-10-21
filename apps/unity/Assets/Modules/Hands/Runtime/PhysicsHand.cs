@@ -32,17 +32,65 @@ namespace PhysicsHands.Hands
         private readonly List<PhysicsFingerBone> _fingerBones = new();
         private readonly List<Collider> _boneColliders = new();
         private readonly List<Collider> _fingerBonesColliders = new();
+        private IJointTargetSource _jointTargets;
+        public Transform Palm => _rigBindings.DetachableHand.Palm;
+        public void SetJointTargets(IJointTargetSource targets) => _jointTargets = targets;
+        public void ClearJointTargets(IJointTargetSource owner)
+        {
+            if (ReferenceEquals(_jointTargets, owner)) _jointTargets = null;
+        }
+        public bool TryGetTargetPose(Rigidbody body, out Pose pose)
+        {
+            if (_jointTargets != null && _jointTargets.TryGetTargetPose(body, out pose)) return true;
+            pose = default;
+            return false;
+        }
+        readonly Dictionary<Rigidbody, (Vector3 normal, float time)> simulationContacts = new(32);
+        public void NotifySimulationContact(Rigidbody body, Vector3 normal)
+        {
+            if (body == null || normal.sqrMagnitude < .5f) return;
+            NotifyPhysicalContact(body);
+            simulationContacts[body] = (normal, Time.fixedTime);
+        }
+        public bool TryGetSimulationContactNormal(Rigidbody body, out Vector3 normal)
+        {
+            if (simulationContacts.TryGetValue(body, out var contact) && Time.fixedTime - contact.time <= Time.fixedDeltaTime * 3)
+            {
+                normal = contact.normal;
+                return true;
+            }
+            // A fingertip constraint also bounds wrist translation; otherwise every
+            // unblocked bone keeps pulling the shared wrist through the neural surface.
+            if (body == _rigBindings.DetachableHand.Rb)
+                foreach (var sample in simulationContacts.Values)
+                    if (Time.fixedTime - sample.time <= Time.fixedDeltaTime * 3)
+                    {
+                        normal = sample.normal;
+                        return true;
+                    }
+            normal = Vector3.zero;
+            return false;
+        }
+        public Vector3 GetSimulationContactOffset(Rigidbody body)
+        {
+            if (body == _rigBindings.DetachableHand.Rb || _rigBindings.ReferencePoser.Wrist == null) return Vector3.zero;
+            Vector3 displacement = _rigBindings.DetachableHand.Rb.position - _rigBindings.ReferencePoser.Wrist.position;
+            Vector3 shift = Vector3.zero;
+            foreach (var sample in simulationContacts.Values)
+                if (Time.fixedTime - sample.time <= Time.fixedDeltaTime * 3)
+                    shift += sample.normal * Mathf.Max(0, Vector3.Dot(displacement - shift, sample.normal));
+            return shift;
+        }
+        public void ClearSimulationContacts() => simulationContacts.Clear();
         private IHandPoseSource _trackedHand;
         private IHandPoseProvider _poseProvider;
-        private Transform _head;
         private PredefinedHandPoseManager _poseLibrary;
         public event Action TrackingLost;
-        public void BindTracking(IHandPoseProvider provider, PhysicsHand other, PredefinedHandPoseManager library, Transform head)
+        public void BindTracking(IHandPoseProvider provider, PhysicsHand other, PredefinedHandPoseManager library)
         {
             _poseProvider = provider;
             _otherHand = other;
             _poseLibrary = library;
-            _head = head;
         }
 
         public bool Owns(Collider collider) => collider != null && collider.GetComponentInParent<PhysicsHand>() == this;
@@ -53,11 +101,10 @@ namespace PhysicsHands.Hands
         private bool _goodTracking => _trackingState.Good;
         private bool _handInitialized => _trackingState.Initialized;
         private bool _floppy;
-        private float _fingerSpringMultiplier = 1f;
-        private float _grabAntiGravityMultiplier;
-        private float _grabDragMultiplier = 1f;
         private bool _directTracking;
         private float _lastPhysicalContactTime = float.NegativeInfinity;
+        private float _lastMovableContactTime = float.NegativeInfinity;
+        public bool MovableContactActive => Time.fixedTime - _lastMovableContactTime <= Time.fixedDeltaTime * 3;
         public bool PhysicalContactActive => Time.fixedTime - _lastPhysicalContactTime <= Time.fixedDeltaTime * 3;
         public event Action<GraspLevel> OnStartGrasping;
         public event Action<GraspLevel> OnStopGrasping;
@@ -85,7 +132,6 @@ namespace PhysicsHands.Hands
         public bool GoodTracking => _goodTracking;
         public bool IsUsingHandTracking => _trackedHand != null;
         public bool DirectTracking => _directTracking;
-        public bool IsInitialized() => _handInitialized;
         public PhysicsHand OtherHand => _otherHand;
         /// <summary>Grab pose applied to the visual hand (set by the hand grabber).</summary>
         public HandPoser CustomPose
@@ -94,18 +140,7 @@ namespace PhysicsHands.Hands
             set;
         }
 
-        public HandPoser CustomPoseAlternative
-        {
-            get;
-            set;
-        }
 
-        /// <summary>Rigidbody currently held, used for anti-gravity compensation.</summary>
-        public Rigidbody HeldRigidbody
-        {
-            get;
-            set;
-        }
 
         public float MapLerpTime
         {
@@ -113,34 +148,10 @@ namespace PhysicsHands.Hands
             set => _behavior.MapLerpTime = value;
         }
 
-        public float FingerSpringMultiplier => _fingerSpringMultiplier * (_floppy ? 0f : 1f) * (_profiles.Humanoid ? _profiles.Humanoid.FingerSpringMultiplier : 1f) * (_profiles.Physics ? _profiles.Physics.humanoidFingerSpringMultiplier : 1f) * (HandSettings ? HandSettings.FingerSpringScale : 1f);
+        public float FingerSpringMultiplier => (_floppy ? 0f : 1f) * (_profiles.Humanoid ? _profiles.Humanoid.FingerSpringMultiplier : 1f) * (_profiles.Physics ? _profiles.Physics.humanoidFingerSpringMultiplier : 1f) * (HandSettings ? HandSettings.FingerSpringScale : 1f);
         public float FingerDamperMultiplier => (_floppy ? 0.2f : 1f) * (_profiles.Humanoid ? _profiles.Humanoid.FingerDamperMultiplier : 1f) * (_profiles.Physics ? _profiles.Physics.humanoidFingerDamperMultiplier : 1f) * (HandSettings ? HandSettings.FingerDamperScale : 1f);
-        public float GrabAntiGravityMultiplier
-        {
-            get => _grabAntiGravityMultiplier;
-            set => _grabAntiGravityMultiplier = value;
-        }
 
-        public float GrabDragMultiplier
-        {
-            get => _grabDragMultiplier;
-            set
-            {
-                _grabDragMultiplier = value;
-                _rigBindings.DetachableHand.SetDrag(value);
-            }
-        }
 
-        public void SetGrabDriveMultipliers(float spring, float damper, float angularSpring, float angularDamper) => _rigBindings.DetachableHand.SetJointGrabDriveMultiplier(spring, damper, angularSpring, angularDamper);
-        public void ResetGrabMultipliers()
-        {
-            SetGrabDriveMultipliers(1f, 1f, 1f, 1f);
-            _grabAntiGravityMultiplier = 0f;
-            GrabDragMultiplier = 1f;
-            _fingerSpringMultiplier = 1f;
-        }
-
-        public void SetFingerSpring(float spring) => _fingerSpringMultiplier = spring;
         /// <summary>Pose that pre-shapes the hand near an object (from a PredictivePose trigger).</summary>
         public void SetPredictivePose(HandPoser pose, bool overrideTracking)
         {
@@ -206,6 +217,8 @@ namespace PhysicsHands.Hands
 
         private void OnDisable()
         {
+            _jointTargets = null;
+            simulationContacts.Clear();
             if (_profiles.Game == null)
                 return;
             _profiles.Game.HandPhysicsActive.Changed -= OnHandPhysicsChanged;
@@ -274,10 +287,12 @@ namespace PhysicsHands.Hands
 
         // Pursuit happens in PhysicsJointDriver.FixedUpdate. Never teleport a dynamic
         // bone in LateUpdate: a sweep checks translation but misses rotational contact.
-        public void NotifyPhysicalContact(Rigidbody body)
+        public void NotifyPhysicalContact(Rigidbody body, Collider other = null)
         {
             if (body != null)
                 _lastPhysicalContactTime = Time.fixedTime;
+            if (other != null && other.attachedRigidbody != null && !other.attachedRigidbody.isKinematic)
+                _lastMovableContactTime = Time.fixedTime;
         }
 
         private void HandleHandPose()
@@ -305,6 +320,7 @@ namespace PhysicsHands.Hands
             }
             else
             {
+                simulationContacts.Clear();
                 TrackingLost?.Invoke();
                 _gestures.Reset();
                 _rigBindings.DetachableHand.SetTrackingQualityDriveMultiplier(_behavior.BadTrackingSpringMultiplier, 1f, 0f);
@@ -332,14 +348,10 @@ namespace PhysicsHands.Hands
         private void CheckPinching() => _gestures.UpdatePinch(_trackedHand);
         public bool IsGrasping(int minFingerCurved, GraspLevel level) => _gestures.IsGrasping(_rigBindings.ReferencePoser, minFingerCurved, _behavior.GraspMinFingers, level);
         public GraspLevel GetGraspLevel() => _rigBindings.ReferencePoser != null ? _rigBindings.ReferencePoser.GetGraspLevel() : GraspLevel.None;
-        public float GetGranularHandGraspLevel() => _rigBindings.ReferencePoser != null ? _rigBindings.ReferencePoser.GetGranularGraspAmount() : 0f;
         public bool IsPinching(HandFinger finger) => _trackedHand != null && _trackedHand.IsPinching(finger);
         public bool IsIndexPinching() => _gestures.IndexPinching;
         public bool IsMiddlePinching() => _gestures.MiddlePinching;
         public bool IsFacingHead() => _trackedHand != null && _trackedHand.IsFacingHead();
-        public float GetIndexPinchingDistance() => TipDistance(_rigBindings.IndexTip);
-        public float GetMiddlePinchingDistance() => TipDistance(_rigBindings.MiddleTip);
-        public Transform GetIndexTip() => _rigBindings.IndexTip;
         public bool IsIndexFlexed() => _rigBindings.ReferencePoser.IsIndexFlexed();
         public bool IsMiddleFlexed() => _rigBindings.ReferencePoser.IsMiddleFlexed();
         public bool IsRingFlexed() => _rigBindings.ReferencePoser.IsRingFlexed();
@@ -348,12 +360,6 @@ namespace PhysicsHands.Hands
         public float GetIndexProximalAngle() => _rigBindings.ReferencePoser.GetIndexProximalAngle();
         public Transform GetIndexProximal() => _rigBindings.ReferencePoser.GetIndexProximal();
         public float GetPinkyProximalAngle() => _rigBindings.ReferencePoser.GetPinkyProximalAngle();
-        public float DistanceFromHead()
-        {
-            return _head != null && _rigBindings.Wrist != null ? Vector3.Distance(_head.position, _rigBindings.Wrist.position) : 0f;
-        }
-
-        private float TipDistance(Transform tip) => _rigBindings.ThumbTip != null && tip != null ? Vector3.Distance(_rigBindings.ThumbTip.position, tip.position) : float.PositiveInfinity;
         public void UpdateVisualState() => _presentation.Update(_profiles.Game == null || _profiles.Game.BadTrackingWarningActive.Value, _handInitialized, _goodTracking, _profiles.Game == null || _profiles.Game.OutlinesActive.Value);
         public void ConfigureShadows() => _presentation.ConfigureShadows();
         public void SetMaterial(Material material) => _presentation.SetMaterial(material);

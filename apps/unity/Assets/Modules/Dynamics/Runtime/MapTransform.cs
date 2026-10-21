@@ -18,10 +18,6 @@ namespace PhysicsHands.Dynamics
         private bool _mapScale;
         [SerializeField]
         private bool _onFixedUpdate;
-        public void SetReference(Transform reference) => _mapToTransform = reference;
-        public void SetLocal(bool local) => _local = local;
-        public void SetMapPosition(bool mapPosition) => _mapPosition = mapPosition;
-        public void SetMapRotation(bool mapRotation) => _mapRotation = mapRotation;
         private void Update()
         {
             if (!_onFixedUpdate)

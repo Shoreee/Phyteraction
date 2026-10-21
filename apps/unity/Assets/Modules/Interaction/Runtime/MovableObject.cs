@@ -42,7 +42,6 @@ namespace PhysicsHands.Interaction
             ResetInitialValues();
         }
 
-        public void SetRigidbody(Rigidbody rb) => _rb = rb;
         public void ResetInitialValues()
         {
             _initialParent = transform.parent;
@@ -53,9 +52,6 @@ namespace PhysicsHands.Interaction
             _initialKinematic = _rb != null && _rb.isKinematic;
         }
 
-        public void DefineRespawnPosition(Transform spawnTransform) => _customRespawnPosition = spawnTransform;
-        public void RemoveChild(MovableObject child) => _childrenToReset.Remove(child);
-        public void SetInitialParent(Transform newParent) => _initialParent = newParent;
         public float GetDistanceFromInitialGlobalPosition() => Vector3.Distance(transform.position, _initialPosition);
         public float GetDistanceFromInitialLocalPosition() => Vector3.Distance(transform.localPosition, _initialLocalPosition);
         public void ResetObject(bool throwEvent, bool resetPosition)
@@ -87,12 +83,6 @@ namespace PhysicsHands.Interaction
                     child.ResetObject(false, resetPosition);
             if (throwEvent)
                 OnReset?.Invoke(this);
-        }
-
-        public void MakeKinematic(bool kinematic)
-        {
-            if (_rb != null)
-                _rb.isKinematic = kinematic;
         }
 
         public void ResetScale() => transform.localScale = _initialScale;

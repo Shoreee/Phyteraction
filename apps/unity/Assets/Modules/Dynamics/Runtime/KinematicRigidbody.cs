@@ -40,10 +40,5 @@ namespace PhysicsHands.Dynamics
                 _rb.MoveRotation(_mapToTransform.rotation);
         }
 
-        public void ResetPose()
-        {
-            transform.localPosition = _initialLocalPosition;
-            transform.localRotation = _initialLocalRotation;
-        }
     }
 }

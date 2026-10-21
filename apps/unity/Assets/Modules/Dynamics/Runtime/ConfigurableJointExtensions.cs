@@ -13,12 +13,6 @@ namespace PhysicsHands.Dynamics
             SetTargetRotationInternal(joint, targetLocalRotation, startLocalRotation, Space.Self);
         }
 
-        /// <summary>Sets joint.targetRotation from a world-space rotation.</summary>
-        public static void SetTargetRotation(this ConfigurableJoint joint, Quaternion targetWorldRotation, Quaternion startWorldRotation)
-        {
-            SetTargetRotationInternal(joint, targetWorldRotation, startWorldRotation, Space.World);
-        }
-
         private static void SetTargetRotationInternal(ConfigurableJoint joint, Quaternion targetRotation, Quaternion startRotation, Space space)
         {
             Vector3 right = joint.axis;
@@ -35,13 +29,6 @@ namespace PhysicsHands.Dynamics
         {
             drive.positionSpring *= springMultiplier;
             drive.positionDamper *= damperMultiplier;
-            return drive;
-        }
-
-        public static JointDrive WithSpringDamper(this JointDrive drive, float spring, float damper)
-        {
-            drive.positionSpring = spring;
-            drive.positionDamper = damper;
             return drive;
         }
 

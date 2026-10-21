@@ -60,8 +60,6 @@ namespace PhysicsHands.Interaction
         [SerializeField]
         private float _defaultFieldDistance = 0.4f;
         [SerializeField]
-        private float _minFieldDistance = 0.1f;
-        [SerializeField]
         private float _maxAttractionDistance = 5f;
         [SerializeField]
         private AudioSource _audioSource;
@@ -81,10 +79,9 @@ namespace PhysicsHands.Interaction
         private bool _generatorRunning;
         private bool _active;
         private float _fieldDistance;
-        private Rigidbody _relativeVelocityReference;
         public bool IsRunning => _generatorRunning;
         private Transform Emitter => _emitterTransform != null ? _emitterTransform : transform;
-        private void Start()
+        private void Awake()
         {
             if (_hand == null)
                 _hand = GetComponentInParent<PhysicsHand>();
@@ -94,15 +91,20 @@ namespace PhysicsHands.Interaction
                 AddRigidbodyToIgnore(_hand.DetachableHand.Rb);
         }
 
-        public void Switch() => Activate(!_active);
+        private void OnDisable()
+        {
+            StopAttraction();
+            foreach (Rigidbody body in _previouslyCaptured)
+                if (body != null) body.useGravity = true;
+            _previouslyCaptured.Clear();
+            _attractedRigidbodies.Clear();
+            System.Array.Clear(_capturedHits, 0, _capturedHits.Length);
+            System.Array.Clear(_attractedHits, 0, _attractedHits.Length);
+        }
+
         public void Activate(bool activate) => _active = activate;
-        public void SetCanAttractMultiple(bool multiple) => _canAttractMultiple = multiple;
-        public void SetDirection(bool attractive) => _repulsive = !attractive;
         public void AddRigidbodyToIgnore(Rigidbody rb) => _rigidbodiesToIgnore.Add(rb);
-        public void RemoveRigidbodyToIgnore(Rigidbody rb) => _rigidbodiesToIgnore.Remove(rb);
-        public void SetRelativeVelocityReference(Rigidbody rb) => _relativeVelocityReference = rb;
         public void ResetForceFieldDistance() => _fieldDistance = _defaultFieldDistance;
-        public void MoveForceField(float value) => _fieldDistance = Mathf.Clamp(_fieldDistance + value, _minFieldDistance, _maxAttractionDistance);
         private bool GestureWantsField() => _hand != null && _hand.GoodTracking && !_hand.IsFacingHead() && _hand.GetGraspLevel() == GraspLevel.None;
         protected void FixedUpdate()
         {
@@ -188,7 +190,7 @@ namespace PhysicsHands.Interaction
             Vector3 toCenter = FieldCenter - rb.worldCenterOfMass;
             float normalized = Mathf.Clamp01(toCenter.magnitude / _sphereCastCaptureRadius);
             float intensity = _capturedForceMultiplier.Evaluate(normalized) * _mainIntensityMultiplier * (_repulsive ? -1f : 1f);
-            Vector3 reference = _relativeVelocityReference != null ? _relativeVelocityReference.linearVelocity : Vector3.zero;
+            Vector3 reference = Vector3.zero;
             if (_fieldVelocityEstimator != null)
                 reference = _fieldVelocityEstimator.GetVelocityEstimate();
             Vector3 relative = rb.linearVelocity - reference;

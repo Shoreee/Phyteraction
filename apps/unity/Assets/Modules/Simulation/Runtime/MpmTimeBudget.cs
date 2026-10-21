@@ -19,11 +19,13 @@ namespace PhysicsHands.Simulation
 
     internal sealed class MpmTimeBudget
     {
-        int Budget, lastFrame;
+        int Budget, minimumBudget, lastFrame;
         float frameMs, pending;
         internal void Initialize(int particles, int maxSubsteps)
         {
             Budget = Mathf.Clamp(500000 / Mathf.Max(1, particles), 1, maxSubsteps);
+            minimumBudget = Budget;
+            frameMs = 0;
             lastFrame = -1;
         }
 
@@ -46,7 +48,10 @@ namespace PhysicsHands.Simulation
             if (age < 3)
                 return;
             if (frameMs > targetFrameMs * 1.15f)
-                Budget = Mathf.Max(1, Mathf.FloorToInt(Budget * .8f));
+                // Total frame cost also contains rendering and XR. When those alone
+                // exceed the target, reducing physics to one substep cannot fix the
+                // bottleneck and starves interaction. Preserve the initialized work quota.
+                Budget = Mathf.Max(minimumBudget, Mathf.FloorToInt(Budget * .8f));
             else if (frameMs < targetFrameMs * 1.02f)
                 Budget = Mathf.Min(maxSubsteps, Budget + 1);
         }

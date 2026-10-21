@@ -2,7 +2,12 @@ using UnityEngine;
 
 namespace PhysicsHands.Dynamics
 {
-    public interface IJointDriveContext
+    public interface IJointTargetSource
+    {
+        bool TryGetTargetPose(Rigidbody body, out Pose pose);
+    }
+
+    public interface IJointDriveContext : IJointTargetSource
     {
         bool DirectTracking
         {
@@ -24,13 +29,16 @@ namespace PhysicsHands.Dynamics
             get;
         }
 
+        Vector3 GetSimulationContactOffset(Rigidbody body);
+        bool TryGetSimulationContactNormal(Rigidbody body, out Vector3 normal);
         bool Owns(Collider collider);
-        void NotifyPhysicalContact(Rigidbody body);
+        void NotifyPhysicalContact(Rigidbody body, Collider other);
     }
 
     public interface IContactBodyPolicy
     {
+        bool CanApplyReaction(Rigidbody body);
         bool UseSampledVelocity(Rigidbody body);
-        void NotifyPhysicalContact(Rigidbody body);
+        void NotifyPhysicalContact(Rigidbody body, Vector3 outwardNormal);
     }
 }

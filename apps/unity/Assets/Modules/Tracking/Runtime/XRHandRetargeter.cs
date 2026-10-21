@@ -169,7 +169,7 @@ namespace PhysicsHands.Tracking
         {
             XRHandJointID tipId = joint switch
             {
-            XRHandJointID.IndexDistal => XRHandJointID.IndexTip, XRHandJointID.MiddleDistal => XRHandJointID.MiddleTip, XRHandJointID.RingDistal => XRHandJointID.RingTip, XRHandJointID.LittleDistal => XRHandJointID.LittleTip, _ => XRHandJointID.Invalid, }
+            XRHandJointID.ThumbDistal => XRHandJointID.ThumbTip, XRHandJointID.IndexDistal => XRHandJointID.IndexTip, XRHandJointID.MiddleDistal => XRHandJointID.MiddleTip, XRHandJointID.RingDistal => XRHandJointID.RingTip, XRHandJointID.LittleDistal => XRHandJointID.LittleTip, _ => XRHandJointID.Invalid, }
 
             ;
             tip = default;
@@ -210,10 +210,5 @@ namespace PhysicsHands.Tracking
             _scale = Vector3.Distance(wrist.position, middle.position) * scale / _initialDistance;
         }
 
-        /// <summary>Maps a transform's rotation from one space into another.</summary>
-        public static void MapRelative(Transform target, Transform reference, Transform refSpace, Transform targetSpace)
-        {
-            target.rotation = targetSpace.rotation * Quaternion.Inverse(refSpace.rotation) * reference.rotation;
-        }
     }
 }

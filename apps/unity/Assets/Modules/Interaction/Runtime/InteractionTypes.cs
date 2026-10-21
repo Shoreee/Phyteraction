@@ -12,7 +12,6 @@ namespace PhysicsHands.Interaction
     public enum SnapType
     {
         None = 0,
-        Procedural = 5,
         Grasp = 10,
         PinchIndex = 15,
     }

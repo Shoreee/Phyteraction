@@ -19,10 +19,6 @@ namespace PhysicsHands.Tracking
         private HandPoser _referenceHandPoser;
         [SerializeField]
         private Transform _palm;
-        [SerializeField]
-        private Transform _forearmWrist;
-        [SerializeField]
-        private Transform _forearmArm;
         [Tooltip("Seconds of continuous high-confidence tracking before tracking is considered good.")]
         [SerializeField]
         private float _goodTrackingTime = 0.2f;
@@ -37,7 +33,8 @@ namespace PhysicsHands.Tracking
         public virtual bool UsesJointTracking => false;
         public HandSide Handedness => _handedness;
         public HandPoser ReferenceHandPoser => _referenceHandPoser;
-        public Transform Palm => _palm;
+        [SerializeField] private Transform _trackingPalm;
+        public Transform Palm => _trackingPalm;
         public Transform Wrist => _referenceHandPoser != null ? _referenceHandPoser.Wrist : transform;
         public bool GoodTracking => _goodTracking;
         public Quaternion LastKnownRotation => _lastKnownRotation;
@@ -90,7 +87,5 @@ namespace PhysicsHands.Tracking
         public abstract bool IsPinching(HandFinger finger);
         public abstract float GetPinchingStrength(HandFinger finger);
         public abstract float GetScale();
-        public virtual Transform GetForearmWristJoint() => _forearmWrist;
-        public virtual Transform GetForearmArmJoint() => _forearmArm;
     }
 }

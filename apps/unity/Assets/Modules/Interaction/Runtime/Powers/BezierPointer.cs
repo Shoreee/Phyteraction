@@ -85,14 +85,6 @@ namespace PhysicsHands.Interaction
         }
 
         public void InstantUpdate() => UpdateCurve(false);
-        public void SetLerpValues(float start, float middleStart, float middleEnd, float end)
-        {
-            _lerpTimeStartPoint = start;
-            _lerpTimeMiddleStartPoint = middleStart;
-            _lerpTimeMiddleEndPoint = middleEnd;
-            _lerpTimeEndPoint = end;
-        }
-
         private void UpdateCurve(bool doLerp)
         {
             if (_startPoint == null || _endPoint == null)

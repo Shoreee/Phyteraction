@@ -16,8 +16,6 @@ namespace PhysicsHands.Interaction
         [SerializeField]
         private PhysicsHand _hand;
         [SerializeField]
-        private Transform _grabDetector;
-        [SerializeField]
         private Transform _pinchDetector;
         [Tooltip("Pinch detector follows this point; defaults to the thumb/index tip midpoint.")]
         [SerializeField]
@@ -25,18 +23,19 @@ namespace PhysicsHands.Interaction
         [SerializeField]
         private Transform _poserDetector;
         [SerializeField]
-        private float _pinchCaptureDistance = 0.03f;
-        [SerializeField]
-        private float _graspCaptureDistance = 0.04f;
-        [SerializeField]
         private float _gestureReleaseGrace = 0.07f;
         private float _releaseStarted = -1f;
+        private IReadOnlyList<Holdable> _gripCandidates;
+        public void BindGripCandidates(IReadOnlyList<Holdable> candidates) => _gripCandidates = candidates;
         private readonly GraspCandidateQuery _candidateQuery = new();
         private readonly PredictivePoseSelection _predictivePoses = new();
         private PredictivePose _closestPredictiveHandPose;
         private bool _canCaptureAgain = true;
-        private bool _capturedWithPinch;
         private bool _lockedByTelekinesis;
+        public System.Func<bool> CaptureAllowed { private get; set; }
+        public bool HasNearbyGrip => FindGraspCandidate(false) != null;
+        public bool CanPreviewGrip => isActiveAndEnabled && _hand != null && _hand.GoodTracking &&
+            _capturedObject == null && _canCaptureAgain && !_lockedByTelekinesis && CaptureAllowed?.Invoke() != false;
         public PhysicsHand Hand => _hand;
         public HandSide Side => _hand != null ? _hand.HandType : HandSide.Right;
         protected override void Awake()
@@ -53,79 +52,32 @@ namespace PhysicsHands.Interaction
             }
         }
 
-        protected override void Start()
+        private bool PinchIntent => _hand != null && _hand.TrackedHand?.IsPinching(HandFinger.Index) == true;
+        private bool GraspIntent(GraspLevel level, float releaseMargin = 0) => _hand != null && _hand.ReferencePoser != null &&
+            _hand.ReferencePoser.IsGrasping(3, level, releaseMargin);
+        private void OnEnable()
         {
-            base.Start();
-            InitializeEvents();
+            if (_hand != null) _hand.TrackingLost += ForceRelease;
         }
-
-        private void InitializeEvents()
-        {
-            if (_hand == null)
-                return;
-            _hand.TrackingLost += ForceRelease;
-            _hand.OnStartGrasping += OnStartGrasping;
-            _hand.OnStopGrasping += OnStopGrasping;
-            _hand.OnStartIndexPinching += OnStartIndexPinching;
-            _hand.OnStopIndexPinching += OnStopIndexPinching;
-        }
-
-        private void OnDestroy()
-        {
-            if (_hand == null)
-                return;
-            _hand.TrackingLost -= ForceRelease;
-            _hand.OnStartGrasping -= OnStartGrasping;
-            _hand.OnStopGrasping -= OnStopGrasping;
-            _hand.OnStartIndexPinching -= OnStartIndexPinching;
-            _hand.OnStopIndexPinching -= OnStopIndexPinching;
-        }
-
         private void OnDisable()
         {
+            if (_hand != null) _hand.TrackingLost -= ForceRelease;
             ForceRelease();
             ClearPoses();
         }
 
-        private void OnStartGrasping(GraspLevel level) => HandleGrasping(level, true);
-        private void OnStopGrasping(GraspLevel level) => HandleGrasping(level, false);
-        private void HandleGrasping(GraspLevel level, bool started)
+        private bool CanGrasp(Holdable holdable) => holdable.AllowsSnap(SnapType.Grasp);
+        private void TryPinchCapture()
         {
-            if (started)
-            {
-                if (_capturedObject != null || !_canCaptureAgain || _lockedByTelekinesis)
-                    return;
-                Holdable target = FindGraspCandidate();
-                if (target != null && level >= target.GraspLevel && CanGrasp(target))
-                    Capture(target);
-                return;
-            }
-
-            if (level == GraspLevel.Weak && (_hand == null || !_hand.IsIndexPinching()))
-                _canCaptureAgain = true;
-        // Sustained opening is checked in Update; a noisy threshold crossing is not a release.
-        }
-
-        private bool CanGrasp(Holdable holdable) => holdable.AllowsSnap(SnapType.Grasp) || (holdable.AllowProceduralPoses && holdable.AllowsSnap(SnapType.Procedural));
-        private void OnStartIndexPinching(PhysicsHand _) => HandlePinchingIndex(true);
-        private void OnStopIndexPinching(PhysicsHand _) => HandlePinchingIndex(false);
-        private void HandlePinchingIndex(bool started)
-        {
-            if (!started)
-            {
-                // Brief tip occlusion is handled by the release grace in Update.
-                return;
-            }
-
             if (_capturedObject != null || !_canCaptureAgain || _lockedByTelekinesis)
                 return;
             Vector3 pinchPoint = PinchPoint();
             Holdable best = null;
-            float bestDistance = _pinchCaptureDistance;
-            QueryCandidates(pinchPoint, _pinchCaptureDistance, false);
+            float bestDistance = float.PositiveInfinity;
+            QueryCandidates(_hand.Palm.position, .08f, true);
             foreach (Holdable h in _candidateQuery.Candidates)
             {
-                if (h == null || !h.isActiveAndEnabled || !CheckIfCanHoldThis(h) || !h.AllowsSnap(SnapType.PinchIndex))
+                if (h == null || !h.isActiveAndEnabled || !CheckIfCanHoldThis(h) || !h.AllowsSnap(SnapType.PinchIndex) || h.FindAnchor(this) == null)
                     continue;
                 float d = h.DistanceTo(pinchPoint);
                 if (d <= bestDistance)
@@ -135,28 +87,32 @@ namespace PhysicsHands.Interaction
                 }
             }
 
-            if (best != null && Capture(best, false))
-                _capturedWithPinch = true;
+            if (best != null)
+                Capture(best, false);
         }
 
-        private void QueryCandidates(Vector3 point, float radius, bool includePalmContacts) => _candidateQuery.Gather(point, radius, includePalmContacts ? _reachableHoldables : null);
-        private Holdable FindGraspCandidate()
+        private void QueryCandidates(Vector3 point, float radius, bool includePalmContacts)
+        {
+            if (_gripCandidates == null) _candidateQuery.Gather(point, radius, includePalmContacts ? _reachableHoldables : null);
+            else
+            {
+                _candidateQuery.Candidates.Clear();
+                for (int i = 0; i < _gripCandidates.Count; i++) _candidateQuery.Candidates.Add(_gripCandidates[i]);
+            }
+        }
+        private Holdable FindGraspCandidate(bool requireGesture = true)
         {
             if (_hand == null)
                 return null;
-            Vector3 point = _grabDetector != null ? _grabDetector.position : _snapJointAnchor.position;
-            QueryCandidates(point, _graspCaptureDistance, true);
+            Vector3 point = _hand.Palm.position;
+            QueryCandidates(point, .08f, true);
             Holdable best = null;
             float distance = float.PositiveInfinity;
             foreach (Holdable h in _candidateQuery.Candidates)
             {
-                if (h == null || !h.isActiveAndEnabled || !CheckIfCanHoldThis(h) || !CanGrasp(h) || !_hand.IsGrasping(3, h.GraspLevel))
+                if (h == null || !h.isActiveAndEnabled || !CheckIfCanHoldThis(h) || !CanGrasp(h) || (requireGesture && !GraspIntent(h.GraspLevel)) || h.FindAnchor(this) == null)
                     continue;
                 float d = h.DistanceTo(point);
-                // Trigger contacts retain their authored detector extent. Fallback queries
-                // must be close to a physical surface, not merely an oversized grab trigger.
-                if (!_reachableHoldables.Contains(h) && d > _graspCaptureDistance)
-                    continue;
                 if (d < distance)
                 {
                     distance = d;
@@ -181,12 +137,12 @@ namespace PhysicsHands.Interaction
             // Retry while the gesture remains active, with release hysteresis.
             if (_hand != null && _hand.TrackedHand != null && _hand.TrackedHand.GoodTracking)
             {
-                if (!_hand.IsGrasping(3, GraspLevel.Weak) && !_hand.IsIndexPinching())
+                if (!GraspIntent(GraspLevel.Weak) && !PinchIntent)
                     _canCaptureAgain = true;
                 if (_capturedObject == null && _canCaptureAgain && !_lockedByTelekinesis)
                 {
-                    if (_hand.IsIndexPinching())
-                        HandlePinchingIndex(true);
+                    if (PinchIntent)
+                        TryPinchCapture();
                     if (_capturedObject == null)
                     {
                         Holdable grasp = FindGraspCandidate();
@@ -198,7 +154,7 @@ namespace PhysicsHands.Interaction
 
             if (_capturedObject != null && _hand != null)
             {
-                bool holdingGesture = _capturedWithPinch ? _hand.IsIndexPinching() : _hand.IsGrasping(3, _capturedObject.GraspLevel);
+                bool holdingGesture = PinchIntent || GraspIntent(_capturedObject.GraspLevel, .08f);
                 if (holdingGesture)
                     _releaseStarted = -1f;
                 else if (_releaseStarted < 0f)
@@ -209,17 +165,7 @@ namespace PhysicsHands.Interaction
 
             if (_pinchDetector != null)
                 _pinchDetector.position = _pinchDetectorTarget != null ? _pinchDetectorTarget.position : PinchPoint();
-            if (_focusedHoldable != null && _capturedObject == null)
-                UpdateFocusedPose(_focusedHoldable);
             CheckClosestPredictiveHandPose();
-        }
-
-        private void UpdateFocusedPose(Holdable holdable)
-        {
-            HandPoserManager poser = holdable.HandPoserManager;
-            if (poser == null || _hand == null)
-                return;
-            poser.UpdateSnap(Side, _hand.Wrist);
         }
 
         internal void AddPredictivePose(PredictivePose pose)
@@ -248,19 +194,6 @@ namespace PhysicsHands.Interaction
                 _hand.SetPredictivePose(null, false);
         }
 
-        public override void Focus(Holdable holdable, bool focus, bool showTarget)
-        {
-            base.Focus(holdable, focus, showTarget);
-            bool highlight = _hand == null || _hand.GameSettings == null || _hand.GameSettings.SnapHighlightActive.Value;
-            ShowTarget(holdable, focus && showTarget && highlight);
-        }
-
-        public void ShowTarget(Holdable holdable, bool show)
-        {
-            if (holdable != null)
-                holdable.ShowHandPose(Side, show);
-        }
-
         /// <summary>Telekinesis holds the object at a distance; normal grabbing is suspended.</summary>
         public void LockWithTelekinesis(Holdable holdable, bool locked)
         {
@@ -273,17 +206,16 @@ namespace PhysicsHands.Interaction
         public void CaptureWithTelekinesis(Holdable holdable)
         {
             _lockedByTelekinesis = false;
-            if (Capture(holdable, true))
-                _capturedWithPinch = false;
+            Capture(holdable, true);
         }
 
         public override bool Capture(Holdable holdable, bool distantGrab)
         {
+            if (CaptureAllowed?.Invoke() == false || _hand == null || !_hand.GoodTracking ||
+                (!distantGrab && (holdable == null || holdable.FindAnchor(this) == null))) return false;
             if (!base.Capture(holdable, distantGrab))
                 return false;
-            _capturedWithPinch = false;
             _releaseStarted = -1f;
-            ShowTarget(holdable, false);
             return true;
         }
 
@@ -291,8 +223,7 @@ namespace PhysicsHands.Interaction
         {
             if (_capturedObject == null)
                 return;
-            _canCaptureAgain = _hand == null || (!_hand.IsGrasping(3, GraspLevel.Weak) && !_hand.IsIndexPinching());
-            _capturedWithPinch = false;
+            _canCaptureAgain = _hand == null || (!GraspIntent(GraspLevel.Weak) && !PinchIntent);
             _releaseStarted = -1f;
             base.Release();
         }

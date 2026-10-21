@@ -178,9 +178,9 @@ namespace PhysicsHands.Interaction
         {
             if (holdable == null || _capturedObject != null || !CheckIfCanHoldThis(holdable))
                 return false;
+            if (!AttachLink(holdable, distantGrab)) return false;
             _capturedObject = holdable;
             holdable.Capture(this);
-            AttachLink(holdable, distantGrab);
             PlayCaptureSound(holdable);
             OnCaptured?.Invoke(holdable);
             return true;
@@ -193,10 +193,9 @@ namespace PhysicsHands.Interaction
                 Capture(_closestHoldable);
         }
 
-        protected virtual void AttachLink(Holdable holdable, bool distantGrab)
+        protected virtual bool AttachLink(Holdable holdable, bool distantGrab)
         {
-            if (_holdingLink != null)
-                _holdingLink.Attach(this, holdable, distantGrab);
+            return _holdingLink != null && _holdingLink.Attach(this, holdable, distantGrab);
         }
 
         public virtual void ForceRelease() => Release();
@@ -213,7 +212,6 @@ namespace PhysicsHands.Interaction
             OnReleased?.Invoke(released);
         }
 
-        public int GetReachablesCount() => _reachableHoldables.Count;
         protected bool CheckIfCanHoldThis(Holdable holdable) => holdable != null && holdable.AllowsHolder(_holderType) && CheckObjectAllowed(holdable);
         protected bool CheckObjectAllowed(Holdable holdable)
         {

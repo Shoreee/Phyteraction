@@ -14,33 +14,37 @@ namespace PhysicsHands.App
         public int dynamicCount = -1;
         public bool Backdrop
         {
-            get => renderer != null && renderer.Backdrop;
+            get => backdrop;
             set
             {
-                RequireRenderer().Backdrop = value;
+                backdrop = value;
+                if (gpuRenderer != null) gpuRenderer.Backdrop = value;
             }
         }
 
-        SplatRenderer renderer;
+        bool backdrop;
+        SplatRenderer gpuRenderer;
+        public void MarkDeformed() => RequireRenderer().MarkDeformed();
         public ComputeBuffer Source => RequireRenderer().Source;
         public ComputeBuffer Deformed => RequireRenderer().Deformed;
         public int Count => asset != null && asset.splats != null ? asset.splats.Length : 0;
 
-        SplatRenderer RequireRenderer() => renderer ?? throw new System.InvalidOperationException($"Gaussian render binding on {name} is not initialized.");
+        SplatRenderer RequireRenderer() => gpuRenderer ?? throw new System.InvalidOperationException($"Gaussian render binding on {name} is not initialized.");
 
         public void Initialize()
         {
-            if (renderer != null)
+            if (gpuRenderer != null)
                 return;
             if (asset == null || asset.splats == null || asset.splats.Length == 0 || sortShader == null || splatShader == null)
                 throw new System.InvalidOperationException($"Incomplete Gaussian render binding on {name}.");
-            renderer = new SplatRenderer(asset.splats, asset.bounds, sortShader, splatShader, transform, nearCount, asset.sh, asset.shFromLocal, dynamicCount);
+            gpuRenderer = new SplatRenderer(asset.splats, asset.bounds, sortShader, splatShader, transform, nearCount, asset.sh, asset.shFromLocal, dynamicCount);
+            gpuRenderer.Backdrop = backdrop;
         }
 
         public void Shutdown()
         {
-            renderer?.Dispose();
-            renderer = null;
+            gpuRenderer?.Dispose();
+            gpuRenderer = null;
         }
 
         void OnDestroy() => Shutdown();

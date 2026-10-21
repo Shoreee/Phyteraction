@@ -163,7 +163,7 @@ namespace PhysicsHands.Simulation
 
         void FixedUpdate()
         {
-            if (!Ready)
+            if (!Ready || !ApplicationActivity.CanSubmitGpuWork)
                 return;
             watch.Restart();
             float dt = Time.fixedDeltaTime;
@@ -186,16 +186,17 @@ namespace PhysicsHands.Simulation
             }
 
             ReactionForce = total / dt;
-            dirty = true;
+            dirty |= Solver.DeformationChanged;
             StepId++;
             SolverMs = watch.Elapsed.TotalMilliseconds;
         }
 
         void Update()
         {
-            if (!Ready || !dirty)
+            if (!Ready || !dirty || !ApplicationActivity.CanSubmitGpuWork)
                 return;
             deformation.Upload(Solver.RenderPositions);
+            splats.MarkDeformed();
             dirty = false;
         }
 

@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 3580241814572500934}
-  _visualTarget: {fileID: 0}
   _wrist: {fileID: 5614726607189090864}
   _mapWrist: 1
   _destroyMesh: 0
@@ -88,17 +87,14 @@ MonoBehaviour:
     Target: {fileID: 5614726607189090864}
     MapPosition: 1
   - XrJoint: 3
-    Target: {fileID: 9140501201758575011}
-    MapPosition: 0
-  - XrJoint: 4
     Target: {fileID: 8848962342278372957}
     MapPosition: 0
-  - XrJoint: 5
+  - XrJoint: 4
     Target: {fileID: 4107635017802488898}
     MapPosition: 0
-  - XrJoint: 6
+  - XrJoint: 5
     Target: {fileID: 2161127230603702965}
-    MapPosition: 1
+    MapPosition: 0
   - XrJoint: 8
     Target: {fileID: 1147851396186242193}
     MapPosition: 0
@@ -645,6 +641,7 @@ Transform:
   - {fileID: 2104334020902605295}
   - {fileID: 3063110782780051404}
   - {fileID: 2060650083009090748}
+  - {fileID: 3529157798111928542}
   m_Father: {fileID: 9084470495054399991}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1416402247272615784
@@ -1618,6 +1615,37 @@ MonoBehaviour:
   _boneDistal: {fileID: 0}
   _proximalMaxCurlAngle: 90
   _middleMaxCurlAngle: 90
+--- !u!1 &4479409810316871723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3529157798111928542}
+  m_Layer: 0
+  m_Name: Tracked palm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3529157798111928542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4479409810316871723}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0.060000002, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5614726607189090864}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4851914198030716710
 GameObject:
   m_ObjectHideFlags: 0
@@ -2932,10 +2960,9 @@ MonoBehaviour:
   _handedness: 1
   _referenceHandPoser: {fileID: 1286707005616382856}
   _palm: {fileID: 2060650083009090748}
-  _forearmWrist: {fileID: 3128647725111437242}
-  _forearmArm: {fileID: 8757092830274095719}
   _goodTrackingTime: 0.2
   _head: {fileID: 0}
+  _trackingPalm: {fileID: 3529157798111928542}
   _xrHandToOvrHandMapper: {fileID: 2707669967597098377}
   _trackingSpace: {fileID: 0}
   _pinchThresholdIndex: 0.02

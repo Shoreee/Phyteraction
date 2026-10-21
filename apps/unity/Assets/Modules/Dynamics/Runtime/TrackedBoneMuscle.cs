@@ -8,7 +8,7 @@ namespace PhysicsHands.Dynamics
         Quaternion lastRotation;
         bool hasPose;
         public void Reset() => hasPose = false;
-        public void Step(Rigidbody body, Vector3 position, Quaternion rotation, float muscle, float linearFrequency, float angularFrequency, float accelerationLimit, float angularLimit)
+        public void Step(Rigidbody body, Vector3 position, Quaternion rotation, float muscle, float linearFrequency, float angularFrequency, float accelerationLimit, float angularLimit, Vector3 contactNormal)
         {
             float dt = Time.fixedDeltaTime;
             Vector3 velocity = hasPose ? Vector3.ClampMagnitude((position - lastPosition) / dt, 5f) : Vector3.zero;
@@ -23,7 +23,16 @@ namespace PhysicsHands.Dynamics
             float g = 1f / (1f + kd * dt + kp * dt * dt);
             Vector3 offset = rotation * body.centerOfMass;
             Vector3 goal = position + offset;
-            Vector3 acceleration = (kp * (goal - body.worldCenterOfMass) + (kd + kp * dt) * (velocity + Vector3.Cross(omega, offset) - body.linearVelocity)) * g;
+            Vector3 error = goal - body.worldCenterOfMass;
+            Vector3 desiredVelocity = velocity + Vector3.Cross(omega, offset);
+            if (contactNormal.sqrMagnitude > .5f)
+            {
+                // Solver contact defines an admissible half-space. Keep raw targets intact,
+                // pursue tangential articulation, and retain damping and outward withdrawal.
+                error -= contactNormal * Mathf.Min(0, Vector3.Dot(error, contactNormal));
+                desiredVelocity -= contactNormal * Mathf.Min(0, Vector3.Dot(desiredVelocity, contactNormal));
+            }
+            Vector3 acceleration = (kp * error + (kd + kp * dt) * (desiredVelocity - body.linearVelocity)) * g;
             body.AddForce(Vector3.ClampMagnitude(acceleration, accelerationLimit), ForceMode.Acceleration);
             // Finger orientation needs its own muscle bandwidth: translating the
             // centre alone leaves a hinged chain trailing behind a fast wrist.

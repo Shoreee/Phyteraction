@@ -19,6 +19,8 @@ namespace PhysicsHands.Posing
             get;
         }
 
+        Transform Palm { get; }
+
         bool GoodTracking
         {
             get;

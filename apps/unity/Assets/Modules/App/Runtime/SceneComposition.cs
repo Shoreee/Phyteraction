@@ -28,8 +28,8 @@ namespace PhysicsHands.App
                 throw new InvalidOperationException($"{name}: assign the tracked hand sources.");
             foreach (var source in sources)
             {
-                if (source == null || source.ReferenceHandPoser == null || source.Wrist == null)
-                    throw new InvalidOperationException($"{name}: each tracked source must have a reference poser and wrist.");
+                if (source == null || source.ReferenceHandPoser == null || source.Wrist == null || source.Palm == null)
+                    throw new InvalidOperationException($"{name}: each tracked source must have a reference poser, wrist and tracking palm marker.");
                 if (source is TrackedHandXR && headCamera.transform.parent == null)
                     throw new InvalidOperationException($"{name}: XR sources require the camera's tracking-space parent.");
             }
@@ -61,7 +61,7 @@ namespace PhysicsHands.App
                 foreach (var candidate in hands)
                     if (candidate != hand && candidate.HandType != hand.HandType)
                         other = candidate;
-                hand.BindTracking(tracking, other, poses, headCamera.transform);
+                hand.BindTracking(tracking, other, poses);
             }
 
             foreach (var pose in predictivePoses)

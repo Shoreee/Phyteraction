@@ -533,7 +533,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 9062117439808416979}
-  _visualTarget: {fileID: 0}
   _wrist: {fileID: 5861797003998767754}
   _mapWrist: 1
   _destroyMesh: 0
@@ -572,17 +571,14 @@ MonoBehaviour:
     Target: {fileID: 5861797003998767754}
     MapPosition: 1
   - XrJoint: 3
-    Target: {fileID: 4851885468066722106}
-    MapPosition: 0
-  - XrJoint: 4
     Target: {fileID: 5699720986900629175}
     MapPosition: 0
-  - XrJoint: 5
+  - XrJoint: 4
     Target: {fileID: 4636871864206943334}
     MapPosition: 0
-  - XrJoint: 6
+  - XrJoint: 5
     Target: {fileID: 2817588596606761143}
-    MapPosition: 1
+    MapPosition: 0
   - XrJoint: 8
     Target: {fileID: 4175240191626904348}
     MapPosition: 0
@@ -982,10 +978,9 @@ MonoBehaviour:
   _handedness: 0
   _referenceHandPoser: {fileID: 5165591148402916264}
   _palm: {fileID: 5463267386996866788}
-  _forearmWrist: {fileID: 4531459097071212621}
-  _forearmArm: {fileID: 4516682895176061949}
   _goodTrackingTime: 0.2
   _head: {fileID: 0}
+  _trackingPalm: {fileID: 3890194190553160656}
   _xrHandToOvrHandMapper: {fileID: 4188177733529551394}
   _trackingSpace: {fileID: 0}
   _pinchThresholdIndex: 0.02
@@ -2642,6 +2637,7 @@ Transform:
   - {fileID: 8304011352485839683}
   - {fileID: 8907290882323373741}
   - {fileID: 5463267386996866788}
+  - {fileID: 3890194190553160656}
   m_Father: {fileID: 4403680749110354004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6285693234866834601
@@ -3389,6 +3385,37 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7794342795944760839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3890194190553160656}
+  m_Layer: 0
+  m_Name: Tracked palm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3890194190553160656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7794342795944760839}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.060000002, y: 0.01999998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5861797003998767754}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7866254721871964664
 GameObject:
   m_ObjectHideFlags: 0

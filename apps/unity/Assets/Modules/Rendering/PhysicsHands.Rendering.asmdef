@@ -2,7 +2,8 @@
     "name": "PhysicsHands.Rendering",
     "rootNamespace": "PhysicsHands.Rendering",
     "references": [
-        "PhysicsHands.GaussianData"
+        "PhysicsHands.GaussianData",
+        "PhysicsHands.Foundation"
     ],
     "includePlatforms": [],
     "autoReferenced": true

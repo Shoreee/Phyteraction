@@ -12,8 +12,14 @@ namespace PhysicsHands.App
         public MonoBehaviour simulation;
         ISimulationLifecycle lifecycle;
 
-        void OnEnable()
+        void OnEnable() => InitializeWhenActive();
+        void Update()
         {
+            if (lifecycle == null) InitializeWhenActive();
+        }
+        void InitializeWhenActive()
+        {
+            if (!ApplicationActivity.CanSubmitGpuWork) return;
             try
             {
                 lifecycle = simulation as ISimulationLifecycle

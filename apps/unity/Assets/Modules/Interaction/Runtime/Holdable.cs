@@ -24,10 +24,6 @@ namespace PhysicsHands.Interaction
         private List<SnapType> _allowedSnapTypes = new()
         {SnapType.Grasp};
         [SerializeField]
-        private bool _useHandPoserManager = true;
-        [SerializeField]
-        private bool _allowProceduralPoses = true;
-        [SerializeField]
         private bool _captureKinematically;
         [SerializeField]
         private bool _makeSpeculativeOnGrab = true;
@@ -41,12 +37,6 @@ namespace PhysicsHands.Interaction
         private GraspLevel _graspLevel = GraspLevel.Moderate;
         [SerializeField]
         private float _handToObjectReleaseDistance = 0.12f;
-        [SerializeField]
-        private float _handToTargetReleaseDistance = 0.3f;
-        [SerializeField]
-        private float _handToTargetVibrationDistance = 0.1f;
-        [SerializeField]
-        private HandPoserManager _handPoserManager;
         [Tooltip("Extra size of auto-generated grab triggers, in metres.")]
         [SerializeField]
         private float _grabTriggerPadding = 0.01f;
@@ -72,13 +62,9 @@ namespace PhysicsHands.Interaction
         public Interactable Interactable => _interactable;
         public MovableObject MovableObject => _movableObject;
         public Respawner Respawner => _respawner;
-        public HandPoserManager HandPoserManager => _useHandPoserManager ? _handPoserManager : null;
-        public bool AllowProceduralPoses => _allowProceduralPoses;
         public bool CaptureKinematically => _captureKinematically;
         public GraspLevel GraspLevel => _graspLevel;
         public float HandToObjectReleaseDistance => _handToObjectReleaseDistance;
-        public float HandToTargetReleaseDistance => _handToTargetReleaseDistance;
-        public float HandToTargetVibrationDistance => _handToTargetVibrationDistance;
         public AudioClip ClipGrab => _clipGrab;
         public AudioClip ClipRelease => _clipRelease;
         public IReadOnlyList<Collider> Colliders => _colliders;
@@ -104,8 +90,7 @@ namespace PhysicsHands.Interaction
             _interactable = GetComponent<Interactable>();
             _movableObject = GetComponent<MovableObject>();
             _respawner = GetComponent<Respawner>();
-            if (_handPoserManager == null)
-                _handPoserManager = GetComponentInChildren<HandPoserManager>();
+            _anchors = GetComponentsInChildren<GripAnchor>(true);
             _initialParent = transform.parent;
             _initialKinematicState = _rb.isKinematic;
             _initialGravityState = _rb.useGravity;
@@ -248,8 +233,6 @@ namespace PhysicsHands.Interaction
                     transform.SetParent(holder.HoldableContainer, true);
             }
 
-            if (_handPoserManager != null)
-                _handPoserManager.SetGrabbed(true);
             OnCaptured?.Invoke(this);
         }
 
@@ -258,8 +241,6 @@ namespace PhysicsHands.Interaction
             if (!_holders.Remove(holder) || _holders.Count > 0)
                 return;
             RefreshPhysics();
-            if (_handPoserManager != null)
-                _handPoserManager.SetGrabbed(false);
             OnReleased?.Invoke(this);
         }
 
@@ -286,25 +267,18 @@ namespace PhysicsHands.Interaction
             _rb.collisionDetectionMode = _initialCollisionMode;
         }
 
-        public void SetInitialParent(Transform newParent) => _initialParent = newParent;
-        /// <summary>Physics state restored on release, for objects that switch between fixed and loose.</summary>
-        public void SetRestPhysics(bool kinematic, bool gravity)
+        private GripAnchor[] _anchors = Array.Empty<GripAnchor>();
+        public GripAnchor FindAnchor(HandGrabber holder)
         {
-            Initialize();
-            _initialKinematicState = kinematic;
-            _initialGravityState = gravity;
-        }
-
-        public void SetAllowedSnaps(params SnapType[] types)
-        {
-            _restrictAllowedSnapTypes = true;
-            _allowedSnapTypes = new List<SnapType>(types);
-        }
-
-        public void ShowHandPose(HandSide side, bool show)
-        {
-            if (_handPoserManager != null)
-                _handPoserManager.ShowHandPose(side, show);
+            GripAnchor best = null;
+            float distance = float.PositiveInfinity;
+            foreach (GripAnchor anchor in _anchors)
+                if (anchor != null && anchor.CanCapture(holder))
+                {
+                    float d = (anchor.transform.position - holder.Hand.Palm.position).sqrMagnitude;
+                    if (d < distance) { best = anchor; distance = d; }
+                }
+            return best;
         }
     }
 }

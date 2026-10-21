@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: VisionOSSettings
   m_EditorClassIdentifier: Unity.XR.VisionOS.Editor::UnityEditor.XR.VisionOS.VisionOSSettings
   m_AppMode: 0
-  m_HandsTrackingUsageDescription: Your hands interact with reconstructed Gaussian
-    scenes.
+  m_HandsTrackingUsageDescription: Your hands interact with physical objects and
+    reconstructed Gaussian scenes.
   m_WorldSensingUsageDescription: Used to place the play space.
   m_RuntimeSettings: {fileID: 11400000, guid: b916deea9507f4260b0c0110337e1783, type: 2}
   m_UpperLimbVisibility: 2

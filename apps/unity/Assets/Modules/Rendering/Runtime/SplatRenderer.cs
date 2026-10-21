@@ -27,7 +27,10 @@ namespace PhysicsHands.Rendering
         static Mesh quad;
         static int quadUsers;
         bool disposed, quadAcquired;
-        int sortedFrame = -1, sortedCount;
+        int sortedCount;
+        uint deformationVersion, sortedVersion;
+        bool hasSorted;
+        public void MarkDeformed() => deformationVersion++;
         Vector3 sortedForward;
         Matrix4x4 sortedTransform;
         public SplatRenderer(Gaussian[] splats, Bounds bounds, ComputeShader sortShader, Shader splatShader, Transform owner, int nearCount = -1, Vector4[] shCoefficients = null, Matrix4x4 shFromLocal = default, int dynamicCount = -1)
@@ -79,18 +82,19 @@ namespace PhysicsHands.Rendering
 
         void Render(ScriptableRenderContext context, Camera camera)
         {
-            if (camera.cameraType == CameraType.Preview || owner == null || !owner.gameObject.activeInHierarchy)
+            if (!ApplicationActivity.CanSubmitGpuWork || camera.cameraType == CameraType.Preview || owner == null || !owner.gameObject.activeInHierarchy)
                 return;
             if ((camera.cullingMask & (1 << owner.gameObject.layer)) == 0)
                 return;
             int visible = Visible;
             var matrix = owner.localToWorldMatrix;
-            // Parallel stereo eyes differ by a constant depth offset: their ordering
-            // is identical. Only reuse within this frame; deformation changes next frame.
-            if (!ReuseParallelEyeSort || sortedFrame != Time.frameCount || sortedCount != visible || sortedTransform != matrix || (sortedForward - camera.transform.forward).sqrMagnitude > 1e-10f)
+            // Parallel views differ by a constant depth offset. Reuse only while
+            // orientation, transform, count and explicitly versioned deformation are unchanged.
+            if (!ReuseParallelEyeSort || !hasSorted || sortedVersion != deformationVersion || sortedCount != visible || !sortedTransform.Equals(matrix) || !sortedForward.Equals(camera.transform.forward))
             {
                 Sort(camera);
-                sortedFrame = Time.frameCount;
+                hasSorted = true;
+                sortedVersion = deformationVersion;
                 sortedCount = visible;
                 sortedTransform = matrix;
                 sortedForward = camera.transform.forward;
@@ -108,7 +112,10 @@ namespace PhysicsHands.Rendering
             {camera = camera, layer = owner.gameObject.layer, worldBounds = b, shadowCastingMode = ShadowCastingMode.Off, receiveShadows = false, lightProbeUsage = LightProbeUsage.Off}, EnsureQuad(), 0, visible);
         }
 
-        public void Sort(Camera camera) => sorter.Sort(camera, owner, depthBounds, Visible, Deformed);
+        public void Sort(Camera camera)
+        {
+            if (ApplicationActivity.CanSubmitGpuWork) sorter.Sort(camera, owner, depthBounds, Visible, Deformed);
+        }
         public void Dispose()
         {
             if (disposed)
