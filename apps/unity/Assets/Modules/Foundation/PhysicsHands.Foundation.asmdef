@@ -1,0 +1,7 @@
+{
+    "name": "PhysicsHands.Foundation",
+    "rootNamespace": "PhysicsHands",
+    "references": [],
+    "includePlatforms": [],
+    "autoReferenced": true
+}

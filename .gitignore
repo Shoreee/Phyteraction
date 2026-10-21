@@ -1,13 +1,21 @@
-# Unity
+# Legacy project-location generated state
 /[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
-/[Mm]emoryCaptures/
-/[Rr]ecordings/
+/[Tt]emp/
+/[Oo]bj/
+
+# Unity generated state
+apps/unity/[Ll]ibrary/
+apps/unity/[Tt]emp/
+apps/unity/[Oo]bj/
+apps/unity/[Uu]ser[Ss]ettings/
+apps/unity/[Ll]ogs/
+apps/unity/[Bb]uilds/
+apps/unity/[Mm]emoryCaptures/
+apps/unity/[Rr]ecordings/
+artifacts/
+data/
 *.csproj
 *.sln
 *.slnx
@@ -25,29 +33,15 @@
 .vscode/
 .idea/
 .DS_Store
-
-# Local tooling / agent caches
 .workbuddy/
 .cursor/
-
-# Reverse-engineering intermediates (regenerate with ReverseEngineering/run_all.sh)
-/ReverseEngineering/output/
-/ReverseEngineering/backups/
-/ReverseEngineering/rea-*/
-
-# Python
 __pycache__/
 *.pyc
 .venv/
 **/.venv/
 
-# PhysFlow / PhysDreamer raw captures and prepared bins (multi-GB; keep tools + docs)
-/Research/GaussianWorld/data/
-/Research/GaussianWorld/.venv/
-
-# ORCA SpeedTree binary assets (re-download from NVIDIA ORCA); keep scripts + architecture docs
-/Research/SpeedTree/orca/
-/Research/SpeedTree/**/*.fbx
-/Research/SpeedTree/**/*.FBX
-/Research/SpeedTree/**/*.dds
-/Research/SpeedTree/**/*.DDS
+# Local Gaussian model payloads; restore them together with their original metadata.
+apps/unity/Assets/Content/Gaussians/*.asset
+apps/unity/Assets/Content/Gaussians/*.asset.meta
+apps/unity/Assets/Content/Gaussians/PhysFlow/
+apps/unity/Assets/Content/Gaussians/PhysFlow.meta

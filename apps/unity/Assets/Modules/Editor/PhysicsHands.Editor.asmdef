@@ -1,0 +1,15 @@
+{
+    "name": "PhysicsHands.Editor",
+    "rootNamespace": "PhysicsHands.Editor",
+    "references": [
+        "PhysicsHands.GaussianData",
+        "PhysicsHands.Simulation",
+        "Unity.Mathematics",
+        "Unity.XR.VisionOS",
+        "Unity.XR.VisionOS.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "autoReferenced": true
+}

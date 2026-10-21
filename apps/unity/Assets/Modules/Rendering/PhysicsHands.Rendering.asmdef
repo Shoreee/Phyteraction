@@ -1,0 +1,9 @@
+{
+    "name": "PhysicsHands.Rendering",
+    "rootNamespace": "PhysicsHands.Rendering",
+    "references": [
+        "PhysicsHands.GaussianData"
+    ],
+    "includePlatforms": [],
+    "autoReferenced": true
+}

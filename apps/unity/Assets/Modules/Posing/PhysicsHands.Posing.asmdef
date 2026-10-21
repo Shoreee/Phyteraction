@@ -1,0 +1,9 @@
+{
+    "name": "PhysicsHands.Posing",
+    "rootNamespace": "PhysicsHands.Posing",
+    "references": [
+        "PhysicsHands.Foundation"
+    ],
+    "includePlatforms": [],
+    "autoReferenced": true
+}

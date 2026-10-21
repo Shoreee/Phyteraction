@@ -1,0 +1,10 @@
+{
+    "name": "PhysicsHands.Dynamics",
+    "rootNamespace": "PhysicsHands.Dynamics",
+    "references": [
+        "PhysicsHands.Foundation",
+        "Unity.Mathematics"
+    ],
+    "includePlatforms": [],
+    "autoReferenced": true
+}

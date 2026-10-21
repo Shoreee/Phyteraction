@@ -1,0 +1,14 @@
+{
+    "name": "PhysicsHands.Simulation",
+    "rootNamespace": "PhysicsHands.Simulation",
+    "references": [
+        "PhysicsHands.Foundation",
+        "PhysicsHands.GaussianData",
+        "PhysicsHands.Dynamics",
+        "Unity.Mathematics",
+        "Unity.Burst",
+        "Unity.Collections"
+    ],
+    "includePlatforms": [],
+    "autoReferenced": true
+}

@@ -1,0 +1,47 @@
+{
+  "alocasia": {
+    "meters": 0.45,
+    "height": 1.05,
+    "refine": 1
+  },
+  "carnation": {
+    "meters": 0.32,
+    "height": 1.05,
+    "refine": 1
+  },
+  "hat": {
+    "meters": 0.3,
+    "height": 1.15,
+    "refine": 1
+  },
+  "telephone": {
+    "meters": 0.35,
+    "height": 1.1,
+    "refine": 1
+  },
+  "fox": {
+    "meters": 0.25,
+    "height": 1.0,
+    "refine": 1
+  },
+  "jam": {
+    "meters": 0.08,
+    "height": 0.95,
+    "refine": 1
+  },
+  "kitchen": {
+    "meters": 0.3,
+    "height": 0.98,
+    "refine": 1
+  },
+  "plane_960": {
+    "meters": 0.25,
+    "height": 1.25,
+    "refine": 1
+  },
+  "sandcastle": {
+    "meters": 0.3,
+    "height": 0.98,
+    "refine": 0.5
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "name": "PhysicsHands.Tracking",
+    "rootNamespace": "PhysicsHands.Tracking",
+    "references": [
+        "PhysicsHands.Foundation",
+        "PhysicsHands.Posing",
+        "Unity.XR.Hands",
+        "Unity.XR.Management",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "autoReferenced": true
+}

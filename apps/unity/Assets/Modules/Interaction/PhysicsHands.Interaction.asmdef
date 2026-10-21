@@ -1,0 +1,13 @@
+{
+    "name": "PhysicsHands.Interaction",
+    "rootNamespace": "PhysicsHands.Interaction",
+    "references": [
+        "PhysicsHands.Foundation",
+        "PhysicsHands.Hands",
+        "PhysicsHands.Posing",
+        "PhysicsHands.Dynamics",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "autoReferenced": true
+}

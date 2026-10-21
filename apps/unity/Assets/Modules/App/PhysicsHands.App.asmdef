@@ -1,0 +1,19 @@
+{
+    "name": "PhysicsHands.App",
+    "rootNamespace": "PhysicsHands.App",
+    "references": [
+        "PhysicsHands.Foundation",
+        "PhysicsHands.Hands",
+        "PhysicsHands.Posing",
+        "PhysicsHands.Tracking",
+        "PhysicsHands.Dynamics",
+        "PhysicsHands.Interaction",
+        "PhysicsHands.GaussianData",
+        "PhysicsHands.Rendering",
+        "PhysicsHands.Simulation",
+        "Unity.InputSystem",
+        "Unity.XR.VisionOS"
+    ],
+    "includePlatforms": [],
+    "autoReferenced": true
+}

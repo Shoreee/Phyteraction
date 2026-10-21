@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40dc7c05e1a8e453e9d0206f7365f0e7, type: 3}
+  m_Name: HumanoidSettings
+  m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.HumanoidSettings
+  WristSpringMultiplier: 1
+  WristAngularSpringMultiplier: 1
+  WristDamperMultiplier: 1
+  WristAngularDamperMultiplier: 1
+  FingerSpringMultiplier: 2
+  FingerDamperMultiplier: 2
+  SolverIterationCountMultiplier: 3
+  MassMultiplier: 1

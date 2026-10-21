@@ -1,0 +1,21 @@
+// MLS-MPM port of PhysFlow / PhysGaussian (mpm_solver_warp): APIC transfer with quadratic
+// B-splines, Kirchhoff stresses and return mappings of the seven PhysFlow materials, grid boundary
+// conditions from the scene configs, and hand-bone colliders with friction and reaction impulses.
+// Per substep: P2G (return mapping, stress, scatter, block marking) -> Args -> Grid (indirect,
+// active 4^3 blocks only, momentum -> velocity in place) -> G2P -> Clear (indirect).
+#pragma kernel P2G
+#pragma kernel Args
+#pragma kernel Grid
+#pragma kernel G2P
+#pragma kernel Clear
+#pragma kernel Deform
+
+struct Particle { float4 x, v, c0, c1, c2, f0, f1, f2, r0, r1, r2; };
+// x.w volume, v.w mass, c0.w yield stress (Pa), c1.w modifier mask bits, c2.w impulse gain,
+
+#include "Includes/MpmState.hlsl"
+#include "Includes/MpmMaterials.hlsl"
+#include "Includes/MpmTransfer.hlsl"
+#include "Includes/MpmParticleToGrid.hlsl"
+#include "Includes/MpmContacts.hlsl"
+#include "Includes/MpmGridToParticle.hlsl"
