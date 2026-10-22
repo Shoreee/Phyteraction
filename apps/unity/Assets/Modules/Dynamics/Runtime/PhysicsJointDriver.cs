@@ -36,6 +36,8 @@ namespace PhysicsHands.Dynamics
         public Transform TrackingTarget => _bindings.TrackingTarget;
         private Transform _trackedBone;
         private readonly TrackedBoneMuscle _muscle = new();
+        private Vector3 staticContactNormal, staticContactPoint;
+        private float staticContactTime = float.NegativeInfinity;
         private readonly TrackedJointPolicy _trackingPolicy = new();
         private System.Action _applyDrives;
         public int SolverIterationCount => _settings.SolverIterationCount;
@@ -232,9 +234,11 @@ namespace PhysicsHands.Dynamics
                 rotation = effective.rotation;
             }
             else
-                position += _hand.GetSimulationContactOffset(_rigidbody);
-            _hand.TryGetSimulationContactNormal(_rigidbody, out Vector3 contactNormal);
-            _muscle.Step(_rigidbody, position, rotation, _trackedBone != null ? Mathf.Max(0, _hand.FingerSpringMultiplier) : 1f, _muscleSettings.TrackingFrequency, _muscleSettings.TrackingAngularFrequency, _hand.PhysicalContactActive ? _muscleSettings.MaxTrackingAcceleration : _muscleSettings.MaxFreeTrackingAcceleration, _muscleSettings.MaxTrackingAngularAcceleration, contactNormal);
+                position += _hand.GetContactOffset(_rigidbody);
+            bool solverContact = _hand.TryGetContact(_rigidbody, out Vector3 contactNormal, out Vector3 contactPoint);
+            bool staticContact = Time.fixedTime - staticContactTime <= Time.fixedDeltaTime * 2;
+            if (staticContact) { contactNormal = staticContactNormal; contactPoint = staticContactPoint; }
+            _muscle.Step(_rigidbody, position, rotation, _trackedBone != null ? Mathf.Max(0, _hand.FingerSpringMultiplier) : 1f, _muscleSettings.TrackingFrequency, _muscleSettings.TrackingAngularFrequency, _hand.PhysicalContactActive ? _muscleSettings.MaxTrackingAcceleration : _muscleSettings.MaxFreeTrackingAcceleration, _muscleSettings.MaxTrackingAngularAcceleration, contactNormal, staticContact || solverContact, contactPoint);
         }
 
         public void InitializeJoint()
@@ -406,6 +410,13 @@ namespace PhysicsHands.Dynamics
             if (_hand == null || _hand.Owns(collision.collider))
                 return;
             _hand.NotifyPhysicalContact(_rigidbody, collision.collider);
+            if ((collision.rigidbody == null || collision.rigidbody.isKinematic) && collision.contactCount > 0)
+            {
+                var contact = collision.GetContact(0);
+                staticContactNormal = contact.normal;
+                staticContactPoint = contact.point;
+                staticContactTime = Time.fixedTime;
+            }
         }
 
         public void Reset()

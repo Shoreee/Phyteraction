@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PhysicsHands.App
 {
-    /// <summary>Object-side approach cues. Preview never reserves an anchor or modifies grip state.</summary>
+    /// <summary>Object-owned approach cues persist until their clockwise exit finishes.</summary>
     public sealed class PalmGripFeedback : MonoBehaviour
     {
         public Camera head;
@@ -12,42 +12,46 @@ namespace PhysicsHands.App
         public PhysicsLabContent lab;
         public WorkbenchInteraction interaction;
         GripAnchor[] anchors;
-        HandFeedbackMesh geometry;
+        HandFeedbackCue[] cues;
         void OnEnable()
         {
             if (head == null || material == null || lab == null || interaction == null)
             {
-                Debug.LogError($"{name}: palm grip feedback requires camera, material, lab and interaction bindings.",this);
-                enabled=false;return;
+                Debug.LogError($"{name}: palm grip feedback requires camera, material, lab and interaction bindings.", this);
+                enabled = false; return;
             }
-            anchors=lab.GetComponentsInChildren<GripAnchor>(true);
-            geometry=new HandFeedbackMesh("Palm grip approach cues",material,Mathf.Max(1, interaction.grabbers.Length) * 108);
+            anchors = lab.GetComponentsInChildren<GripAnchor>(true);
+            cues = new HandFeedbackCue[anchors.Length];
         }
         void LateUpdate()
         {
-            if(geometry==null)return;
-            if(!ApplicationActivity.CanSubmitGpuWork||!lab.isActiveAndEnabled||interaction.workspace.Dragging){geometry.Hide();return;}
-            geometry.Begin(head.transform);
-            Vector3 low=Vector3.one*float.MaxValue,high=-low;
-            GripAnchor previous=null;
-            foreach(var grabber in interaction.grabbers)
+            if (cues == null) return;
+            bool allowed = lab.isActiveAndEnabled && !interaction.workspace.Dragging;
+            for (int i = 0; i < anchors.Length; i++)
             {
-                if(grabber==null||!grabber.CanPreviewGrip)continue;
-                GripAnchor best=null;float closest=float.PositiveInfinity;
-                foreach(var anchor in anchors)
-                {
-                    if(anchor==null||!anchor.CanPreview(grabber))continue;
-                    float distance=(anchor.transform.position-grabber.Hand.Palm.position).sqrMagnitude;
-                    if(distance<closest){best=anchor;closest=distance;}
-                }
-                if(best==null||best==previous)continue;
-                previous=best;Vector3 point=best.transform.position;
-                float approach=Mathf.InverseLerp(best.captureDistance*1.5f,best.captureDistance,Mathf.Sqrt(closest));
-                geometry.Ring(point,.023f,new Color(1,1,1,Mathf.Lerp(.35f,1,approach)));
-                low=Vector3.Min(low,point);high=Vector3.Max(high,point);
+                GripAnchor anchor = anchors[i];
+                bool show = false;
+                if (allowed && anchor != null)
+                    foreach (var grabber in interaction.grabbers)
+                    {
+                        if (grabber == null || !grabber.CanPreviewGrip || !anchor.CanPreview(grabber)) continue;
+                        GripAnchor closest = null; float distance = float.PositiveInfinity;
+                        foreach (var candidate in anchors)
+                        {
+                            if (candidate == null || !candidate.CanPreview(grabber)) continue;
+                            float d = (candidate.transform.position - grabber.Hand.Palm.position).sqrMagnitude;
+                            if (d < distance) { closest = candidate; distance = d; }
+                        }
+                        show |= closest == anchor;
+                    }
+                if (show && cues[i] == null) cues[i] = HandFeedbackCue.Create(head, material);
+                if (cues[i] != null) cues[i].Set(show, anchor != null ? anchor.transform.position : Vector3.zero, Color.white);
             }
-            geometry.Commit(low.x==float.MaxValue?new Bounds(Vector3.zero,Vector3.one):new Bounds((low+high)*.5f,high-low+Vector3.one*.1f));
         }
-        void OnDisable(){geometry?.Dispose();geometry=null;anchors=null;}
+        void OnDisable()
+        {
+            if (cues != null) foreach (var cue in cues) if (cue != null) cue.Release();
+            cues = null; anchors = null;
+        }
     }
 }

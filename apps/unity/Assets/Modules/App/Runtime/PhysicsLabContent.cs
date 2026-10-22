@@ -6,12 +6,14 @@ namespace PhysicsHands.App
     public sealed class PhysicsLabContent : MonoBehaviour, IWorkbenchContent
     {
         public Rigidbody[] bodies = System.Array.Empty<Rigidbody>();
+        public LabPistol[] pistols = System.Array.Empty<LabPistol>();
+        public LabProjectileSystem projectiles;
         Vector3[] positions;
         Quaternion[] rotations;
         public bool Available => true;
         public bool SupportsRoom => false;
         public bool SupportsPaper => false;
-        public string Status => "PHYSICS LAB  ·  CONTACT / PALM GRIP";
+        public string Status => "PHYSICS LAB  ·  FRICTION / AUTHORED GRIP";
         void Awake()
         {
             positions = new Vector3[bodies.Length];
@@ -25,6 +27,7 @@ namespace PhysicsHands.App
         public void SetContentActive(bool active) => gameObject.SetActive(active);
         public void ResetContent()
         {
+            if (projectiles != null) projectiles.Clear();
             for (int i = 0; i < bodies.Length; i++)
             {
                 Rigidbody body = bodies[i];
@@ -34,6 +37,7 @@ namespace PhysicsHands.App
                 body.linearVelocity = body.angularVelocity = Vector3.zero;
                 body.WakeUp();
             }
+            foreach (LabPistol pistol in pistols) pistol.ResetState();
         }
         public void SetRoom(bool visible) { }
         public void Replay() { }

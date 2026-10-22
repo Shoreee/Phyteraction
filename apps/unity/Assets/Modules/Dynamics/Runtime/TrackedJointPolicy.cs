@@ -24,7 +24,7 @@ namespace PhysicsHands.Dynamics
                     // limits/lengths in the joint, without a competing high-gain motor
                     // or projection teleports through the contact surface.
                     joint.projectionMode = JointProjectionMode.None;
-                    joint.enablePreprocessing = true;
+                    joint.enablePreprocessing = false;
                     body.solverIterations = Mathf.Max(96, iterations);
                     body.solverVelocityIterations = 16;
                 }

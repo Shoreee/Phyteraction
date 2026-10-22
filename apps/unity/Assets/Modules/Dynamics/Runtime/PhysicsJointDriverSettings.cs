@@ -33,14 +33,14 @@ namespace PhysicsHands.Dynamics
     internal sealed class TrackedMuscleSettings
     {
         [Min(1)]
-        public float TrackingFrequency = 18f;
+        public float TrackingFrequency = 60f;
         [Min(1)]
         public float TrackingAngularFrequency = 50f;
         [Min(1)]
-        public float MaxTrackingAcceleration = 60f;
+        public float MaxTrackingAcceleration = 180f;
         [Min(1)]
         public float MaxFreeTrackingAcceleration = 240f;
         [Min(1)]
-        public float MaxTrackingAngularAcceleration = 12000f;
+        public float MaxTrackingAngularAcceleration = 18000f;
     }
 }

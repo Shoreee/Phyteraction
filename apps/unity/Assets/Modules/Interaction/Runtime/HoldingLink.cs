@@ -57,10 +57,11 @@ namespace PhysicsHands.Interaction
                 Vector3 objectPoint = anchor != null ? anchor.transform.position : owner.SnapJointAnchor.position;
                 joint.anchor = body.transform.InverseTransformPoint(objectPoint);
                 startAnchor = palmBody.transform.InverseTransformPoint(objectPoint);
-                endAnchor = palmBody.transform.InverseTransformPoint(palm.position);
+                Vector3 clearance = anchor != null ? hand.GripRotation * anchor.palmToAnchor : Vector3.zero;
+                endAnchor = palmBody.transform.InverseTransformPoint(palm.position + clearance);
                 initialRelative = Quaternion.Inverse(palmBody.rotation) * body.rotation;
                 // Object-authored palm frames specify the complete alignment, including handedness.
-                Quaternion correction = anchor != null ? palm.rotation * Quaternion.Inverse(anchor.PalmRotation(grabber.Side)) : Quaternion.identity;
+                Quaternion correction = anchor != null ? hand.GripRotation * Quaternion.Inverse(anchor.PalmRotation(grabber.Side)) : Quaternion.identity;
                 targetRelative = Quaternion.Inverse(palmBody.rotation) * correction * body.rotation;
                 var linear = new JointDrive { positionSpring = _linearSpring, positionDamper = _linearDamper, maximumForce = _maximumForce };
                 joint.xDrive = joint.yDrive = joint.zDrive = linear;
@@ -69,7 +70,7 @@ namespace PhysicsHands.Interaction
                 ApplyAlignment();
                 if (anchor != null)
                 {
-                    wrap = new GeometryHandWrap(hand, held.Colliders);
+                    wrap = new GeometryHandWrap(hand, held.Colliders, anchor.gripPose);
                     hand.SetJointTargets(wrap);
                 }
                 return true;

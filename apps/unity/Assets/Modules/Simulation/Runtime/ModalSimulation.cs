@@ -99,7 +99,7 @@ namespace PhysicsHands.Simulation
         readonly ContactGatherer contacts = new();
         readonly Stopwatch watch = new();
         Rigidbody[] bodies;
-        ModalDeformationOutput deformation;
+        GaussianCageDeformation deformation;
         IGaussianBufferSource splats;
         bool dirty = true;
         ISimulationContactSource contactProvider;
@@ -137,7 +137,7 @@ namespace PhysicsHands.Simulation
 
                 Solver = new ModalSolver(Cage, asset.modeOmega, asset.modeShapes);
                 Debug.Log($"Gaussian cage: {Cage.voxelCount} voxels, {Cage.rest.Length} nodes ({Cage.anchoredNodes} anchored), {Cage.tets.Length} tets, {Cage.sampleVoxel.Length} contact samples, {Solver.ModeCount} modes {asset.modeOmega[0] / (2 * Mathf.PI):F2}-{asset.modeOmega[^1] / (2 * Mathf.PI):F1} Hz, E {Cage.youngsMin:G3}/{Cage.youngsMedian:G3}/{Cage.youngsMax:G3} Pa, rho {Cage.density:F1} kg/m3");
-                deformation = new ModalDeformationOutput(Cage, solver, splats);
+                deformation = new GaussianCageDeformation(Cage, solver, splats);
                 contacts.Reset();
                 dirty = true;
                 StepId = 0;

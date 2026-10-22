@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3215eabf4fe048c09ba709edf1e863ec, type: 3}
+  m_Name: TreeMaterialPrior
+  m_EditorClassIdentifier: PhysicsHands.GaussianData::PhysicsHands.GaussianData.ElasticMaterialAsset
+  provenance: PhysFlow author alocasia material initialization; transferred vegetation
+    prior, NOT calibrated SpeedTree wood and NOT learned generalization
+  sourceSha256: 1d6a2895f75edd095fc6281dfc28afe4331c1d93777cff0adb710dfcfe3b3a35
+  checkpointSha256: 
+  youngs: 100000
+  poisson: 0.3
+  density: 75
+  simUnitMeters: 0.45

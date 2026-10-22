@@ -12,7 +12,10 @@ namespace PhysicsHands.Interaction
         {
             internal PhysicsJointDriver driver;
             internal Collider[] colliders;
-            internal Quaternion local;
+            internal Quaternion local, previousTracked, capturedTracked, authored;
+            internal bool hasAuthored;
+            internal Transform tracked, trackedSpace;
+            internal Quaternion TrackedRotation => tracked != null ? Quaternion.Inverse(trackedSpace.rotation) * tracked.rotation : Quaternion.identity;
             internal Vector3 localPosition, probe;
             internal Pose pose;
             internal int parent;
@@ -26,13 +29,15 @@ namespace PhysicsHands.Interaction
         readonly Collider[] nearby = new Collider[64];
         const float ContactSlop = .00025f;
 
-        internal GeometryHandWrap(PhysicsHand hand, IReadOnlyList<Collider> surfaces)
+        internal GeometryHandWrap(PhysicsHand hand, IReadOnlyList<Collider> surfaces, GripPoseAsset gripPose = null)
         {
             this.hand = hand;
             this.surfaces = surfaces;
             localScale = hand.Wrist.lossyScale;
             var list = new List<Bone>();
             foreach (PhysicsFinger finger in hand.Fingers)
+            {
+                if (gripPose != null && gripPose.TracksFreely(finger.FingerType)) continue;
                 foreach (PhysicsFingerBone phalanx in finger.Bones)
                 {
                     PhysicsJointDriver driver = phalanx.PhysicsJointDriver;
@@ -41,12 +46,22 @@ namespace PhysicsHands.Interaction
                     int parent = parentBody != null && indices.TryGetValue(parentBody, out int index) ? index : -1;
                     Transform space = parentBody != null ? parentBody.transform : hand.Wrist;
                     indices.Add(driver.Rigidbody, list.Count);
-                    list.Add(new Bone { driver = driver, colliders = phalanx.GetColliders(),
+                    var trackedFinger = hand.ReferencePoser.GetFinger(finger.FingerType);
+                    int physicalIndex = System.Array.IndexOf(finger.Bones, phalanx);
+                    int trackedIndex = trackedFinger.FingerBones.Count - finger.Bones.Length + physicalIndex;
+                    Transform tracked = trackedFinger.GetBone(trackedIndex)?.target;
+                    Quaternion authored = Quaternion.identity;
+                    bool hasAuthored = gripPose != null && gripPose.TryGet(hand.HandType, finger.FingerType, physicalIndex, out authored);
+                    Transform trackedSpace = parent >= 0 ? list[parent].tracked : hand.ReferencePoser.Wrist;
+                    Quaternion trackedLocal = tracked != null ? Quaternion.Inverse(trackedSpace.rotation) * tracked.rotation : Quaternion.identity;
+                    list.Add(new Bone { trackedSpace = trackedSpace, hasAuthored = hasAuthored, authored = authored, capturedTracked = trackedLocal, driver = driver, colliders = phalanx.GetColliders(),
+                        tracked = tracked, previousTracked = trackedLocal,
                         local = Quaternion.Inverse(space.rotation) * driver.transform.rotation,
                         localPosition = space.InverseTransformPoint(driver.transform.position),
                         probe = Probe(driver, phalanx.GetColliders()),
                         parent = parent, thumb = finger.FingerType == HandFinger.Thumb });
                 }
+            }
             bones = list.ToArray();
             Rebuild(0);
         }
@@ -87,13 +102,50 @@ namespace PhysicsHands.Interaction
                 Bone bone = bones[i];
                 ConfigurableJoint joint = bone.driver.Joint;
                 if (joint == null) continue;
+                if (bone.tracked != null)
+                {
+                    Quaternion delta = Quaternion.Inverse(bone.previousTracked) * bone.TrackedRotation;
+                    if (Quaternion.Angle(Quaternion.identity, delta) > .01f)
+                    {
+                        bone.previousTracked = bone.TrackedRotation;
+                        Quaternion before = bone.local;
+                        float penetration = Penetration(i);
+                        bone.local *= delta;
+                        Rebuild(i);
+                        if (Penetration(i) > Mathf.Max(ContactSlop, penetration) + .00005f) { bone.local = before; Rebuild(i); }
+                    }
+                }
+                if (bone.hasAuthored)
+                {
+                    Quaternion original = bone.local;
+                    float penetration = Penetration(i);
+                    Quaternion trackedDelta = bone.tracked != null ? Quaternion.Inverse(bone.capturedTracked) * bone.TrackedRotation : Quaternion.identity;
+                    bone.local = Quaternion.RotateTowards(original, ClampJoint(bone, bone.authored * trackedDelta), 180 * dt);
+                    Rebuild(i);
+                    if (Penetration(i) > Mathf.Max(ContactSlop, penetration) + .00005f) { bone.local = original; Rebuild(i); }
+                    continue;
+                }
                 // Small coordinate-descent steps use actual collider surfaces. Both signs are
                 // tried, so mirrored skeletons do not require historical bone-name rules.
-                float step = Mathf.Min(2, 100 * dt);
+                float step = Mathf.Min(4, 180 * dt);
                 Improve(i, joint.axis, joint.lowAngularXLimit.limit, joint.highAngularXLimit.limit, step);
                 if (bone.thumb && (bone.parent < 0 || !bones[bone.parent].thumb))
                     Improve(i, joint.secondaryAxis, -joint.angularYLimit.limit, joint.angularYLimit.limit, step);
             }
+        }
+
+        static Quaternion ClampJoint(Bone bone, Quaternion local)
+        {
+            ConfigurableJoint joint = bone.driver.Joint;
+            Vector3 x = joint.axis.normalized, y = joint.secondaryAxis.normalized;
+            Quaternion frame = Quaternion.LookRotation(Vector3.Cross(x, y).normalized, y);
+            Quaternion delta = Quaternion.Inverse(frame) * Quaternion.Inverse(bone.driver.RestLocalRotation) * local * frame;
+            Vector3 angles = delta.eulerAngles;
+            float Limit(float value, ConfigurableJointMotion motion, float low, float high) => motion == ConfigurableJointMotion.Locked ? 0 : motion == ConfigurableJointMotion.Limited ? Mathf.Clamp(Mathf.DeltaAngle(0, value), low, high) : Mathf.DeltaAngle(0, value);
+            angles.x = Limit(angles.x, joint.angularXMotion, joint.lowAngularXLimit.limit, joint.highAngularXLimit.limit);
+            angles.y = Limit(angles.y, joint.angularYMotion, -joint.angularYLimit.limit, joint.angularYLimit.limit);
+            angles.z = Limit(angles.z, joint.angularZMotion, -joint.angularZLimit.limit, joint.angularZLimit.limit);
+            return bone.driver.RestLocalRotation * frame * Quaternion.Euler(angles) * Quaternion.Inverse(frame);
         }
 
         void Improve(int index, Vector3 axis, float low, float high, float step)
@@ -103,6 +155,7 @@ namespace PhysicsHands.Interaction
             Quaternion original = bone.local;
             float best = SurfaceDistance(index);
             Quaternion selected = original;
+            float penetration = Penetration(index);
             for (int sign = -1; sign <= 1; sign += 2)
             {
                 Quaternion candidate = original * Quaternion.AngleAxis(step * sign, axis);
@@ -113,7 +166,7 @@ namespace PhysicsHands.Interaction
                 bone.local = candidate;
                 Rebuild(index);
                 float distance = SurfaceDistance(index);
-                if (distance < best - .000001f && !Penetrates(index))
+                if (distance < best - .00000001f && Penetration(index) <= Mathf.Max(ContactSlop, penetration) + .00005f)
                 {
                     best = distance;
                     selected = candidate;
@@ -161,8 +214,9 @@ namespace PhysicsHands.Interaction
                 if (p == ancestor) return true;
             return false;
         }
-        bool Penetrates(int from)
+        float Penetration(int from)
         {
+            float maximum = 0;
             for (int i = from; i < bones.Length; i++)
             {
                 if (i != from && !DescendsFrom(i, from)) continue;
@@ -171,19 +225,19 @@ namespace PhysicsHands.Interaction
                 {
                     if (own == null || own.isTrigger) continue;
                     Quaternion rotation = b.pose.rotation * Quaternion.Inverse(b.driver.transform.rotation) * own.transform.rotation;
-                    Vector3 position = b.pose.position + b.pose.rotation * b.driver.transform.InverseTransformPoint(own.transform.position);
+                    Vector3 position = b.pose.position + b.pose.rotation * Vector3.Scale(b.driver.transform.InverseTransformPoint(own.transform.position), b.driver.transform.lossyScale);
                     int count = Physics.OverlapSphereNonAlloc(position, own.bounds.extents.magnitude + .01f, nearby, ~0, QueryTriggerInteraction.Ignore);
                     for (int c = 0; c < count; c++)
                     {
                         Collider other = nearby[c];
                         nearby[c] = null;
                         if (other == null || hand.Owns(other)) continue;
-                        if (Physics.ComputePenetration(own, position, rotation, other, other.transform.position, other.transform.rotation, out _, out float depth) && depth > ContactSlop)
-                            return true;
+                        if (Physics.ComputePenetration(own, position, rotation, other, other.transform.position, other.transform.rotation, out _, out float depth))
+                            maximum = Mathf.Max(maximum, depth);
                     }
                 }
             }
-            return false;
+            return maximum;
         }
     }
 }

@@ -29,8 +29,10 @@ void CacheAdd(int3 coord, float3 momentum, float mass)
         uint slot = c.x + cacheSize.x * (c.y + cacheSize.y * c.z);
         int3 fixedP = (int3)round(clamp(momentum * _FixedMomentum, -2.0e9, 2.0e9));
         int fixedM = (int)round(clamp(mass * _FixedMass, -2.0e9, 2.0e9));
-        InterlockedAdd(nodeX[slot], fixedP.x); InterlockedAdd(nodeY[slot], fixedP.y);
-        InterlockedAdd(nodeZ[slot], fixedP.z); InterlockedAdd(nodeM[slot], fixedM);
+        if (fixedP.x != 0) InterlockedAdd(nodeX[slot], fixedP.x);
+        if (fixedP.y != 0) InterlockedAdd(nodeY[slot], fixedP.y);
+        if (fixedP.z != 0) InterlockedAdd(nodeZ[slot], fixedP.z);
+        if (fixedM != 0) InterlockedAdd(nodeM[slot], fixedM);
     }
     else
     {

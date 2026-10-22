@@ -54,11 +54,22 @@ namespace PhysicsHands.Simulation
         }
 
         public ElasticCage(ModalModelAsset asset, float voxel, float totalMass, float fallbackYoungs, int minSplats = 2, int samplesPerVoxel = 4)
+            : this(asset.renderData.splats, asset.renderData.splats.Length, asset.youngsSim, asset.frozen,
+                asset.simUnitMeters, asset.simDensity, Poisson, voxel, totalMass, fallbackYoungs, minSplats, samplesPerVoxel, true) { }
+
+        // Geometry and material coordinates are independent of the rendering backend. A source with
+        // no fixed region remains free; only the legacy flower importer requests a bottom anchor.
+        public ElasticCage(Gaussian[] splats, int countLimit, float[] youngs, bool[] frozen,
+            float simUnitMeters, float simDensity, float poisson, float voxel, float totalMass,
+            float fallbackYoungs, int minSplats = 2, int samplesPerVoxel = 4, bool inferBottomAnchor = false, bool solidVolume = false, bool[] attachmentSeeds = null)
         {
+            if (countLimit <= 0 || countLimit > splats.Length || voxel <= 0 || totalMass < 0)
+                throw new ArgumentException("Invalid elastic cage geometry or mass.");
             spacing = voxel;
-            var splats = asset.renderData.splats;
-            Vector3 origin = asset.renderData.bounds.min - Vector3.one * voxel;
-            var dims = Vector3Int.CeilToInt(asset.renderData.bounds.size / voxel) + new Vector3Int(3, 3, 3);
+            var bounds = new Bounds(splats[0].center, Vector3.zero);
+            for (int i = 1; i < countLimit; i++) bounds.Encapsulate(splats[i].center);
+            Vector3 origin = bounds.min - Vector3.one * voxel;
+            var dims = Vector3Int.CeilToInt(bounds.size / voxel) + new Vector3Int(3, 3, 3);
             int cells = dims.x * dims.y * dims.z;
             int Cell(Vector3Int c) => c.x + dims.x * (c.y + dims.y * c.z);
             Vector3Int Coord(int i) => new(i % dims.x, i / dims.x % dims.y, i / (dims.x * dims.y));
@@ -66,21 +77,47 @@ namespace PhysicsHands.Simulation
             Vector3Int CellOf(Vector3 p) => Vector3Int.FloorToInt((p - origin) / voxel);
             var count = new int[cells];
             var frozenCount = new int[cells];
+            var seedCount = new int[cells];
             var youngsSum = new double[cells];
-            bool material = asset.HasMaterial, hasFrozen = asset.frozen != null && asset.frozen.Length == splats.Length;
-            for (int i = 0; i < splats.Length; i++)
+            bool material = youngs != null && youngs.Length == countLimit && simUnitMeters > 0, hasFrozen = frozen != null && frozen.Length == countLimit;
+            for (int i = 0; i < countLimit; i++)
             {
                 int c = Cell(CellOf(splats[i].center));
                 count[c]++;
-                if (hasFrozen && asset.frozen[i])
+                if (hasFrozen && frozen[i])
                     frozenCount[c]++;
+                if (attachmentSeeds != null && attachmentSeeds[i]) seedCount[c]++;
                 if (material)
-                    youngsSum[c] += asset.youngsSim[i];
+                    youngsSum[c] += youngs[i];
             }
 
             var label = new int[cells];
             for (int i = 0; i < cells; i++)
                 label[i] = count[i] >= minSplats ? 0 : -1;
+            if (solidVolume)
+            {
+                // Fill only enclosed voids. Open handles, leaf gaps and the outside remain empty.
+                var outside = new bool[cells];
+                var flood = new Queue<int>();
+                for (int i = 0; i < cells; i++)
+                {
+                    var p = Coord(i);
+                    if (label[i] < 0 && (p.x == 0 || p.y == 0 || p.z == 0 || p.x == dims.x - 1 || p.y == dims.y - 1 || p.z == dims.z - 1))
+                    { outside[i] = true; flood.Enqueue(i); }
+                }
+                while (flood.Count > 0)
+                {
+                    var p = Coord(flood.Dequeue());
+                    foreach (var d in Faces)
+                    {
+                        var q = p + d;
+                        if (!Inside(q)) continue;
+                        int c = Cell(q);
+                        if (label[c] < 0 && !outside[c]) { outside[c] = true; flood.Enqueue(c); }
+                    }
+                }
+                for (int i = 0; i < cells; i++) if (!outside[i]) label[i] = 0;
+            }
             // Voxels touching only at an edge or corner form zero-energy hinges. Bridge such diagonal
             // contacts with an axis-aligned path so thin tilted stems and petals stay face-connected.
             var bridges = new List<int>();
@@ -111,19 +148,21 @@ namespace PhysicsHands.Simulation
             foreach (int b in bridges)
                 label[b] = 0;
             // Keep face-connected components attached to the boundary condition; floaters would drift away.
-            bool Frozen(int c) => frozenCount[c] * 2 > count[c] && count[c] > 0;
+            bool Frozen(int c) => (inferBottomAnchor ? frozenCount[c] * 2 > count[c] : frozenCount[c] > 0) && count[c] > 0;
             bool anyFrozen = false;
             for (int i = 0; i < cells; i++)
                 anyFrozen |= label[i] == 0 && Frozen(i);
+            bool anyAttached = anyFrozen;
+            for (int i = 0; i < cells; i++) anyAttached |= label[i] == 0 && seedCount[i] > 0;
             int lowest = int.MaxValue;
-            if (!anyFrozen)
+            if (!anyFrozen && inferBottomAnchor)
                 for (int i = 0; i < cells; i++)
                     if (label[i] == 0)
                         lowest = Mathf.Min(lowest, Coord(i).y);
-            bool Anchor(int c) => anyFrozen ? Frozen(c) : Coord(c).y == lowest;
+            bool Anchor(int c) => anyFrozen ? Frozen(c) : inferBottomAnchor && Coord(c).y == lowest;
             var queue = new Queue<int>();
             for (int i = 0; i < cells; i++)
-                if (label[i] == 0 && Anchor(i))
+                if (label[i] == 0 && (Anchor(i) || seedCount[i] > 0 || !anyAttached && !inferBottomAnchor))
                 {
                     label[i] = 1;
                     queue.Enqueue(i);
@@ -159,6 +198,7 @@ namespace PhysicsHands.Simulation
             voxelCount = voxels.Count;
             if (voxelCount == 0)
                 throw new InvalidOperationException("No occupied voxels connected to the boundary condition.");
+            if (totalMass == 0) totalMass = simDensity * voxelCount * voxel * voxel * voxel;
             // Nearest kept voxel for every cell (multi-source BFS), so floaters stay embedded.
             var nearest = (int[])voxelOfCell.Clone();
             foreach (int c in voxels)
@@ -183,12 +223,12 @@ namespace PhysicsHands.Simulation
 
             density = totalMass / (voxelCount * voxel * voxel * voxel);
             // Preserve PhysDreamer's dynamics time scale: E / rho scales with length squared.
-            float unit = material ? asset.simUnitMeters : 0;
+            float unit = material ? simUnitMeters : 0;
             var voxelYoungs = new float[voxelCount];
             for (int v = 0; v < voxelCount; v++)
             {
                 int c = voxels[v];
-                voxelYoungs[v] = material ? (float)(youngsSum[c] / Mathf.Max(1, count[c])) * density / asset.simDensity * unit * unit : fallbackYoungs;
+                voxelYoungs[v] = material ? (float)(youngsSum[c] / Mathf.Max(1, count[c])) * density / simDensity * unit * unit : fallbackYoungs;
             }
 
             // Bridge voxels hold no splats; they inherit the mean modulus of their populated neighbours.
@@ -213,7 +253,7 @@ namespace PhysicsHands.Simulation
                     }
                 }
 
-                voxelYoungs[v] = n > 0 ? sum / n : fallbackYoungs;
+                voxelYoungs[v] = n > 0 ? sum / n : material ? fallbackYoungs * density / simDensity * unit * unit : fallbackYoungs;
             }
 
             var sorted = (float[])voxelYoungs.Clone();
@@ -269,7 +309,7 @@ namespace PhysicsHands.Simulation
             {
                 var p = Coord(voxels[v]);
                 bool odd = ((p.x + p.y + p.z) & 1) != 0;
-                float mu = voxelYoungs[v] / (2 * (1 + Poisson)), lambda = voxelYoungs[v] * Poisson / ((1 + Poisson) * (1 - 2 * Poisson));
+                float mu = voxelYoungs[v] / (2 * (1 + poisson)), lambda = voxelYoungs[v] * poisson / ((1 + poisson) * (1 - 2 * poisson));
                 foreach (var t in odd ? OddTets : EvenTets)
                 {
                     var tet = new int4(voxelNodes[v * 8 + t.x], voxelNodes[v * 8 + t.y], voxelNodes[v * 8 + t.z], voxelNodes[v * 8 + t.w]);
@@ -296,11 +336,17 @@ namespace PhysicsHands.Simulation
             restVolume = volumes.ToArray();
             this.mu = mus.ToArray();
             this.lambda = lambdas.ToArray();
-            splatVoxel = new uint[splats.Length];
+            splatVoxel = new uint[countLimit];
+            if (samplesPerVoxel <= 0)
+            {
+                for (int i = 0; i < countLimit; i++) splatVoxel[i] = (uint)nearest[Cell(CellOf(splats[i].center))];
+                sampleVoxel = Array.Empty<int>(); sampleWeights = Array.Empty<Vector4>();
+                return;
+            }
             var perVoxel = new List<int>[voxelCount];
             var seen = new int[voxelCount];
             var random = new System.Random(731);
-            for (int i = 0; i < splats.Length; i++)
+            for (int i = 0; i < countLimit; i++)
             {
                 var cell = CellOf(splats[i].center);
                 int c = Cell(cell);

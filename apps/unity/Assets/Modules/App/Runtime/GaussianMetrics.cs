@@ -33,7 +33,7 @@ namespace PhysicsHands.App
         float nextQuality, nextFlush, nextDisplay, gpuMs, solverMs, reaction;
         void OnEnable()
         {
-            simulation = GetComponent<ISimulationDiagnostics>();
+            simulation = GetComponent<GaussianModelRuntime>().simulation as ISimulationDiagnostics;
             windowCount = 0;
             if (display != null && header == null)
                 header = display.text;

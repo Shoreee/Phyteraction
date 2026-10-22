@@ -24,8 +24,6 @@ MonoBehaviour:
     _value: 1
   ResetActive:
     _value: 1
-  OutlinesActive:
-    _value: 1
   ShowAxes:
     _value: 0
   VirtualMappingActive:

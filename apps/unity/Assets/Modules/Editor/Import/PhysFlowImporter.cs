@@ -124,7 +124,6 @@ namespace PhysicsHands.Editor.Import
             // stayed within the grid-scale tolerance. Fine structures keep source sampling.
             a.allowInteractionQuadrature = scene is "hat"or "fox"or "jam"or "kitchen";
             a.integrationSubdivisions = 2;
-            a.interactionStepMultiplier = scene is "alocasia"or "telephone" ? 2 : 1;
             a.material = config.material switch
             {
             "jelly"or "elastic" => MpmMaterial.Elastic, "metal" => MpmMaterial.Metal, "sand" => MpmMaterial.Sand, "foam" => MpmMaterial.Foam, "plasticine" => MpmMaterial.Plasticine, "non_newtonian" => MpmMaterial.NonNewtonian, _ => throw new NotSupportedException($"{scene}: PhysFlow material {config.material}"), }
@@ -218,6 +217,8 @@ namespace PhysicsHands.Editor.Import
             a.axles = axles.ToArray();
             a.sourceSha256 = report.source_sha256;
             a.provenance = $"PhysFlow (CVPR 2025) release / {scene}: {report.source_ply} sha256 {report.source_sha256[..12]}; config {scene}_config.json (GPT-4 initial material, not the refined values); prepare_physflow.py refine={report.refine}";
+            a.materialOrigin = "physflow-author-initialization";
+            PhysFlowTrainedMaterial.Apply(a, scene, configText, reportText);
             Directory.CreateDirectory(Path.Combine(RepositoryPaths.UnityRoot, AssetFolder));
             string path = $"{AssetFolder}/{scene}.asset";
             a.renderData = GaussianAssetWriter.SaveRenderData(path, a.renderData);

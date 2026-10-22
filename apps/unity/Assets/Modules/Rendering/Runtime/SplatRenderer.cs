@@ -12,6 +12,8 @@ namespace PhysicsHands.Rendering
         // Off: only the moving part and its immediate support are drawn over passthrough.
         public bool Backdrop;
         public bool ReuseParallelEyeSort = true;
+        // Realtime omits only the faint outer tail. 1/255 restores the source cutoff.
+        public float MinimumContribution = 2f / 255;
         public ComputeBuffer Source => buffers.Source;
         public ComputeBuffer Deformed => buffers.Deformed;
         public readonly int Count, NearCount;
@@ -101,6 +103,7 @@ namespace PhysicsHands.Rendering
             }
 
             material.SetInt("_VisibleCount", visible);
+            material.SetFloat("_MinimumContribution", Mathf.Clamp(MinimumContribution, 1f / 255, 8f / 255));
             material.SetMatrix("_SplatLocalToWorld", matrix);
             material.SetMatrix("_SplatWorldToLocal", owner.worldToLocalMatrix);
             Vector3 e = bounds.extents;

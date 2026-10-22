@@ -10,12 +10,12 @@ namespace PhysicsHands.Simulation
     {
         internal readonly ComputeShader cs;
         internal readonly CommandBuffer cmd;
-        internal readonly ComputeBuffer particles, grid, blockFlag, blockList, counter, args, reaction, shapeBuffer, modifiers, cuboids, axles, splatParticle, splatOffset, splatNeighbors, splatWeights, particleRest;
-        internal readonly int kP2G, kArgs, kGrid, kG2P, kClear, kDeform, particleGroups;
-        internal readonly uint[] zeros = new uint[ContactGatherer.MaxShapes * 8];
+        internal readonly ComputeBuffer particles, grid, blockFlag, blockList, counter, args, reaction, shapeBuffer, couplingBodies, bodySnapshot, contactBound, modifiers, cuboids, axles, splatParticle, splatOffset, splatNeighbors, splatWeights, particleRest;
+        internal readonly int kP2G, kArgs, kBeginCoupling, kContactBound, kGrid, kG2P, kClear, kDeform, particleGroups;
+        internal readonly uint[] zeros = new uint[ContactGatherer.MaxShapes * MpmRigidCoupling.Stride];
         internal readonly float heaviest;
         bool disposed;
-        internal MpmGpuResources(MpmModelAsset asset, MpmDiscretization layout, IGaussianBufferSource splats, ComputeShader solver, float friction, float skinCells, float maxPushSpeed, float maxMaterialSpeed)
+        internal MpmGpuResources(MpmModelAsset asset, MpmDiscretization layout, IGaussianBufferSource splats, ComputeShader solver, float friction, float skinCells)
         {
             try
             {
@@ -24,6 +24,8 @@ namespace PhysicsHands.Simulation
                 kP2G = cs.FindKernel("P2G");
                 kArgs = cs.FindKernel("Args");
                 kGrid = cs.FindKernel("Grid");
+                kBeginCoupling = cs.FindKernel("BeginCoupling");
+                kContactBound = cs.FindKernel("ContactBound");
                 kG2P = cs.FindKernel("G2P");
                 kClear = cs.FindKernel("Clear");
                 kDeform = cs.FindKernel("Deform");
@@ -39,7 +41,10 @@ namespace PhysicsHands.Simulation
                 args = new ComputeBuffer(3, 4, ComputeBufferType.IndirectArguments);
                 args.SetData(new uint[]{0, 1, 1});
                 reaction = new ComputeBuffer(zeros.Length, 4);
-                shapeBuffer = new ComputeBuffer(ContactGatherer.MaxShapes, 128);
+                shapeBuffer = new ComputeBuffer(ContactGatherer.MaxShapes, 160);
+                bodySnapshot = new ComputeBuffer(zeros.Length, 4);
+                contactBound = new ComputeBuffer(ContactGatherer.MaxShapes, 4);
+                couplingBodies = new ComputeBuffer(ContactGatherer.MaxShapes, 96);
                 modifiers = Buffer(asset.modifiers, 96);
                 cuboids = Buffer(asset.cuboids, 48);
                 axles = Buffer(asset.axles, 32);
@@ -60,7 +65,7 @@ namespace PhysicsHands.Simulation
                 particleRest = Buffer(rest, 16);
                 splatParticle = Buffer(bind, 4);
                 splatOffset = Buffer(offs, 16);
-                foreach (int k in new[]{kP2G, kArgs, kGrid, kG2P, kClear, kDeform})
+                foreach (int k in new[]{kP2G, kArgs, kBeginCoupling, kContactBound, kGrid, kG2P, kClear, kDeform})
                 {
                     cs.SetBuffer(k, "_Particles", particles);
                     cs.SetBuffer(k, "_Grid", grid);
@@ -70,6 +75,9 @@ namespace PhysicsHands.Simulation
                     cs.SetBuffer(k, "_Args", args);
                     cs.SetBuffer(k, "_Reaction", reaction);
                     cs.SetBuffer(k, "_Shapes", shapeBuffer);
+                    cs.SetBuffer(k, "_Bodies", couplingBodies);
+                    cs.SetBuffer(k, "_BodySnapshot", bodySnapshot);
+                    cs.SetBuffer(k, "_ContactBound", contactBound);
                     cs.SetBuffer(k, "_Modifiers", modifiers);
                     cs.SetBuffer(k, "_Cuboids", cuboids);
                     cs.SetBuffer(k, "_Axles", axles);
@@ -98,8 +106,6 @@ namespace PhysicsHands.Simulation
                 cs.SetFloat("_Xi", asset.xi);
                 cs.SetFloat("_Friction", friction);
                 cs.SetFloat("_Skin", skinCells * asset.dx);
-                cs.SetFloat("_MaxPush", maxPushSpeed / asset.metersPerUnit);
-                cs.SetFloat("_MaxParticleSpeed", maxMaterialSpeed / asset.metersPerUnit);
                 float floor = float.MaxValue;
                 foreach (var p in layout.positions)
                     floor = Mathf.Min(floor, Vector3.Dot(p, asset.up));
@@ -159,7 +165,7 @@ namespace PhysicsHands.Simulation
             disposed = true;
             cmd?.Release();
             UnityEngine.Object.Destroy(cs);
-            foreach (var buffer in new[]{particles, grid, blockFlag, blockList, counter, args, reaction, shapeBuffer, modifiers, cuboids, axles, splatParticle, splatOffset, splatNeighbors, splatWeights, particleRest})
+            foreach (var buffer in new[]{particles, grid, blockFlag, blockList, counter, args, reaction, shapeBuffer, couplingBodies, bodySnapshot, contactBound, modifiers, cuboids, axles, splatParticle, splatOffset, splatNeighbors, splatWeights, particleRest})
                 buffer?.Release();
         }
     }

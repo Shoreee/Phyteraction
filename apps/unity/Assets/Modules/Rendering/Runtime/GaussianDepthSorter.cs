@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Unity.Profiling;
 
 namespace PhysicsHands.Rendering
 {
@@ -10,6 +11,7 @@ namespace PhysicsHands.Rendering
         readonly ComputeShader sort;
         readonly int kClear, kHistogram, kScan, kScatter;
         readonly int[] kernels;
+        static readonly ProfilerMarker sortMarker = new("PhysicsHands.Gaussian.Sort");
         const int Buckets = 1 << 16;
         bool disposed;
         ComputeBuffer boundDeformed;
@@ -39,6 +41,7 @@ namespace PhysicsHands.Rendering
         {
             if (visible == 0)
                 return;
+            using var sample = sortMarker.Auto();
             var toWorld = owner.localToWorldMatrix;
             Vector3 eye = camera.transform.position, forward = camera.transform.forward;
             Vector3 lo = depthBounds.min, hi = depthBounds.max;

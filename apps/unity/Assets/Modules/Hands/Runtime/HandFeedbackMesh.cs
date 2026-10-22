@@ -32,16 +32,23 @@ namespace PhysicsHands.Hands
             visual.SetActive(false);
         }
         public void Begin(Transform view) { used=0;right=view.right;up=view.up;forward=view.forward; }
-        public void Ring(Vector3 centre, float radius, Color color)
+        public void Ring(Vector3 centre, float radius, Color color, float[] ticks = null)
         {
-            // Twelve radial, round-ended ticks with generous gaps, not a solid rim.
-            for (int i=0;i<12;i++)
+            // Rectangular radial ticks; shaft dashes retain their rounded ends.
+            for (int i = 0; i < 24; i++)
             {
-                float a=i*Mathf.PI/6;
-                Vector3 radial=right*Mathf.Cos(a)+up*Mathf.Sin(a);
-                Dash(centre+radial*(radius-.0035f),centre+radial*(radius+.0035f),color,.0015f);
+                float alpha = ticks != null ? ticks[i] : 1;
+                if (alpha <= 0) continue;
+                Color tint = color; tint.a *= alpha;
+                float a = Mathf.PI / 2 - i * Mathf.PI / 12;
+                Vector3 radial = right * Mathf.Cos(a) + up * Mathf.Sin(a);
+                Vector3 side = Vector3.Cross(radial, forward).normalized * .001f;
+                Vector3 start = centre + radial * (radius * .85f);
+                Vector3 end = centre + radial * (radius * 1.15f);
+                Quad(start - side, start + side, end + side, end - side, tint);
             }
         }
+
         public void Dash(Vector3 a, Vector3 b, Color color, float radius)
         {
             Vector3 along=(b-a).normalized,side=Vector3.Cross(along,forward).normalized;

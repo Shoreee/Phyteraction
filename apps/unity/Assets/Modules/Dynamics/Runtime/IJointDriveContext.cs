@@ -29,8 +29,8 @@ namespace PhysicsHands.Dynamics
             get;
         }
 
-        Vector3 GetSimulationContactOffset(Rigidbody body);
-        bool TryGetSimulationContactNormal(Rigidbody body, out Vector3 normal);
+        Vector3 GetContactOffset(Rigidbody body);
+        bool TryGetContact(Rigidbody body, out Vector3 normal, out Vector3 point);
         bool Owns(Collider collider);
         void NotifyPhysicalContact(Rigidbody body, Collider other);
     }
@@ -38,7 +38,6 @@ namespace PhysicsHands.Dynamics
     public interface IContactBodyPolicy
     {
         bool CanApplyReaction(Rigidbody body);
-        bool UseSampledVelocity(Rigidbody body);
-        void NotifyPhysicalContact(Rigidbody body, Vector3 outwardNormal);
+        void NotifyPhysicalContact(Rigidbody body, Vector3 outwardNormal, Vector3 point);
     }
 }

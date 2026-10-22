@@ -33,7 +33,6 @@ namespace PhysicsHands.App
             var hand = body.GetComponentInParent<PhysicsHand>();
             return hand == null || hand.isActiveAndEnabled && hand.GoodTracking;
         }
-        public bool UseSampledVelocity(Rigidbody body) => body.GetComponentInParent<PhysicsHand>()?.DirectTracking == true;
-        public void NotifyPhysicalContact(Rigidbody body, Vector3 outwardNormal) => body.GetComponentInParent<PhysicsHand>()?.NotifySimulationContact(body, outwardNormal);
+        public void NotifyPhysicalContact(Rigidbody body, Vector3 outwardNormal, Vector3 point) => body.GetComponentInParent<PhysicsHand>()?.NotifyContactConstraint(body, outwardNormal, point);
     }
 }

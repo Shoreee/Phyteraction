@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6870b82ad3994bd58b28318868818bc, type: 3}
   m_Name: PhysicsSetup_Interactive
   m_EditorClassIdentifier: PhysicsHands.Foundation::PhysicsHands.PhysicsSetup
-  fixedDeltaTime: 0.005555556
+  fixedDeltaTime: 0.002777778
   defaultContactOffset: 0.005
   humanoidWristSpringMultiplier: 1
   humanoidWristDamperMultiplier: 1

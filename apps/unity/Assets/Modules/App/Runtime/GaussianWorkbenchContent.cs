@@ -16,7 +16,7 @@ namespace PhysicsHands.App
         {
             if (output != null) return;
             output = GetComponent<GaussianRenderBinding>();
-            simulation = GetComponent<ISimulationControl>();
+            simulation = GetComponent<GaussianModelRuntime>().simulation as ISimulationControl;
             pedestals = System.Array.FindAll(GetComponentsInChildren<Renderer>(true), r => r.name == "Pedestal");
         }
         public bool Available
@@ -41,7 +41,7 @@ namespace PhysicsHands.App
                 if (!Available) return title + "  ·  MODEL NOT INSTALLED";
                 int total = output.asset.splats.Length;
                 int visible = room || output.dynamicCount < 0 ? total : Mathf.Min(total, output.nearCount);
-                return $"{title}  ·  GS {visible:N0}/{total:N0}";
+                return $"{title}  ·  GS {visible:N0}/{total:N0}" + (simulation is CageSimulation ? "  ·  ELASTIC" : "");
             }
         }
         public void SetContentActive(bool active) => gameObject.SetActive(active);

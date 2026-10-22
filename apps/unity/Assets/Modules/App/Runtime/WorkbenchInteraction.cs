@@ -20,6 +20,8 @@ namespace PhysicsHands.App
             foreach (HandGrabber grabber in grabbers)
                 if (grabber != null) grabber.CaptureAllowed = CanCapture;
             if (workspace != null) workspace.CanDragHand = CanDrag;
+            if (labContent != null)
+                foreach (var pistol in labContent.pistols) pistol.trigger.BindHands(grabbers);
         }
         bool CanCapture() => workspace == null || !workspace.Dragging;
         bool CanDrag(PhysicsHand hand)

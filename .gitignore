@@ -45,3 +45,12 @@ apps/unity/Assets/Content/Gaussians/*.asset
 apps/unity/Assets/Content/Gaussians/*.asset.meta
 apps/unity/Assets/Content/Gaussians/PhysFlow/
 apps/unity/Assets/Content/Gaussians/PhysFlow.meta
+
+# Official SpeedTree research payloads are restored separately under their source license.
+apps/unity/Assets/Content/SpeedTree/*
+!apps/unity/Assets/Content/SpeedTree/*.meta
+!apps/unity/Assets/Content/SpeedTree/LICENCE.md
+!apps/unity/Assets/Content/SpeedTree/source.json
+!apps/unity/Assets/Content/SpeedTree/Textures/
+apps/unity/Assets/Content/SpeedTree/Textures/*
+!apps/unity/Assets/Content/SpeedTree/Textures/*.meta

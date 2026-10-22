@@ -6,7 +6,7 @@ namespace PhysicsHands.Simulation
 {
     internal struct ShapeGpu
     {
-        public Vector4 a, b, va, vb, ax, ay, az, he;
+        public Vector4 a, b, va, vb, ax, ay, az, he, previousA, previousB;
     }
 
     internal struct Particle

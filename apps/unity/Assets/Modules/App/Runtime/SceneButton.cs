@@ -15,7 +15,8 @@ namespace PhysicsHands.App
             Reset,
             Replay,
             Backdrop,
-            Lab
+            Lab,
+            Tree
         }
 
         public WorkbenchContentSelector selector;
@@ -77,6 +78,7 @@ namespace PhysicsHands.App
             else if (action == Action.Reset) selector.ResetScene();
             else if (action == Action.Replay) selector.Replay();
             else if (action == Action.Backdrop) selector.ToggleBackdrop();
+            else if (action == Action.Tree) selector.ToggleTree();
             else selector.ToggleLab();
         }
 

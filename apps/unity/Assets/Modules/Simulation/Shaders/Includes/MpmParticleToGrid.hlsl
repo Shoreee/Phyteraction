@@ -47,7 +47,11 @@
     float3x3 f = Rows(q.f0, q.f1, q.f2);
 
     float3x3 stress;
-    if (_ReferenceConstitutive != 0)
+    // Exact identity strain has zero stress. Avoid a spectral decomposition for
+    // untouched elastic/metal/foam/fluid samples; no strain tolerance or material tuning.
+    bool identity = all(q.f0.xyz == float3(1,0,0)) && all(q.f1.xyz == float3(0,1,0)) && all(q.f2.xyz == float3(0,0,1));
+    if (identity && _Material != 2 && yieldStress >= 0) stress = 0;
+    else if (_ReferenceConstitutive != 0)
     {
         if (_Material == 1 || _Material == 4) f = VonMises(f, yieldStress);
         else if (_Material == 2) f = Sand(f);
@@ -81,8 +85,10 @@
         if (nodeM[flushSlot] == 0 && nodeX[flushSlot] == 0 && nodeY[flushSlot] == 0 && nodeZ[flushSlot] == 0) continue;
         uint3 c = cacheOrigin + uint3(flushSlot % cacheSize.x, flushSlot / cacheSize.x % cacheSize.y, flushSlot / (cacheSize.x * cacheSize.y));
         uint raw = Node(c) * 4;
-        InterlockedAdd(_Grid[raw], asuint(nodeX[flushSlot])); InterlockedAdd(_Grid[raw + 1], asuint(nodeY[flushSlot]));
-        InterlockedAdd(_Grid[raw + 2], asuint(nodeZ[flushSlot])); InterlockedAdd(_Grid[raw + 3], asuint(nodeM[flushSlot]));
+        if (nodeX[flushSlot] != 0) InterlockedAdd(_Grid[raw], asuint(nodeX[flushSlot]));
+        if (nodeY[flushSlot] != 0) InterlockedAdd(_Grid[raw + 1], asuint(nodeY[flushSlot]));
+        if (nodeZ[flushSlot] != 0) InterlockedAdd(_Grid[raw + 2], asuint(nodeZ[flushSlot]));
+        if (nodeM[flushSlot] != 0) InterlockedAdd(_Grid[raw + 3], asuint(nodeM[flushSlot]));
         Mark(c);
     }
 }

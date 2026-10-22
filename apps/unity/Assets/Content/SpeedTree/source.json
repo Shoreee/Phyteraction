@@ -1,0 +1,67 @@
+{
+  "repository": "https://github.com/Unity-Technologies/WaterScenes",
+  "revision": "6032de37ee5cccfe5d86b5cf0959f66747de9342",
+  "usage": "Non-commercial research only; see LICENCE.md",
+  "files": [
+    {
+      "file": "Bush_Desktop.st",
+      "sha256": "35b781cec9c4d706175659f4be5e2f3b4b3128a542d957c7fc98f632bf4b808b",
+      "bytes": 1014612,
+      "url": "https://raw.githubusercontent.com/Unity-Technologies/WaterScenes/6032de37ee5cccfe5d86b5cf0959f66747de9342/Assets/WaterSystemDemo/Models/Vegetation/SpeedTree/Bush/Bush_Desktop.st"
+    },
+    {
+      "file": "Bush_Desktop.st.meta",
+      "sha256": "9499c161e6518590541891532ead0f5e47af3129781118b7d0322e67ceea3d91",
+      "bytes": 1731,
+      "url": "https://raw.githubusercontent.com/Unity-Technologies/WaterScenes/6032de37ee5cccfe5d86b5cf0959f66747de9342/Assets/WaterSystemDemo/Models/Vegetation/SpeedTree/Bush/Bush_Desktop.st.meta"
+    },
+    {
+      "file": "Textures/Bush_Desktop_Color.png",
+      "sha256": "8d4f6fafa63fe4b32c90ceda7924d8b82c7a8ff576af1991fe93ce9870ebcabf",
+      "bytes": 3148012,
+      "url": "https://raw.githubusercontent.com/Unity-Technologies/WaterScenes/6032de37ee5cccfe5d86b5cf0959f66747de9342/Assets/WaterSystemDemo/Models/Vegetation/SpeedTree/Bush/Textures/Bush_Desktop_Color.png"
+    },
+    {
+      "file": "Textures/Bush_Desktop_Color.png.meta",
+      "sha256": "920c2ce6b6874fea19d256e3434a1e62c46c520e68882630264a7c6d021e890b",
+      "bytes": 2261,
+      "url": "https://raw.githubusercontent.com/Unity-Technologies/WaterScenes/6032de37ee5cccfe5d86b5cf0959f66747de9342/Assets/WaterSystemDemo/Models/Vegetation/SpeedTree/Bush/Textures/Bush_Desktop_Color.png.meta"
+    },
+    {
+      "file": "Textures/Bush_Desktop_Extra.png",
+      "sha256": "e718ad2f5b012e8b77342a62edbaf58d50baf4602e7c73801fde4557bf498d4f",
+      "bytes": 1305322,
+      "url": "https://raw.githubusercontent.com/Unity-Technologies/WaterScenes/6032de37ee5cccfe5d86b5cf0959f66747de9342/Assets/WaterSystemDemo/Models/Vegetation/SpeedTree/Bush/Textures/Bush_Desktop_Extra.png"
+    },
+    {
+      "file": "Textures/Bush_Desktop_Extra.png.meta",
+      "sha256": "b647eb91ac199878a18ab71751e04cd6e4ad6d345ea7979e669495e7a5f56029",
+      "bytes": 2302,
+      "url": "https://raw.githubusercontent.com/Unity-Technologies/WaterScenes/6032de37ee5cccfe5d86b5cf0959f66747de9342/Assets/WaterSystemDemo/Models/Vegetation/SpeedTree/Bush/Textures/Bush_Desktop_Extra.png.meta"
+    },
+    {
+      "file": "Textures/Bush_Desktop_Normal.png",
+      "sha256": "8e8ef9053fcbded7d014e883b0db24c0c37d6ec2a507535ce10070132d66c3b1",
+      "bytes": 2150923,
+      "url": "https://raw.githubusercontent.com/Unity-Technologies/WaterScenes/6032de37ee5cccfe5d86b5cf0959f66747de9342/Assets/WaterSystemDemo/Models/Vegetation/SpeedTree/Bush/Textures/Bush_Desktop_Normal.png"
+    },
+    {
+      "file": "Textures/Bush_Desktop_Normal.png.meta",
+      "sha256": "c72f2fe4e778715d39c76b90f1a147848ce5de45b2ec3a9209c1ad7311a408c5",
+      "bytes": 2261,
+      "url": "https://raw.githubusercontent.com/Unity-Technologies/WaterScenes/6032de37ee5cccfe5d86b5cf0959f66747de9342/Assets/WaterSystemDemo/Models/Vegetation/SpeedTree/Bush/Textures/Bush_Desktop_Normal.png.meta"
+    },
+    {
+      "file": "Textures/Bush_Desktop_Subsurface.png",
+      "sha256": "d88f84acc8c8c3df55e96c9f90052a35ee6c69501ef1bf0c02a9935efec5f198",
+      "bytes": 531960,
+      "url": "https://raw.githubusercontent.com/Unity-Technologies/WaterScenes/6032de37ee5cccfe5d86b5cf0959f66747de9342/Assets/WaterSystemDemo/Models/Vegetation/SpeedTree/Bush/Textures/Bush_Desktop_Subsurface.png"
+    },
+    {
+      "file": "Textures/Bush_Desktop_Subsurface.png.meta",
+      "sha256": "8a8ea68a3cb4fec4a2e071958d41d8b5443385260a1ed96304d68153032e1228",
+      "bytes": 2261,
+      "url": "https://raw.githubusercontent.com/Unity-Technologies/WaterScenes/6032de37ee5cccfe5d86b5cf0959f66747de9342/Assets/WaterSystemDemo/Models/Vegetation/SpeedTree/Bush/Textures/Bush_Desktop_Subsurface.png.meta"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1262c985e40640dbb2338045efea0ed9, type: 3}
+  m_Name: TreeAppearance
+  m_EditorClassIdentifier: PhysicsHands.GaussianData::PhysicsHands.GaussianData.MeshRenderAsset
+  mesh: {fileID: 4300000, guid: 7341a103ef6bf4fd3a5479b92e3b700a, type: 2}
+  materials:
+  - {fileID: 2100000, guid: cc9a22f7c04de4435b3b2e6b621e7392, type: 2}
+  provenance: Unity-Technologies/WaterScenes@6032de37ee5cccfe5d86b5cf0959f66747de9342;
+    SpeedTree Bush_Desktop; non-commercial research only

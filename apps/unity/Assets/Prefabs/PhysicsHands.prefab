@@ -410,7 +410,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21896318863542621}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -857,7 +857,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 3
   FingerBones:
@@ -1038,7 +1038,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83166776714423356}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1218,7 +1218,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133994835425191917}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1494,7 +1494,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186955161267942316}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1870,14 +1870,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -1906,7 +1906,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.2
   _muscleDamperMultiplier: 0.2
@@ -2169,7 +2169,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -2187,7 +2187,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -2235,7 +2235,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27d5336b0ace84cd993944875a26eefb, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
   _wrist: {fileID: 8619017162720722634}
@@ -2967,14 +2967,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -3003,7 +3003,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.2
   _muscleDamperMultiplier: 0.2
@@ -3088,7 +3088,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 579082901a56b4dfa97d530ba47ec3bd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFinger
   _fingerType: 4
   _bones:
@@ -3108,7 +3108,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0db13835497d4a2e8fd25b9d626ceee, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.MapTransform
   _mapToTransform: {fileID: 5190017680999908935}
   _local: 1
@@ -3351,7 +3351,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 1
   FingerBones:
@@ -3751,7 +3751,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 0
   FingerBones:
@@ -4337,7 +4337,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -4355,7 +4355,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -5569,14 +5569,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -5605,7 +5605,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.2
   _muscleDamperMultiplier: 0.2
@@ -5772,7 +5772,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27d5336b0ace84cd993944875a26eefb, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 1340004911632531132}
   _wrist: {fileID: 1982907681380229970}
@@ -6391,7 +6391,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d248bec9949f34b678e2e1baf2985959, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.RigMapper
   _localMapping: 0
   _mapPosition: 1
@@ -6656,7 +6656,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 1
   FingerBones:
@@ -7417,7 +7417,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -7458,7 +7458,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -7640,14 +7640,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -7676,7 +7676,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -7899,7 +7899,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -7917,7 +7917,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -8188,7 +8188,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c44d1582b0d94acf9ae51b6ffb17c53, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.ForceFieldGenerator
   _hand: {fileID: 0}
   _cancelGravity: 1
@@ -8435,7 +8435,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f722fc807b5dd4f47a5048f1314a4f35, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.VelocityEstimator
   velocityAverageFrames: 5
   maxVelocity: 10
@@ -8540,7 +8540,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f722fc807b5dd4f47a5048f1314a4f35, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.VelocityEstimator
   velocityAverageFrames: 5
   maxVelocity: 10
@@ -9084,14 +9084,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -9120,7 +9120,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.2
   _muscleDamperMultiplier: 0.2
@@ -9424,7 +9424,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0db13835497d4a2e8fd25b9d626ceee, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.MapTransform
   _mapToTransform: {fileID: 4990329498231846392}
   _local: 0
@@ -10088,7 +10088,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551562055275860671}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -10337,14 +10337,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -10373,7 +10373,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -10424,7 +10424,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 1
   FingerBones:
@@ -11129,14 +11129,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -11165,7 +11165,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -11249,7 +11249,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 7106787693099181209}
   _mapRotation: 0
@@ -11917,7 +11917,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d248bec9949f34b678e2e1baf2985959, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.RigMapper
   _localMapping: 1
   _mapPosition: 0
@@ -12565,7 +12565,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 2
   FingerBones:
@@ -13100,14 +13100,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -13136,7 +13136,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -13621,7 +13621,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848859400048170481}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -14133,7 +14133,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b0dfacd3846d40039c0a52918b7fabe, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.HandGrabber
   _snapJointAnchor: {fileID: 1770443876092054680}
   _snapPointTranslocator: {fileID: 3164049708386512079}
@@ -14144,7 +14144,7 @@ MonoBehaviour:
   _captureKinematically: 0
   _releaseDistance: 0.05
   _restrictAllowedObjects: 0
-  _allowedObjectTypes: 
+  _allowedObjectTypes:
   _holdingLink: {fileID: 4298897771327646307}
   _audioSource: {fileID: 5878487056138772561}
   _defaultCaptureClip: {fileID: 0}
@@ -14191,7 +14191,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -14205,7 +14205,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c7edbc4a9e3b4330860ebb71d6e7bb7, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.HoldingLink
   _linearSpring: 1200
   _linearDamper: 45
@@ -14544,7 +14544,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b0dfacd3846d40039c0a52918b7fabe, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.HandGrabber
   _snapJointAnchor: {fileID: 6811126111689078773}
   _snapPointTranslocator: {fileID: 8350603139140530892}
@@ -14555,7 +14555,7 @@ MonoBehaviour:
   _captureKinematically: 0
   _releaseDistance: 0.05
   _restrictAllowedObjects: 0
-  _allowedObjectTypes: 
+  _allowedObjectTypes:
   _holdingLink: {fileID: 585127366080729684}
   _audioSource: {fileID: 5280683235587545184}
   _defaultCaptureClip: {fileID: 0}
@@ -14602,7 +14602,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -14616,7 +14616,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c7edbc4a9e3b4330860ebb71d6e7bb7, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.HoldingLink
   _linearSpring: 1200
   _linearDamper: 45
@@ -14761,7 +14761,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971172664399312855}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -15346,14 +15346,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -15382,7 +15382,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.2
   _muscleDamperMultiplier: 0.2
@@ -15751,7 +15751,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27d5336b0ace84cd993944875a26eefb, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
   _wrist: {fileID: 1479579069077131585}
@@ -15972,7 +15972,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29ec3b01740e34d23900c85bd5ae762e, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandMapper
   Reference: {fileID: 0}
   Wrist: {fileID: 8293912566222175273}
@@ -17392,7 +17392,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 1
   FingerBones:
@@ -17576,7 +17576,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 1
   FingerBones:
@@ -17782,7 +17782,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06c07700596da4fe7b3c6ec4a798b35e, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.DetachableHand
   _hand: {fileID: 5460524893235680692}
   _joint: {fileID: 8399543834556837440}
@@ -17810,14 +17810,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -17975,7 +17975,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28bcfe0b5611c4a80bf7da2d800a8471, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.IgnoreColliders
   _colliders: []
   _collidersToIgnore: []
@@ -18282,7 +18282,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 579082901a56b4dfa97d530ba47ec3bd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFinger
   _fingerType: 0
   _bones:
@@ -18302,7 +18302,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0db13835497d4a2e8fd25b9d626ceee, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.MapTransform
   _mapToTransform: {fileID: 2761637740810253322}
   _local: 1
@@ -18442,7 +18442,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f722fc807b5dd4f47a5048f1314a4f35, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.VelocityEstimator
   velocityAverageFrames: 5
   maxVelocity: 10
@@ -18764,7 +18764,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 0
   FingerBones:
@@ -18943,7 +18943,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2574551091013475715}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 0
@@ -19344,7 +19344,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 2
   FingerBones:
@@ -19409,7 +19409,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27d5336b0ace84cd993944875a26eefb, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
   _wrist: {fileID: 2339629780681024625}
@@ -19441,7 +19441,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d248bec9949f34b678e2e1baf2985959, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.RigMapper
   _localMapping: 0
   _mapPosition: 0
@@ -19550,7 +19550,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29ec3b01740e34d23900c85bd5ae762e, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandMapper
   Reference: {fileID: 0}
   Wrist: {fileID: 4206279885655319384}
@@ -19767,7 +19767,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2706387952122363333}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -19887,7 +19887,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 4
   FingerBones:
@@ -20088,14 +20088,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -20124,7 +20124,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.4
   _muscleDamperMultiplier: 0.3
@@ -20146,7 +20146,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 579082901a56b4dfa97d530ba47ec3bd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFinger
   _fingerType: 1
   _bones:
@@ -20315,7 +20315,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2748741518291848158}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 0
@@ -20584,7 +20584,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2777553601933008214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -20796,7 +20796,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 2
   FingerBones:
@@ -21726,7 +21726,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2964079610841201177}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -21874,7 +21874,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99c4b2dbde02048d4a339b098275ee40, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsHand
   _behavior:
     HandType: 0
@@ -22252,14 +22252,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -22288,7 +22288,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.4
   _muscleDamperMultiplier: 0.3
@@ -22309,7 +22309,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 579082901a56b4dfa97d530ba47ec3bd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFinger
   _fingerType: 3
   _bones:
@@ -22596,7 +22596,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -22637,7 +22637,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -22925,7 +22925,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 2
   FingerBones:
@@ -23085,7 +23085,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 2
   FingerBones:
@@ -23783,7 +23783,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f722fc807b5dd4f47a5048f1314a4f35, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.VelocityEstimator
   velocityAverageFrames: 5
   maxVelocity: 10
@@ -24440,8 +24440,8 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3415474653842462400}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -24482,7 +24482,7 @@ SkinnedMeshRenderer:
   m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300000, guid: acc5c8c61f3ec44c493348e683f7875a, type: 2}
   m_Bones:
@@ -24735,7 +24735,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 3
   FingerBones:
@@ -24831,7 +24831,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 4
   FingerBones:
@@ -25032,14 +25032,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -25068,7 +25068,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -25790,7 +25790,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3627103186091324378}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -26055,7 +26055,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3654520312516704393}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -26308,14 +26308,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -26344,7 +26344,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.2
   _muscleDamperMultiplier: 0.2
@@ -26391,7 +26391,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3668229936152309376}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -26797,14 +26797,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -26833,7 +26833,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.2
   _muscleDamperMultiplier: 0.2
@@ -27122,7 +27122,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 1
   FingerBones:
@@ -27986,7 +27986,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 2
   FingerBones:
@@ -28449,14 +28449,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -28485,7 +28485,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -28647,7 +28647,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f91844b13633460584859658b7d0294, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.BezierPointer
   _startPoint: {fileID: 0}
   _endPoint: {fileID: 0}
@@ -28895,7 +28895,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 0
   FingerBones:
@@ -29308,7 +29308,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -29326,7 +29326,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -29854,7 +29854,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 1
   FingerBones:
@@ -30383,7 +30383,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: defdc3f49adcc48018da94e880170923, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Telekinesis
   headCamera: {fileID: 0}
   _minDistance: 0.1
@@ -31016,7 +31016,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06c07700596da4fe7b3c6ec4a798b35e, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.DetachableHand
   _hand: {fileID: 3121537489149727319}
   _joint: {fileID: 8099763107020745707}
@@ -31044,14 +31044,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -31209,7 +31209,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28bcfe0b5611c4a80bf7da2d800a8471, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.IgnoreColliders
   _colliders: []
   _collidersToIgnore: []
@@ -31256,7 +31256,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 0
   FingerBones:
@@ -31872,7 +31872,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 2
   FingerBones:
@@ -32086,7 +32086,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 4
   FingerBones:
@@ -32348,14 +32348,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -32384,7 +32384,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.4
   _muscleDamperMultiplier: 0.3
@@ -32767,7 +32767,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 2
   FingerBones:
@@ -33252,7 +33252,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -33270,7 +33270,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -33969,7 +33969,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d248bec9949f34b678e2e1baf2985959, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.RigMapper
   _localMapping: 1
   _mapPosition: 0
@@ -34262,7 +34262,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 0
   FingerBones:
@@ -34410,7 +34410,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -34451,7 +34451,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -34769,7 +34769,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 3
   FingerBones:
@@ -35424,7 +35424,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acfb2a3d9edb544adaccc97c2228c7c6, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.PinchCursor
   headCamera: {fileID: 0}
   _thumbTip: {fileID: 3742431595676723561}
@@ -37466,14 +37466,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -37502,7 +37502,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -38101,7 +38101,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27d5336b0ace84cd993944875a26eefb, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 6235139547180615277}
   _wrist: {fileID: 1805905908517594820}
@@ -38486,14 +38486,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -38522,7 +38522,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.2
   _muscleDamperMultiplier: 0.2
@@ -38684,7 +38684,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f91844b13633460584859658b7d0294, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.BezierPointer
   _startPoint: {fileID: 0}
   _endPoint: {fileID: 0}
@@ -38866,7 +38866,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 4
   FingerBones:
@@ -39067,14 +39067,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -39103,7 +39103,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -39690,7 +39690,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 3
   FingerBones:
@@ -40089,14 +40089,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -40125,7 +40125,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -40912,14 +40912,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -40948,7 +40948,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -41318,14 +41318,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -41354,7 +41354,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.4
   _muscleDamperMultiplier: 0.3
@@ -42379,7 +42379,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5701284850732805400}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -43530,7 +43530,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -43571,7 +43571,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -44144,7 +44144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5271973187166063776
 Transform:
   m_ObjectHideFlags: 0
@@ -44186,7 +44186,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 37941d9427a5d4d68abc876436d8cc05, type: 2}
-  - {fileID: 2100000, guid: 6fead8f45b6474da99b45cc8b5305c30, type: 2}
+  - {fileID: 2100000, guid: b5cff919273e74693b423051740eb037, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -44871,7 +44871,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 579082901a56b4dfa97d530ba47ec3bd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFinger
   _fingerType: 4
   _bones:
@@ -44891,7 +44891,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0db13835497d4a2e8fd25b9d626ceee, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.MapTransform
   _mapToTransform: {fileID: 8991664004709867238}
   _local: 1
@@ -45026,7 +45026,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -45044,7 +45044,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -45535,14 +45535,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -45571,7 +45571,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -46554,7 +46554,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 0
   FingerBones:
@@ -47148,7 +47148,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f722fc807b5dd4f47a5048f1314a4f35, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.VelocityEstimator
   velocityAverageFrames: 5
   maxVelocity: 10
@@ -47589,7 +47589,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f722fc807b5dd4f47a5048f1314a4f35, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.VelocityEstimator
   velocityAverageFrames: 5
   maxVelocity: 10
@@ -48376,7 +48376,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27d5336b0ace84cd993944875a26eefb, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
   _wrist: {fileID: 6576516533865392433}
@@ -48408,7 +48408,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d248bec9949f34b678e2e1baf2985959, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.RigMapper
   _localMapping: 0
   _mapPosition: 0
@@ -49052,7 +49052,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -49070,7 +49070,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -50399,7 +50399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4451266893681530883
 Transform:
   m_ObjectHideFlags: 0
@@ -50441,7 +50441,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 37941d9427a5d4d68abc876436d8cc05, type: 2}
-  - {fileID: 2100000, guid: 4187537181ed6402c932c8064e1c4900, type: 2}
+  - {fileID: 2100000, guid: b5cff919273e74693b423051740eb037, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -51229,7 +51229,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 4
   FingerBones:
@@ -51453,7 +51453,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7127919047842685804}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -51888,8 +51888,8 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7252986295293238902}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -52591,7 +52591,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27d5336b0ace84cd993944875a26eefb, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.HandPoser
   _mesh: {fileID: 0}
   _wrist: {fileID: 5887008919403136739}
@@ -52623,7 +52623,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d248bec9949f34b678e2e1baf2985959, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.RigMapper
   _localMapping: 0
   _mapPosition: 0
@@ -53278,7 +53278,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: defdc3f49adcc48018da94e880170923, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Telekinesis
   headCamera: {fileID: 0}
   _minDistance: 0.1
@@ -53886,7 +53886,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 579082901a56b4dfa97d530ba47ec3bd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFinger
   _fingerType: 0
   _bones:
@@ -53906,7 +53906,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0db13835497d4a2e8fd25b9d626ceee, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.MapTransform
   _mapToTransform: {fileID: 4763057146525658662}
   _local: 1
@@ -54359,7 +54359,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0db13835497d4a2e8fd25b9d626ceee, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.MapTransform
   _mapToTransform: {fileID: 7106787693099181209}
   _local: 0
@@ -54468,7 +54468,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7632332530609980348}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -55168,14 +55168,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -55204,7 +55204,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.4
   _muscleDamperMultiplier: 0.3
@@ -55226,7 +55226,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 579082901a56b4dfa97d530ba47ec3bd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFinger
   _fingerType: 2
   _bones:
@@ -55582,7 +55582,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7734648703585374467}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -55946,7 +55946,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 4
   FingerBones:
@@ -56012,7 +56012,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 2
   FingerBones:
@@ -56283,7 +56283,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 4990329498231846392}
   _mapRotation: 0
@@ -56731,7 +56731,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acfb2a3d9edb544adaccc97c2228c7c6, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.PinchCursor
   headCamera: {fileID: 0}
   _thumbTip: {fileID: 7764182571252068853}
@@ -57449,7 +57449,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -57467,7 +57467,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -58006,7 +58006,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 3
   FingerBones:
@@ -58417,7 +58417,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -58435,7 +58435,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -60092,14 +60092,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -60128,7 +60128,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.4
   _muscleDamperMultiplier: 0.3
@@ -60150,7 +60150,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 579082901a56b4dfa97d530ba47ec3bd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFinger
   _fingerType: 3
   _bones:
@@ -60594,7 +60594,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -60612,7 +60612,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -60813,7 +60813,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 0
   FingerBones:
@@ -61624,7 +61624,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -61642,7 +61642,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -61694,7 +61694,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d248bec9949f34b678e2e1baf2985959, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.RigMapper
   _localMapping: 0
   _mapPosition: 1
@@ -62149,7 +62149,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c44d1582b0d94acf9ae51b6ffb17c53, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.ForceFieldGenerator
   _hand: {fileID: 0}
   _cancelGravity: 1
@@ -62589,14 +62589,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -62625,7 +62625,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.4
   _muscleDamperMultiplier: 0.3
@@ -62647,7 +62647,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 579082901a56b4dfa97d530ba47ec3bd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFinger
   _fingerType: 1
   _bones:
@@ -63583,14 +63583,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -63619,7 +63619,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.2
   _muscleDamperMultiplier: 0.2
@@ -64153,7 +64153,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8692795129445258010}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -64689,7 +64689,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99c4b2dbde02048d4a339b098275ee40, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsHand
   _behavior:
     HandType: 1
@@ -65332,7 +65332,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 866d6cc2ea91c4dca9e13c9c4e3bf737, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Posing::PhysicsHands.Posing.FingerPoser
   type: 4
   FingerBones:
@@ -66015,7 +66015,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db911ebc81eb340b2ab83d3dfe164e08, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Interaction::PhysicsHands.Interaction.Interactor
   Type: 2
   Side: 1
@@ -66033,7 +66033,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b98bcd69475d4a488bd98cf3dc24992, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.KinematicRigidbody
   _mapToTransform: {fileID: 0}
   _mapRotation: 1
@@ -66277,14 +66277,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -66313,7 +66313,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.1
   _muscleDamperMultiplier: 0.1
@@ -66772,14 +66772,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -66808,7 +66808,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.4
   _muscleDamperMultiplier: 0.3
@@ -66830,7 +66830,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 579082901a56b4dfa97d530ba47ec3bd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFinger
   _fingerType: 2
   _bones:
@@ -67507,14 +67507,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282d8e42dbef24acea913834c9592f6a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Dynamics::PhysicsHands.Dynamics.PhysicsJointDriver
   _muscleSettings:
-    TrackingFrequency: 18
+    TrackingFrequency: 60
     TrackingAngularFrequency: 50
-    MaxTrackingAcceleration: 60
+    MaxTrackingAcceleration: 180
     MaxFreeTrackingAcceleration: 240
-    MaxTrackingAngularAcceleration: 12000
+    MaxTrackingAngularAcceleration: 18000
   _settings:
     Enforce: 1
     CreateTarget: 0
@@ -67543,7 +67543,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbba0d8083f654f6086d661ab8ebd6ab, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: PhysicsHands.Hands::PhysicsHands.Hands.PhysicsFingerBone
   _muscleSpringMultiplier: 0.2
   _muscleDamperMultiplier: 0.2

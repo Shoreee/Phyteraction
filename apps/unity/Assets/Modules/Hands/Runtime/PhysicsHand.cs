@@ -34,6 +34,26 @@ namespace PhysicsHands.Hands
         private readonly List<Collider> _fingerBonesColliders = new();
         private IJointTargetSource _jointTargets;
         public Transform Palm => _rigBindings.DetachableHand.Palm;
+        // Grip frames follow anatomy; legacy palm markers have rig-specific local axes.
+        public Quaternion GripRotation
+        {
+            get
+            {
+                Transform index = null, middle = null, pinky = null;
+                foreach (var finger in Fingers)
+                {
+                    if (finger.Bones.Length == 0) continue;
+                    if (finger.FingerType == HandFinger.Index) index = finger.Bones[0].transform;
+                    else if (finger.FingerType == HandFinger.Middle) middle = finger.Bones[0].transform;
+                    else if (finger.FingerType == HandFinger.Pinky) pinky = finger.Bones[0].transform;
+                }
+                if (index == null || middle == null || pinky == null) return Palm.rotation;
+                Vector3 fingers = middle.position - Wrist.position;
+                Vector3 normal = Vector3.Cross(index.position - pinky.position, fingers);
+                if (HandType == HandSide.Right) normal = -normal;
+                return normal.sqrMagnitude > 1e-10f && fingers.sqrMagnitude > 1e-10f ? Quaternion.LookRotation(normal, fingers) : Palm.rotation;
+            }
+        }
         public void SetJointTargets(IJointTargetSource targets) => _jointTargets = targets;
         public void ClearJointTargets(IJointTargetSource owner)
         {
@@ -45,18 +65,19 @@ namespace PhysicsHands.Hands
             pose = default;
             return false;
         }
-        readonly Dictionary<Rigidbody, (Vector3 normal, float time)> simulationContacts = new(32);
-        public void NotifySimulationContact(Rigidbody body, Vector3 normal)
+        readonly Dictionary<Rigidbody, (Vector3 normal, Vector3 point, float time)> simulationContacts = new(32);
+        public void NotifyContactConstraint(Rigidbody body, Vector3 normal, Vector3 point)
         {
             if (body == null || normal.sqrMagnitude < .5f) return;
             NotifyPhysicalContact(body);
-            simulationContacts[body] = (normal, Time.fixedTime);
+            simulationContacts[body] = (normal, point, Time.fixedTime);
         }
-        public bool TryGetSimulationContactNormal(Rigidbody body, out Vector3 normal)
+        public bool TryGetContact(Rigidbody body, out Vector3 normal, out Vector3 point)
         {
             if (simulationContacts.TryGetValue(body, out var contact) && Time.fixedTime - contact.time <= Time.fixedDeltaTime * 3)
             {
                 normal = contact.normal;
+                point = contact.point;
                 return true;
             }
             // A fingertip constraint also bounds wrist translation; otherwise every
@@ -66,12 +87,14 @@ namespace PhysicsHands.Hands
                     if (Time.fixedTime - sample.time <= Time.fixedDeltaTime * 3)
                     {
                         normal = sample.normal;
+                        point = body.worldCenterOfMass;
                         return true;
                     }
             normal = Vector3.zero;
+            point = Vector3.zero;
             return false;
         }
-        public Vector3 GetSimulationContactOffset(Rigidbody body)
+        public Vector3 GetContactOffset(Rigidbody body)
         {
             if (body == _rigBindings.DetachableHand.Rb || _rigBindings.ReferencePoser.Wrist == null) return Vector3.zero;
             Vector3 displacement = _rigBindings.DetachableHand.Rb.position - _rigBindings.ReferencePoser.Wrist.position;
@@ -360,7 +383,7 @@ namespace PhysicsHands.Hands
         public float GetIndexProximalAngle() => _rigBindings.ReferencePoser.GetIndexProximalAngle();
         public Transform GetIndexProximal() => _rigBindings.ReferencePoser.GetIndexProximal();
         public float GetPinkyProximalAngle() => _rigBindings.ReferencePoser.GetPinkyProximalAngle();
-        public void UpdateVisualState() => _presentation.Update(_profiles.Game == null || _profiles.Game.BadTrackingWarningActive.Value, _handInitialized, _goodTracking, _profiles.Game == null || _profiles.Game.OutlinesActive.Value);
+        public void UpdateVisualState() => _presentation.Update(_profiles.Game == null || _profiles.Game.BadTrackingWarningActive.Value, _handInitialized, _goodTracking);
         public void ConfigureShadows() => _presentation.ConfigureShadows();
         public void SetMaterial(Material material) => _presentation.SetMaterial(material);
         public void ShowBones(bool show) => _presentation.ShowBones(show);

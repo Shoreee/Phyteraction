@@ -8,10 +8,10 @@ namespace PhysicsHands.Dynamics
         Quaternion lastRotation;
         bool hasPose;
         public void Reset() => hasPose = false;
-        public void Step(Rigidbody body, Vector3 position, Quaternion rotation, float muscle, float linearFrequency, float angularFrequency, float accelerationLimit, float angularLimit, Vector3 contactNormal)
+        public void Step(Rigidbody body, Vector3 position, Quaternion rotation, float muscle, float linearFrequency, float angularFrequency, float accelerationLimit, float angularLimit, Vector3 contactNormal, bool hasContactPoint = false, Vector3 contactPoint = default)
         {
             float dt = Time.fixedDeltaTime;
-            Vector3 velocity = hasPose ? Vector3.ClampMagnitude((position - lastPosition) / dt, 5f) : Vector3.zero;
+            Vector3 velocity = hasPose ? (position - lastPosition) / dt : Vector3.zero;
             Vector3 omega = hasPose ? RotationVector(rotation * Quaternion.Inverse(lastRotation)) / dt : Vector3.zero;
             omega = Vector3.ClampMagnitude(omega, 30f);
             lastPosition = position;
@@ -40,7 +40,22 @@ namespace PhysicsHands.Dynamics
             kp = w * w * muscle;
             kd = 2 * w * Mathf.Sqrt(muscle);
             g = 1f / (1f + kd * dt + kp * dt * dt);
-            Vector3 alpha = (kp * RotationVector(rotation * Quaternion.Inverse(body.rotation)) + (kd + kp * dt) * (omega - body.angularVelocity)) * g;
+            Vector3 rotationError = RotationVector(rotation * Quaternion.Inverse(body.rotation));
+            if (hasContactPoint)
+            {
+                // Angular pursuit must obey the same surface half-space as translation.
+                // Otherwise a rotating fingertip keeps loading contact friction even after
+                // inward COM pursuit has been removed.
+                Vector3 axis = Vector3.Cross(contactPoint - body.worldCenterOfMass, contactNormal);
+                float lengthSquared = axis.sqrMagnitude;
+                if (lengthSquared > 1e-10f)
+                {
+                    axis /= Mathf.Sqrt(lengthSquared);
+                    rotationError -= axis * Mathf.Min(0, Vector3.Dot(rotationError, axis));
+                    omega -= axis * Mathf.Min(0, Vector3.Dot(omega, axis));
+                }
+            }
+            Vector3 alpha = (kp * rotationError + (kd + kp * dt) * (omega - body.angularVelocity)) * g;
             alpha = Vector3.ClampMagnitude(alpha, angularLimit);
             // Convert desired world angular acceleration with this bone's inertia.
             Quaternion inertiaFrame = body.rotation * body.inertiaTensorRotation;

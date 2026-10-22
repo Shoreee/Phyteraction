@@ -33,6 +33,10 @@ namespace PhysicsHands.App
             var session = head != null ? head.parent : null;
             Vector3 World(Vector3 p) => session != null ? session.TransformPoint(p) : p;
             Vector3 Direction(Vector3 d) => session != null ? session.TransformDirection(d) : d;
+            // The provider reuses pointer IDs across gestures. Only an active gesture
+            // is consumed; an observed release arms that pointer for its next pinch.
+            for (int i = 0; i < device.inputs.Count; i++)
+                if (!device.inputs[i].isInProgress) seenIds[i] = -1;
             if (gazeId >= 0)
             {
                 // Other held gestures cannot take over when this owner releases.
@@ -55,8 +59,11 @@ namespace PhysicsHands.App
                 if (id == seenIds[i]) continue;
                 var kind = (VisionOSSpatialPointerKind)input.kind.ReadValue();
                 if (kind == 0) continue; // Kind can arrive after Began.
+                if (!input.isTracked.isPressed || panel == null) continue;
+                Vector3 rayDirection = Direction(input.startRayDirection.ReadValue());
+                if (rayDirection.sqrMagnitude < .5f) continue; // Ray metadata can arrive after kind.
                 seenIds[i] = id;
-                if (kind != VisionOSSpatialPointerKind.IndirectPinch || !input.isTracked.isPressed || panel == null) continue;
+                if (kind != VisionOSSpatialPointerKind.IndirectPinch) continue;
                 var point = World(input.inputDevicePosition.ReadValue());
                 if (canStart?.Invoke(point) == false || !Hits(new Ray(World(input.startRayOrigin.ReadValue()), Direction(input.startRayDirection.ReadValue())), panel, gazeTolerance)) continue;
                 gazeId = id;

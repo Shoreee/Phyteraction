@@ -42,6 +42,9 @@ namespace PhysicsHands.GaussianData
     public sealed class MpmModelAsset : ScriptableObject
     {
         public string scene, provenance, sourceSha256;
+        [Tooltip("Empty on earlier assets means author initialization, not trained output.")]
+        public string materialOrigin = "physflow-author-initialization";
+        public string trainingCommit, materialCheckpointSha256;
         public GaussianRenderAsset renderData;
         public int dynamicCount;
         [Tooltip("Static splats right after the dynamic ones that belong to the object's support.")]
@@ -64,8 +67,6 @@ namespace PhysicsHands.GaussianData
         public bool allowInteractionQuadrature;
         [Range(2, 8)]
         public int integrationSubdivisions = 2;
-        [Range(1, 2)]
-        public float interactionStepMultiplier = 1;
         [Header("Material (SI, PhysFlow config scaled by 1e7 / 1e5 / 1e4)")]
         public MpmMaterial material;
         public float youngs, poisson, density, yieldStress, viscosity, frictionAngle, xi, cohesion;

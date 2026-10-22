@@ -19,7 +19,7 @@ namespace PhysicsHands
         public float solverIterationCountMultiplier = 3f;
         public void ApplyGlobal()
         {
-            Time.fixedDeltaTime = Mathf.Clamp(fixedDeltaTime, 0.005f, 0.05f);
+            Time.fixedDeltaTime = Mathf.Clamp(fixedDeltaTime, 1f / 360f, 0.05f);
             Time.maximumDeltaTime = 0.1f;
             Physics.defaultContactOffset = defaultContactOffset;
         }

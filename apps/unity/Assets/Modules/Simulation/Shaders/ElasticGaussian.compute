@@ -7,13 +7,17 @@ StructuredBuffer<float4> _VoxelOrigin;
 StructuredBuffer<uint> _SplatVoxel;
 StructuredBuffer<Gaussian> _Source;
 RWStructuredBuffer<Gaussian> _Deformed;
-uint _SplatCount;
+uint _SplatCount, _ClampEmbedding;
 float _Spacing;
 
 [numthreads(64,1,1)] void Deform(uint i:SV_DispatchThreadID){
  if(i>=_SplatCount)return;
- // Splats outside kept voxels use linear extrapolation of their nearest voxel.
+ // Reconstruct material coordinates; the learned flower retains its existing affine embedding.
  Gaussian g=_Source[i];uint voxel=_SplatVoxel[i];float3 f=(g.center.xyz-_VoxelOrigin[voxel].xyz)/_Spacing;
+ // Disconnected capture floaters retain their rest offset from the nearest material cell.
+ // Extrapolating a distant point by an unbounded affine field amplifies tiny strains into debris.
+ float3 restOffset=0;
+ if(_ClampEmbedding!=0){float3 bounded=saturate(f);restOffset=(f-bounded)*_Spacing;f=bounded;}
  float3 p=0,dx=0,dy=0,dz=0;
  for(uint c=0;c<8;c++){
   uint x=c&1,y=(c>>1)&1,z=(c>>2)&1;
@@ -26,7 +30,7 @@ float _Spacing;
  }
  // Covariance transport: Sigma' = F Sigma F^T, represented by three scaled axes.
  float3 a=g.axis0.xyz,b=g.axis1.xyz,c3=g.axis2.xyz;
- g.center.xyz=p;g.axis0.xyz=dx*a.x+dy*a.y+dz*a.z;
+ g.center.xyz=p+restOffset;g.axis0.xyz=dx*a.x+dy*a.y+dz*a.z;
  g.axis1.xyz=dx*b.x+dy*b.y+dz*b.z;g.axis2.xyz=dx*c3.x+dy*c3.y+dz*c3.z;
  _Deformed[i]=g;
 }

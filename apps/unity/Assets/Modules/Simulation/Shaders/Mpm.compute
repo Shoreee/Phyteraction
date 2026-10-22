@@ -5,6 +5,8 @@
 // active 4^3 blocks only, momentum -> velocity in place) -> G2P -> Clear (indirect).
 #pragma kernel P2G
 #pragma kernel Args
+#pragma kernel BeginCoupling
+#pragma kernel ContactBound
 #pragma kernel Grid
 #pragma kernel G2P
 #pragma kernel Clear

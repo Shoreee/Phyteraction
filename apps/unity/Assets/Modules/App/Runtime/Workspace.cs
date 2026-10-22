@@ -105,7 +105,10 @@ namespace PhysicsHands.App
                 float d = (hand.TrackedHand.Palm.position - point).sqrMagnitude;
                 if (d < distance) { distance = d; nearest = hand; }
             }
-            return CanStart(nearest);
+            // A valid system spatial pinch does not require the separate skeletal
+            // source to have recovered its confidence debounce on this exact frame.
+            // Use a nearby tracked hand for grip/button arbitration when available.
+            return nearest == null || distance > .2f * .2f || CanStart(nearest);
         }
         void Show(bool on, bool moving)
         {

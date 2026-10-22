@@ -635,6 +635,8 @@ MonoBehaviour:
   backdropButton: {fileID: 348191551}
   paperButton: {fileID: 2066603160}
   labButton: {fileID: 1181065431}
+  treeButton: {fileID: 1937969830}
+  tree: {fileID: 1539502990}
   labLabel: {fileID: 1012430660}
   status: {fileID: 1835577760}
   lab: {fileID: 7833845388998640272}
@@ -872,6 +874,7 @@ GameObject:
   - component: {fileID: 180880374}
   - component: {fileID: 20000000000}
   - component: {fileID: 48536647}
+  - component: {fileID: 853230342}
   m_Layer: 0
   m_Name: PhysFlow jam
   m_TagString: Untagged
@@ -916,7 +919,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180880370}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeede180989d74ac182d0884ec77bb12, type: 3}
   m_Name: 
@@ -927,14 +930,7 @@ MonoBehaviour:
   probes: []
   friction: 0.6
   skinCells: 0.5
-  maxReactionForce: 8
   cfl: 0.45
-  maxSubsteps: 256
-  useAdaptiveBudget: 1
-  targetFrameMs: 12
-  maxHandSpeed: 1.5
-  maxPushSpeed: 1
-  maxMaterialSpeed: 2
   gravity: 1
   replay: 0
   useInteractionQuadrature: 1
@@ -969,6 +965,7 @@ MonoBehaviour:
   sortShader: {fileID: 7200000, guid: 81ed5de8133ba4df1b0239876828b67b, type: 3}
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 15923
+  minimumContribution: 0.007843138
   dynamicCount: 15905
 --- !u!1 &181304885
 GameObject:
@@ -1956,6 +1953,119 @@ Transform:
   m_Children: []
   m_Father: {fileID: 956046957}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &326390076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 326390077}
+  - component: {fileID: 326390080}
+  - component: {fileID: 326390079}
+  - component: {fileID: 326390078}
+  m_Layer: 0
+  m_Name: Root mount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &326390077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326390076}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.006, z: 0}
+  m_LocalScale: {x: 0.12, y: 0.006, z: 0.12}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1539502989}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &326390078
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326390076}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &326390079
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326390076}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &326390080
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326390076}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &348191548
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,6 +2392,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381426733}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &385142194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083395353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e8015aba714012abde648f531506dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Simulation::PhysicsHands.Simulation.CageSimulation
+  source: {fileID: 11400000, guid: fc8489741bf6042c8a2158586bf45fc3, type: 2}
+  deformationShader: {fileID: 7200000, guid: b6d54916a16814ac58373e798153c840, type: 3}
+  contactSource: {fileID: 1083395357}
+  probes: []
+  resolution: 24
+  substeps: 1
+  iterations: 2
+  friction: 0.6
 --- !u!1 &396690373
 GameObject:
   m_ObjectHideFlags: 0
@@ -2492,6 +2622,7 @@ GameObject:
   - component: {fileID: 480436800}
   - component: {fileID: 20000000001}
   - component: {fileID: 1511171193}
+  - component: {fileID: 1194361558}
   m_Layer: 0
   m_Name: PhysFlow plane_960
   m_TagString: Untagged
@@ -2536,7 +2667,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480436796}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeede180989d74ac182d0884ec77bb12, type: 3}
   m_Name: 
@@ -2547,14 +2678,7 @@ MonoBehaviour:
   probes: []
   friction: 0.6
   skinCells: 0.5
-  maxReactionForce: 8
   cfl: 0.45
-  maxSubsteps: 256
-  useAdaptiveBudget: 1
-  targetFrameMs: 12
-  maxHandSpeed: 1.5
-  maxPushSpeed: 1
-  maxMaterialSpeed: 2
   gravity: 1
   replay: 0
   useInteractionQuadrature: 1
@@ -2589,6 +2713,7 @@ MonoBehaviour:
   sortShader: {fileID: 7200000, guid: 81ed5de8133ba4df1b0239876828b67b, type: 3}
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 34348
+  minimumContribution: 0.007843138
   dynamicCount: 25124
 --- !u!1 &489966887
 GameObject:
@@ -2876,6 +3001,7 @@ Transform:
   - {fileID: 1262572747}
   - {fileID: 79679258}
   - {fileID: 7833845388998640271}
+  - {fileID: 1539502989}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &540917408
@@ -3254,6 +3380,7 @@ GameObject:
   - component: {fileID: 604871500}
   - component: {fileID: 20000000002}
   - component: {fileID: 1372869785}
+  - component: {fileID: 2128572956}
   m_Layer: 0
   m_Name: PhysFlow hat
   m_TagString: Untagged
@@ -3298,7 +3425,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604871496}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeede180989d74ac182d0884ec77bb12, type: 3}
   m_Name: 
@@ -3309,14 +3436,7 @@ MonoBehaviour:
   probes: []
   friction: 0.6
   skinCells: 0.5
-  maxReactionForce: 8
   cfl: 0.45
-  maxSubsteps: 256
-  useAdaptiveBudget: 1
-  targetFrameMs: 12
-  maxHandSpeed: 1.5
-  maxPushSpeed: 1
-  maxMaterialSpeed: 2
   gravity: 1
   replay: 0
   useInteractionQuadrature: 1
@@ -3351,6 +3471,7 @@ MonoBehaviour:
   sortShader: {fileID: 7200000, guid: 81ed5de8133ba4df1b0239876828b67b, type: 3}
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 262144
+  minimumContribution: 0.007843138
   dynamicCount: 261402
 --- !u!1 &613275526
 GameObject:
@@ -3922,6 +4043,110 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.022, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &742733472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 742733473}
+  - component: {fileID: 742733475}
+  - component: {fileID: 742733474}
+  m_Layer: 0
+  m_Name: LAB label
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &742733473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742733472}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.005, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1937969828}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!102 &742733474
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742733472}
+  m_Text: TREE
+  m_OffsetZ: 0
+  m_CharacterSize: 0.001
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 56
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &742733475
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742733472}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &811383026
 GameObject:
   m_ObjectHideFlags: 0
@@ -4088,6 +4313,26 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &853230342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180880370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e8015aba714012abde648f531506dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Simulation::PhysicsHands.Simulation.CageSimulation
+  source: {fileID: 11400000, guid: 4f9f77452b6754a1cbd41aeb31ad3552, type: 2}
+  deformationShader: {fileID: 7200000, guid: b6d54916a16814ac58373e798153c840, type: 3}
+  contactSource: {fileID: 180880374}
+  probes: []
+  resolution: 24
+  substeps: 1
+  iterations: 2
+  friction: 0.6
 --- !u!1 &854366825
 GameObject:
   m_ObjectHideFlags: 0
@@ -4647,6 +4892,77 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.022, z: 0.04}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &976688988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 976688989}
+  - component: {fileID: 976688991}
+  - component: {fileID: 976688990}
+  m_Layer: 0
+  m_Name: TREE touch sensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &976688989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976688988}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.026499998, y: 0.016, z: -0.038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1262572747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &976688990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976688988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fad046db8904180b780007c70dfbb3, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.SceneButton
+  selector: {fileID: 110175403}
+  workspace: {fileID: 540917408}
+  action: 5
+  scene: 0
+  cap: {fileID: 1937969828}
+--- !u!65 &976688991
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976688988}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.044, y: 0.02, z: 0.032}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &981901287
 GameObject:
@@ -5283,6 +5599,115 @@ Transform:
   - {fileID: 1935263921}
   m_Father: {fileID: 24253552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1015983721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1015983722}
+  - component: {fileID: 1015983724}
+  - component: {fileID: 1015983723}
+  m_Layer: 0
+  m_Name: SpeedTree mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1015983722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015983721}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1539502989}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1015983723
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015983721}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials: []
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1015983724
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015983721}
+  m_Mesh: {fileID: 0}
+--- !u!114 &1027240287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499931952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e8015aba714012abde648f531506dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Simulation::PhysicsHands.Simulation.CageSimulation
+  source: {fileID: 11400000, guid: c9be50b6be84743da91c0f0c12dc8b86, type: 2}
+  deformationShader: {fileID: 7200000, guid: b6d54916a16814ac58373e798153c840, type: 3}
+  contactSource: {fileID: 1499931956}
+  probes: []
+  resolution: 24
+  substeps: 1
+  iterations: 2
+  friction: 0.6
 --- !u!1 &1077103583
 GameObject:
   m_ObjectHideFlags: 0
@@ -5954,6 +6379,7 @@ GameObject:
   - component: {fileID: 1083395357}
   - component: {fileID: 20000000003}
   - component: {fileID: 2004151360}
+  - component: {fileID: 385142194}
   m_Layer: 0
   m_Name: PhysFlow carnation
   m_TagString: Untagged
@@ -5998,7 +6424,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083395353}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeede180989d74ac182d0884ec77bb12, type: 3}
   m_Name: 
@@ -6009,14 +6435,7 @@ MonoBehaviour:
   probes: []
   friction: 0.6
   skinCells: 0.5
-  maxReactionForce: 8
   cfl: 0.45
-  maxSubsteps: 256
-  useAdaptiveBudget: 1
-  targetFrameMs: 12
-  maxHandSpeed: 1.5
-  maxPushSpeed: 1
-  maxMaterialSpeed: 2
   gravity: 1
   replay: 0
   useInteractionQuadrature: 1
@@ -6051,6 +6470,7 @@ MonoBehaviour:
   sortShader: {fileID: 7200000, guid: 81ed5de8133ba4df1b0239876828b67b, type: 3}
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 123954
+  minimumContribution: 0.007843138
   dynamicCount: 99280
 --- !u!1 &1092165368
 GameObject:
@@ -6583,6 +7003,7 @@ MonoBehaviour:
   sortShader: {fileID: 7200000, guid: 81ed5de8133ba4df1b0239876828b67b, type: 3}
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: -1
+  minimumContribution: 0.007843138
   dynamicCount: -1
 --- !u!1 &1181065428
 GameObject:
@@ -6675,6 +7096,26 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1194361558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480436796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e8015aba714012abde648f531506dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Simulation::PhysicsHands.Simulation.CageSimulation
+  source: {fileID: 11400000, guid: 9f435498ff4d44ede9e418e1a527d66f, type: 2}
+  deformationShader: {fileID: 7200000, guid: b6d54916a16814ac58373e798153c840, type: 3}
+  contactSource: {fileID: 480436800}
+  probes: []
+  resolution: 24
+  substeps: 1
+  iterations: 2
+  friction: 0.6
 --- !u!1 &1210336144
 GameObject:
   m_ObjectHideFlags: 0
@@ -6972,6 +7413,8 @@ Transform:
   - {fileID: 1181065429}
   - {fileID: 318768395}
   - {fileID: 1077103584}
+  - {fileID: 976688989}
+  - {fileID: 1937969828}
   m_Father: {fileID: 540917407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1274337591
@@ -7374,6 +7817,7 @@ GameObject:
   - component: {fileID: 1390382681}
   - component: {fileID: 20000000005}
   - component: {fileID: 1112924986}
+  - component: {fileID: 1557601697}
   m_Layer: 0
   m_Name: PhysFlow fox
   m_TagString: Untagged
@@ -7418,7 +7862,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390382677}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeede180989d74ac182d0884ec77bb12, type: 3}
   m_Name: 
@@ -7429,14 +7873,7 @@ MonoBehaviour:
   probes: []
   friction: 0.6
   skinCells: 0.5
-  maxReactionForce: 8
   cfl: 0.45
-  maxSubsteps: 256
-  useAdaptiveBudget: 1
-  targetFrameMs: 12
-  maxHandSpeed: 1.5
-  maxPushSpeed: 1
-  maxMaterialSpeed: 2
   gravity: 1
   replay: 0
   useInteractionQuadrature: 1
@@ -7471,6 +7908,7 @@ MonoBehaviour:
   sortShader: {fileID: 7200000, guid: 81ed5de8133ba4df1b0239876828b67b, type: 3}
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 361190
+  minimumContribution: 0.007843138
   dynamicCount: 361190
 --- !u!1 &1395668568
 GameObject:
@@ -7900,6 +8338,7 @@ GameObject:
   - component: {fileID: 1499931956}
   - component: {fileID: 20000000006}
   - component: {fileID: 514464345}
+  - component: {fileID: 1027240287}
   m_Layer: 0
   m_Name: PhysFlow telephone
   m_TagString: Untagged
@@ -7944,7 +8383,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499931952}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeede180989d74ac182d0884ec77bb12, type: 3}
   m_Name: 
@@ -7955,14 +8394,7 @@ MonoBehaviour:
   probes: []
   friction: 0.6
   skinCells: 0.5
-  maxReactionForce: 8
   cfl: 0.45
-  maxSubsteps: 256
-  useAdaptiveBudget: 1
-  targetFrameMs: 12
-  maxHandSpeed: 1.5
-  maxPushSpeed: 1
-  maxMaterialSpeed: 2
   gravity: 1
   replay: 0
   useInteractionQuadrature: 1
@@ -7997,6 +8429,7 @@ MonoBehaviour:
   sortShader: {fileID: 7200000, guid: 81ed5de8133ba4df1b0239876828b67b, type: 3}
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 55020
+  minimumContribution: 0.007843138
   dynamicCount: 49273
 --- !u!114 &1511171193
 MonoBehaviour:
@@ -8134,6 +8567,57 @@ Transform:
   - {fileID: 78315003}
   m_Father: {fileID: 1855035034}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1539502988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1539502989}
+  - component: {fileID: 1539502990}
+  m_Layer: 0
+  m_Name: TREE - Official SpeedTree research
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1539502989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539502988}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0348123, y: -0.012000024, z: 0.08895612}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1015983722}
+  - {fileID: 326390077}
+  m_Father: {fileID: 540917407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1539502990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539502988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 243af9fc50ee460aa842d9b0e02d7436, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.TreeWorkbenchContent
+  visual: {fileID: 1015983724}
+  appearance: {fileID: 11400000, guid: 33003b57700cc45afaf5b73149db0d84, type: 2}
+  contactSource: {fileID: 1083395357}
+  material: {fileID: 11400000, guid: 8e8bd22154b9943068396b9355fba741, type: 2}
+  resolution: 24
 --- !u!114 &1550850667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8147,6 +8631,26 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
   title: FLOWER
+--- !u!114 &1557601697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390382677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e8015aba714012abde648f531506dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Simulation::PhysicsHands.Simulation.CageSimulation
+  source: {fileID: 11400000, guid: 1cfcb72115ec94959949e7a5cbb95a9f, type: 2}
+  deformationShader: {fileID: 7200000, guid: b6d54916a16814ac58373e798153c840, type: 3}
+  contactSource: {fileID: 1390382681}
+  probes: []
+  resolution: 24
+  substeps: 1
+  iterations: 2
+  friction: 0.6
 --- !u!1 &1568932454
 GameObject:
   m_ObjectHideFlags: 0
@@ -8162,6 +8666,7 @@ GameObject:
   - component: {fileID: 1568932458}
   - component: {fileID: 20000000007}
   - component: {fileID: 20000000011}
+  - component: {fileID: 20000000014}
   m_Layer: 0
   m_Name: PhysFlow kitchen
   m_TagString: Untagged
@@ -8206,7 +8711,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568932454}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeede180989d74ac182d0884ec77bb12, type: 3}
   m_Name: 
@@ -8217,14 +8722,7 @@ MonoBehaviour:
   probes: []
   friction: 0.6
   skinCells: 0.5
-  maxReactionForce: 8
   cfl: 0.45
-  maxSubsteps: 256
-  useAdaptiveBudget: 1
-  targetFrameMs: 12
-  maxHandSpeed: 1.5
-  maxPushSpeed: 1
-  maxMaterialSpeed: 2
   gravity: 1
   replay: 0
   useInteractionQuadrature: 1
@@ -8259,6 +8757,7 @@ MonoBehaviour:
   sortShader: {fileID: 7200000, guid: 81ed5de8133ba4df1b0239876828b67b, type: 3}
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 262144
+  minimumContribution: 0.007843138
   dynamicCount: 145173
 --- !u!1 &1584298549
 GameObject:
@@ -9488,6 +9987,7 @@ GameObject:
   - component: {fileID: 1838594865}
   - component: {fileID: 20000000008}
   - component: {fileID: 20000000010}
+  - component: {fileID: 20000000013}
   m_Layer: 0
   m_Name: PhysFlow sandcastle
   m_TagString: Untagged
@@ -9532,7 +10032,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838594861}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeede180989d74ac182d0884ec77bb12, type: 3}
   m_Name: 
@@ -9543,14 +10043,7 @@ MonoBehaviour:
   probes: []
   friction: 0.6
   skinCells: 0.5
-  maxReactionForce: 8
   cfl: 0.45
-  maxSubsteps: 256
-  useAdaptiveBudget: 1
-  targetFrameMs: 12
-  maxHandSpeed: 1.5
-  maxPushSpeed: 1
-  maxMaterialSpeed: 2
   gravity: 1
   replay: 0
   useInteractionQuadrature: 1
@@ -9585,6 +10078,7 @@ MonoBehaviour:
   sortShader: {fileID: 7200000, guid: 81ed5de8133ba4df1b0239876828b67b, type: 3}
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 262144
+  minimumContribution: 0.007843138
   dynamicCount: 238468
 --- !u!1 &1846598568
 GameObject:
@@ -9601,6 +10095,7 @@ GameObject:
   - component: {fileID: 1846598572}
   - component: {fileID: 20000000009}
   - component: {fileID: 20000000012}
+  - component: {fileID: 20000000015}
   m_Layer: 0
   m_Name: PhysFlow alocasia
   m_TagString: Untagged
@@ -9645,7 +10140,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1846598568}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeede180989d74ac182d0884ec77bb12, type: 3}
   m_Name: 
@@ -9656,14 +10151,7 @@ MonoBehaviour:
   probes: []
   friction: 0.6
   skinCells: 0.5
-  maxReactionForce: 8
   cfl: 0.45
-  maxSubsteps: 256
-  useAdaptiveBudget: 1
-  targetFrameMs: 12
-  maxHandSpeed: 1.5
-  maxPushSpeed: 1
-  maxMaterialSpeed: 2
   gravity: 1
   replay: 0
   useInteractionQuadrature: 1
@@ -9698,6 +10186,7 @@ MonoBehaviour:
   sortShader: {fileID: 7200000, guid: 81ed5de8133ba4df1b0239876828b67b, type: 3}
   splatShader: {fileID: 4800000, guid: 710b6635f32784b128f91b67bafd6181, type: 3}
   nearCount: 229913
+  minimumContribution: 0.007843138
   dynamicCount: 135751
 --- !u!1 &1848319564
 GameObject:
@@ -10311,6 +10800,97 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1015979197}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1937969827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1937969828}
+  - component: {fileID: 1937969829}
+  - component: {fileID: 1937969830}
+  m_Layer: 0
+  m_Name: TREE button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1937969828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937969827}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.026499998, y: 0.004, z: -0.038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 742733473}
+  m_Father: {fileID: 1262572747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1937969829
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937969827}
+  m_Mesh: {fileID: 4300000, guid: 91d336949402c471aaef01361199c368, type: 2}
+--- !u!23 &1937969830
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937969827}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8e7951875d08a43158f2109f33f23f99, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1938352134
 GameObject:
   m_ObjectHideFlags: 0
@@ -11540,6 +12120,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2110328678}
   m_Mesh: {fileID: 0}
+--- !u!114 &2128572956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604871496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e8015aba714012abde648f531506dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Simulation::PhysicsHands.Simulation.CageSimulation
+  source: {fileID: 11400000, guid: 692d0c3469ecb4a6a9eac547ce1e5701, type: 2}
+  deformationShader: {fileID: 7200000, guid: b6d54916a16814ac58373e798153c840, type: 3}
+  contactSource: {fileID: 604871500}
+  probes: []
+  resolution: 24
+  substeps: 1
+  iterations: 2
+  friction: 0.6
 --- !u!114 &20000000000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11553,7 +12153,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianModelRuntime
   rendering: {fileID: 180880375}
-  simulation: {fileID: 180880373}
+  simulation: {fileID: 853230342}
 --- !u!114 &20000000001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11567,7 +12167,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianModelRuntime
   rendering: {fileID: 480436801}
-  simulation: {fileID: 480436799}
+  simulation: {fileID: 1194361558}
 --- !u!114 &20000000002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11581,7 +12181,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianModelRuntime
   rendering: {fileID: 604871501}
-  simulation: {fileID: 604871499}
+  simulation: {fileID: 2128572956}
 --- !u!114 &20000000003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11595,7 +12195,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianModelRuntime
   rendering: {fileID: 1083395358}
-  simulation: {fileID: 1083395356}
+  simulation: {fileID: 385142194}
 --- !u!114 &20000000004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11623,7 +12223,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianModelRuntime
   rendering: {fileID: 1390382682}
-  simulation: {fileID: 1390382680}
+  simulation: {fileID: 1557601697}
 --- !u!114 &20000000006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11637,7 +12237,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianModelRuntime
   rendering: {fileID: 1499931957}
-  simulation: {fileID: 1499931955}
+  simulation: {fileID: 1027240287}
 --- !u!114 &20000000007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11651,7 +12251,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianModelRuntime
   rendering: {fileID: 1568932459}
-  simulation: {fileID: 1568932457}
+  simulation: {fileID: 20000000014}
 --- !u!114 &20000000008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11665,7 +12265,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianModelRuntime
   rendering: {fileID: 1838594866}
-  simulation: {fileID: 1838594864}
+  simulation: {fileID: 20000000013}
 --- !u!114 &20000000009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11679,7 +12279,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianModelRuntime
   rendering: {fileID: 1846598573}
-  simulation: {fileID: 1846598571}
+  simulation: {fileID: 20000000015}
 --- !u!114 &20000000010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11719,6 +12319,66 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: PhysicsHands.App::PhysicsHands.App.GaussianWorkbenchContent
   title: PLANT
+--- !u!114 &20000000013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838594861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e8015aba714012abde648f531506dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Simulation::PhysicsHands.Simulation.CageSimulation
+  source: {fileID: 11400000, guid: 74bbd2a990ee2458583f960152c57451, type: 2}
+  deformationShader: {fileID: 7200000, guid: b6d54916a16814ac58373e798153c840, type: 3}
+  contactSource: {fileID: 1838594865}
+  probes: []
+  resolution: 24
+  substeps: 1
+  iterations: 2
+  friction: 0.6
+--- !u!114 &20000000014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568932454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e8015aba714012abde648f531506dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Simulation::PhysicsHands.Simulation.CageSimulation
+  source: {fileID: 11400000, guid: f859b0b4b6ce44fa683e7663c3cb8572, type: 2}
+  deformationShader: {fileID: 7200000, guid: b6d54916a16814ac58373e798153c840, type: 3}
+  contactSource: {fileID: 1568932458}
+  probes: []
+  resolution: 24
+  substeps: 1
+  iterations: 2
+  friction: 0.6
+--- !u!114 &20000000015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846598568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e8015aba714012abde648f531506dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PhysicsHands.Simulation::PhysicsHands.Simulation.CageSimulation
+  source: {fileID: 11400000, guid: 2821071d10172498db3ff09c869d9644, type: 2}
+  deformationShader: {fileID: 7200000, guid: b6d54916a16814ac58373e798153c840, type: 3}
+  contactSource: {fileID: 1846598572}
+  probes: []
+  resolution: 24
+  substeps: 1
+  iterations: 2
+  friction: 0.6
 --- !u!1001 &7833845388998640270
 PrefabInstance:
   m_ObjectHideFlags: 0

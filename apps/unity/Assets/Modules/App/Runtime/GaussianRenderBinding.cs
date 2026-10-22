@@ -11,6 +11,8 @@ namespace PhysicsHands.App
         public ComputeShader sortShader;
         public Shader splatShader;
         public int nearCount = -1;
+        [Tooltip("Faint Gaussian tail cutoff; 1/255 restores source rendering, 2/255 reduces overdraw.")]
+        [Range(1f / 255, 8f / 255)] public float minimumContribution = 2f / 255;
         public int dynamicCount = -1;
         public bool Backdrop
         {
@@ -39,6 +41,7 @@ namespace PhysicsHands.App
                 throw new System.InvalidOperationException($"Incomplete Gaussian render binding on {name}.");
             gpuRenderer = new SplatRenderer(asset.splats, asset.bounds, sortShader, splatShader, transform, nearCount, asset.sh, asset.shFromLocal, dynamicCount);
             gpuRenderer.Backdrop = backdrop;
+            gpuRenderer.MinimumContribution = minimumContribution;
         }
 
         public void Shutdown()

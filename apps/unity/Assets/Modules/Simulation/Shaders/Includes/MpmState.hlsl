@@ -1,5 +1,5 @@
 // f0.w release time; F (elastic) and R (render deformation) stored by rows.
-struct Shape { float4 a, b, va, vb, ax, ay, az, he; }; // a.w radius, b.w isBox
+struct Shape { float4 a, b, va, vb, ax, ay, az, he, previousA, previousB; }; // a.w radius, b.w isBox
 struct Modifier { float4 pos, size, vec, normal, h1, h2; }; // pos.w type, size.w start, vec.w end, normal.w rotation, h1.w translation
 struct Cuboid { float4 pos, size, velocity; };            // pos.w start, size.w end
 struct Axle { float4 pos, normal; };                      // pos.w radius, normal.w half height
@@ -8,7 +8,10 @@ struct Axle { float4 pos, normal; };                      // pos.w radius, norma
 RWStructuredBuffer<Particle> _Particles;
 RWStructuredBuffer<uint> _Grid;         // 4 floats (as bits) per node: momentum, mass; velocity after Grid
 RWStructuredBuffer<uint> _BlockFlag, _BlockList, _Counter, _Args;
-RWStructuredBuffer<uint> _Reaction;     // 8 per shape: impulse xyz, magnitude, moment xyz
+RWStructuredBuffer<uint> _BodySnapshot, _ContactBound;
+RWStructuredBuffer<uint> _Reaction;     // 16 per rigidbody: impulse/weight, torque, weighted normal, weighted position
+struct CouplingBody { float4 centreInvMass, inertia0, inertia1, inertia2, velocity, omega; };
+StructuredBuffer<CouplingBody> _Bodies;
 StructuredBuffer<Shape> _Shapes;
 StructuredBuffer<Modifier> _Modifiers;
 StructuredBuffer<Cuboid> _Cuboids;
@@ -21,8 +24,8 @@ StructuredBuffer<uint4> _SplatNeighbors;
 StructuredBuffer<float4> _SplatWeights;
 StructuredBuffer<float4> _ParticleRest;
 
-uint _ParticleCount, _GridN, _Blocks, _ShapeCount, _ModifierCount, _CuboidCount, _AxleCount, _Material, _Script, _Hardening, _DynamicCount, _RenderTotal, _ReferenceConstitutive;
-float _Dx, _InvDx, _Dt, _Time, _ShapeTime, _Mu, _Lambda, _Viscosity, _FrictionAlpha, _Cohesion, _Xi, _Damping, _Friction, _Skin, _MaxPush, _MaxParticleSpeed, _FloorOffset;
+uint _BodyCount, _ParticleCount, _GridN, _Blocks, _ShapeCount, _ModifierCount, _CuboidCount, _AxleCount, _Material, _Script, _Hardening, _DynamicCount, _RenderTotal, _ReferenceConstitutive;
+float _Dx, _InvDx, _Dt, _ContactDt, _Time, _ShapeTime, _Mu, _Lambda, _Viscosity, _FrictionAlpha, _Cohesion, _Xi, _Damping, _Friction, _Skin, _FloorOffset;
 uint _Floor, _GravityMode; // gravity: 0 none, 1 all particles, 2 detached pieces only, 3 detached or hand-touched material
 // Mass scaling (explicit FEM practice): inertia x _MassScale raises the stable step; static stiffness is unchanged.
 float _MassScale;
@@ -44,7 +47,8 @@ float3x3 Diag(float3 d) { return float3x3(d.x,0,0, 0,d.y,0, 0,0,d.z); }
 float _FixedMass, _FixedMomentum;
 void FixedAdd(uint address, float value, float scale)
 {
-    InterlockedAdd(_Grid[address], asuint((int)round(clamp(value * scale, -2.0e9, 2.0e9))));
+    int quanta = (int)round(clamp(value * scale, -2.0e9, 2.0e9));
+    if (quanta != 0) InterlockedAdd(_Grid[address], asuint(quanta));
 }
 void ReactionAdd(uint address, float value)
 {

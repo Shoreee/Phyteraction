@@ -6,15 +6,15 @@ using UnityEngine;
 
 namespace PhysicsHands.Simulation
 {
-    internal sealed class ModalDeformationOutput : IDisposable
+    internal sealed class GaussianCageDeformation : IDisposable
     {
         readonly ComputeBuffer positions, voxelNodes, voxelOrigin, splatVoxel;
         readonly ComputeShader compute;
         readonly int deform, count;
         bool disposed;
-        internal ModalDeformationOutput(ElasticCage cage, ComputeShader solver, IGaussianBufferSource splats)
+        internal GaussianCageDeformation(ElasticCage cage, ComputeShader solver, IGaussianBufferSource splats, bool clampEmbedding = false)
         {
-            count = splats.Count;
+            count = cage.splatVoxel.Length;
             try
             {
                 compute = UnityEngine.Object.Instantiate(solver);
@@ -32,8 +32,9 @@ namespace PhysicsHands.Simulation
                 compute.SetBuffer(deform, "_SplatVoxel", splatVoxel);
                 compute.SetBuffer(deform, "_Source", splats.Source);
                 compute.SetBuffer(deform, "_Deformed", splats.Deformed);
-                compute.SetInt("_SplatCount", splats.Count);
+                compute.SetInt("_SplatCount", count);
                 compute.SetFloat("_Spacing", cage.spacing);
+                compute.SetInt("_ClampEmbedding", clampEmbedding ? 1 : 0);
             }
             catch
             {

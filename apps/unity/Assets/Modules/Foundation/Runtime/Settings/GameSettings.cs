@@ -16,7 +16,6 @@ namespace PhysicsHands
         public ObservableSetting<bool> SafetyActive = new(true);
         public ObservableSetting<bool> BadTrackingWarningActive = new(true);
         public ObservableSetting<bool> ResetActive = new(true);
-        public ObservableSetting<bool> OutlinesActive = new(true);
         public ObservableSetting<bool> ShowAxes = new(false);
         public ObservableSetting<bool> VirtualMappingActive = new(true);
         public ObservableSetting<bool> HandPhysicsActive = new(true);

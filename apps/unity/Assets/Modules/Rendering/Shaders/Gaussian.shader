@@ -24,6 +24,7 @@ Shader "GaussianWorld/Elastic Splats"
    StructuredBuffer<Gaussian> _Deformed;
    StructuredBuffer<uint> _Order;
    uint _VisibleCount, _ShEnabled, _DynamicCount;
+   float _MinimumContribution;
    StructuredBuffer<float4> _Sh;
    float4x4 _ShFromLocal, _SplatLocalToWorld, _SplatWorldToLocal;
    struct Attributes {float4 positionOS:POSITION; uint id:SV_VertexID; UNITY_VERTEX_INPUT_INSTANCE_ID};
@@ -47,6 +48,11 @@ Shader "GaussianWorld/Elastic Splats"
     if(quad>=_VisibleCount){o.positionCS=float4(2,2,2,1);o.uv=0;o.color=0;return o;}
     uint index=_Order[quad];Gaussian g=_Deformed[index];
     float3 v=TransformWorldToView(mul(_SplatLocalToWorld,float4(g.center.xyz,1)).xyz);
+    // Reject only splats that the configured fragment threshold makes invisible.
+    // Do this before covariance and SH work; keep every source Gaussian.
+    float near=saturate((-v.z-.06)/.14);
+    float opacity=min(.99,g.color.a*near);
+    if(opacity<_MinimumContribution){o.positionCS=float4(2,2,2,1);o.uv=0;o.color=0;return o;}
     float3 a=mul((float3x3)UNITY_MATRIX_V,mul((float3x3)_SplatLocalToWorld,g.axis0.xyz));
     float3 b=mul((float3x3)UNITY_MATRIX_V,mul((float3x3)_SplatLocalToWorld,g.axis1.xyz));
     float3 c=mul((float3x3)UNITY_MATRIX_V,mul((float3x3)_SplatLocalToWorld,g.axis2.xyz));
@@ -68,14 +74,14 @@ Shader "GaussianWorld/Elastic Splats"
     // shrink it rather than flood the screen (and the fill rate).
     float extent=3*max(length(e0),length(e1));if(extent>.5){e0*=.5/extent;e1*=.5/extent;}
     // Splats closer than 6 cm vanish, fading in by 20 cm, so the head can enter the scene.
-    float near=saturate((-v.z-.06)/.14);
-    // The quad ends where the Gaussian drops below the 1/255 the fragment discards (at most 3 sigma):
+    // The quad ends where the Gaussian drops below the configured fragment cutoff (at most 3 sigma):
     // faint splats cover far fewer pixels for the same image.
-    float opacity=min(.99,g.color.a*near);
-    if(opacity<1.0/255){o.positionCS=float4(2,2,2,1);o.uv=0;o.color=0;return o;}
-    float radius=min(3,sqrt(2*log(255*opacity)));
+    float radius=min(3,sqrt(2*log(opacity/_MinimumContribution)));
+    float4 centreCS=mul(UNITY_MATRIX_P,float4(v,1));
+    float2 support=radius*(abs(e0)+abs(e1));
+    if(any(abs(centreCS.xy)>centreCS.w*(1+support))){o.positionCS=float4(2,2,2,1);o.uv=0;o.color=0;return o;}
     uint corner=input.id%4;float2 uv=float2((corner==1||corner==2)?1:-1,corner>=2?1:-1)*radius;
-    o.positionCS=mul(UNITY_MATRIX_P,float4(v,1));
+    o.positionCS=centreCS;
     o.positionCS.xy+=(e0*uv.x+e1*uv.y)*o.positionCS.w;
     float3 rgb=g.color.rgb;
     if(_ShEnabled!=0){
@@ -91,7 +97,7 @@ Shader "GaussianWorld/Elastic Splats"
    half4 Frag(Varyings input):SV_Target {
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
     float alpha=input.color.a*exp(-.5*dot(input.uv,input.uv));
-    clip(alpha-1.0/255);return half4(input.color.rgb,alpha);
+    clip(alpha-_MinimumContribution);return half4(input.color.rgb,alpha);
    }
    ENDHLSL
   }
